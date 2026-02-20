@@ -93,18 +93,18 @@ export default function About() {
 
           {/* Stats */}
           <AnimatedWrapper direction="up" delay={0.3}>
-            <div className="grid grid-cols-3 gap-6 mt-10">
+            <div className="grid grid-cols-3 gap-3 mt-8">
               {stats.map(({ icon: Icon, value, label, suffix }) => (
                 <div
                   key={label}
-                  className="text-center p-4 rounded-2xl transition-all glass hover:bg-white/5"
+                  className="text-center p-3 rounded-xl transition-all glass hover:bg-white/5"
                 >
-                  <Icon className="mx-auto mb-2 text-neon" size={24} />
-                  <div className="text-3xl font-bold text-white">
+                  <Icon className="mx-auto mb-1.5 text-neon" size={20} />
+                  <div className="text-2xl font-bold text-white">
                     <CountUp target={value} />
                     {suffix}
                   </div>
-                  <p className="text-xs mt-1 text-slate-500">
+                  <p className="text-[11px] mt-1 text-slate-500">
                     {label}
                   </p>
                 </div>
