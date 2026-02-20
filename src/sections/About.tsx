@@ -3,7 +3,6 @@ import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
 import { personalInfo } from '@/data/constants';
-import { cn } from '@/utils/cn';
 import { useInView } from 'react-intersection-observer';
 import { useEffect, useState } from 'react';
 

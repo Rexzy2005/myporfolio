@@ -4,7 +4,6 @@ import { FiExternalLink, FiGithub, FiX } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
-import Badge from '@/components/ui/Badge';
 import Button from '@/components/ui/Button';
 import { projects, type Project } from '@/data/projects';
 import { cn } from '@/utils/cn';
