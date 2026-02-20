@@ -58,11 +58,11 @@ export default function About() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Left — Profile image */}
         <AnimatedWrapper direction="left">
-          <div className="relative mx-auto lg:mx-0 w-72 sm:w-80 aspect-[3/4]">
+          <div className="relative mx-auto lg:mx-0 w-72 h-72 sm:w-80 sm:h-80">
             {/* Subtle glow */}
-            <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-brand-500 to-neon opacity-10 blur-xl" />
+            <div className="absolute inset-0 rounded-full bg-linear-to-br from-brand-500 to-neon opacity-10 blur-xl" />
             {/* Image frame */}
-            <div className="relative w-full h-full rounded-2xl overflow-hidden border border-brand-500/20 bg-surface-800">
+            <div className="relative w-full h-full rounded-full overflow-hidden border border-brand-500/20 bg-surface-800">
               <img
                 src="/dev-rex.jpg"
                 alt={personalInfo.name}
@@ -70,7 +70,7 @@ export default function About() {
               />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-4 py-2 rounded-lg text-sm font-medium glass text-neon border-neon/20">
+            <div className="absolute -bottom-2 -right-2 px-4 py-2 rounded-lg text-sm font-medium glass text-neon border-neon/20">
               <FiMapPin className="inline mr-1" />
               {personalInfo.location}
             </div>
