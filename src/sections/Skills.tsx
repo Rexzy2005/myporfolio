@@ -138,7 +138,7 @@ export default function Skills() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
-                  'relative px-5 py-2.5 text-sm font-medium rounded-xl transition-all duration-300',
+                  'relative px-3 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm font-medium rounded-xl transition-all duration-300',
                   activeTab === tab.key
                     ? 'text-white'
                     : 'text-slate-400 hover:text-white'
