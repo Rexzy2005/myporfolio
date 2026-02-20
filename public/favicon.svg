@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#030712"/>
+  <text x="4" y="23" font-family="Arial, sans-serif" font-weight="bold" font-size="14" fill="url(#grad)">DR</text>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="32" y2="32">
+      <stop offset="0%" stop-color="#3381ff"/>
+      <stop offset="100%" stop-color="#00f0ff"/>
+    </linearGradient>
+  </defs>
+</svg>
