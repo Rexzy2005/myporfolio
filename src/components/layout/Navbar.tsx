@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { navLinks } from '@/data/constants';
 import { cn } from '@/utils/cn';
@@ -9,6 +9,10 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+
+  // Scroll progress
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,10 +54,15 @@ export default function Navbar() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           isScrolled
-            ? 'glass py-3 shadow-lg shadow-black/10'
+            ? 'py-3 shadow-lg shadow-black/10 bg-surface-950/80 backdrop-blur-xl border-b border-white/5'
             : 'bg-transparent py-5'
         )}
       >
+          {/* Scroll progress bar */}
+          <motion.div
+            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-500 to-neon origin-left"
+            style={{ scaleX }}
+          />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <motion.a
@@ -128,7 +137,7 @@ export default function Navbar() {
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-0 bottom-0 w-80 p-8 pt-24 bg-surface-900 border-l border-glass-border"
+              className="absolute right-0 top-0 bottom-0 w-72 max-w-[85vw] p-6 pt-20 bg-surface-900/95 backdrop-blur-xl border-l border-glass-border"
             >
               <div className="flex flex-col gap-2">
                 {navLinks.map((link, i) => (
