@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
@@ -24,15 +24,56 @@ const proficiencyColors: Record<string, string> = {
 
 function SkillNode({ skill, index }: { skill: Skill; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
+  const nodeRef = useRef<HTMLDivElement>(null);
+  const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
+  const [arrowStyle, setArrowStyle] = useState<React.CSSProperties>({});
+
+  const updateTooltipPosition = useCallback(() => {
+    if (!nodeRef.current) return;
+    const rect = nodeRef.current.getBoundingClientRect();
+    const tooltipW = 240; // w-60 = 240px
+    const padding = 12;
+    const screenW = window.innerWidth;
+
+    // Default: centered above
+    let left = rect.width / 2 - tooltipW / 2;
+    // Clamp so tooltip doesn't go off-screen
+    const absLeft = rect.left + left;
+    const absRight = absLeft + tooltipW;
+
+    let arrowLeft = '50%';
+
+    if (absLeft < padding) {
+      const shift = padding - absLeft;
+      left += shift;
+      // Move arrow to stay pointing at the card center
+      arrowLeft = `${Math.max(16, tooltipW / 2 - shift)}px`;
+    } else if (absRight > screenW - padding) {
+      const shift = absRight - (screenW - padding);
+      left -= shift;
+      arrowLeft = `${Math.min(tooltipW - 16, tooltipW / 2 + shift)}px`;
+    }
+
+    setTooltipStyle({ left: `${left}px`, transform: 'none' });
+    setArrowStyle({ left: arrowLeft, transform: 'translateX(-50%) rotate(45deg)' });
+  }, []);
+
+  const handleEnter = () => {
+    updateTooltipPosition();
+    setIsHovered(true);
+  };
 
   return (
     <motion.div
+      ref={nodeRef}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.5 }}
       transition={{ duration: 0.4, delay: index * 0.05 }}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={handleEnter}
       onMouseLeave={() => setIsHovered(false)}
+      onTouchStart={handleEnter}
+      onTouchEnd={() => setIsHovered(false)}
       className="relative group"
     >
       <motion.div
@@ -62,7 +103,8 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-50 left-1/2 -translate-x-1/2 bottom-full mb-3 w-64 p-4 rounded-xl text-sm pointer-events-none bg-surface-800 border border-glass-border shadow-xl"
+            className="absolute z-50 bottom-full mb-3 w-60 p-4 rounded-xl text-sm pointer-events-none bg-surface-800 border border-glass-border shadow-xl"
+            style={tooltipStyle}
           >
             <div className="flex items-center gap-2 mb-2">
               <skill.icon size={16} style={{ color: skill.color }} />
@@ -82,7 +124,10 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
               </p>
             )}
             {/* Arrow */}
-            <div className="absolute left-1/2 -translate-x-1/2 -bottom-2 w-4 h-4 rotate-45 bg-surface-800 border-r border-b border-glass-border" />
+            <div
+              className="absolute -bottom-2 w-4 h-4 bg-surface-800 border-r border-b border-glass-border"
+              style={arrowStyle}
+            />
           </motion.div>
         )}
       </AnimatePresence>
@@ -147,7 +192,7 @@ export default function Skills() {
                 {activeTab === tab.key && (
                   <motion.div
                     layoutId="activeSkillTab"
-                    className="absolute inset-0 bg-gradient-to-r from-brand-600 to-brand-500 rounded-xl"
+                    className="absolute inset-0 bg-linear-to-r from-brand-600 to-brand-500 rounded-xl"
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   />
                 )}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiExternalLink, FiGithub, FiX } from 'react-icons/fi';
+import { FiExternalLink, FiX } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
@@ -21,39 +21,69 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
     <motion.div
       whileHover={{ y: -6, transition: { duration: 0.2 } }}
       onClick={onClick}
-      className="cursor-pointer overflow-hidden group rounded-2xl p-6 bg-black border border-white/10 transition-all duration-300 hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.08),0_0_60px_rgba(255,255,255,0.04)]"
+      className="cursor-pointer overflow-hidden group rounded-2xl bg-black border border-white/10 transition-all duration-300 hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.08),0_0_60px_rgba(255,255,255,0.04)]"
     >
-      {/* Image placeholder */}
-      <div className="relative h-48 rounded-xl overflow-hidden mb-4 bg-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
+      {/* Image */}
+      <div className="relative h-48 overflow-hidden bg-white/5">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          onError={(e) => {
+            e.currentTarget.style.display = 'none';
+            e.currentTarget.nextElementSibling?.classList.remove('hidden');
+          }}
+        />
+        <div className="hidden absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
           <span className="text-5xl font-bold text-white/20 group-hover:text-white/40 transition-all duration-300">
             {project.title.charAt(0)}
           </span>
         </div>
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-          <span className="text-white opacity-0 group-hover:opacity-100 transition-opacity font-medium text-sm tracking-wide">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+          <span className="text-white font-medium text-sm tracking-wide">
             View Case Study →
           </span>
         </div>
+        {/* Live demo icon - top right of image */}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="absolute top-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-sm text-white/70 hover:text-white hover:bg-black/80 border border-white/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            title="Live Demo"
+          >
+            <FiExternalLink size={14} />
+          </a>
+        )}
       </div>
 
-      <h3 className="text-lg font-bold mb-2 text-white group-hover:text-white/90">
-        {project.title}
-      </h3>
-      <p className="text-sm mb-4 line-clamp-2 text-slate-400">
-        {project.shortDescription}
-      </p>
-      <div className="flex flex-wrap gap-1.5">
-        {project.techStack.slice(0, 4).map((tech) => (
-          <span key={tech} className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/70 border border-white/10">
-            {tech}
+      {/* Content */}
+      <div className="p-5">
+        <div className="flex items-start justify-between gap-3 mb-2">
+          <h3 className="text-lg font-bold text-white group-hover:text-white/90 leading-tight">
+            {project.title}
+          </h3>
+          <span className="shrink-0 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full bg-white/5 text-white/40 border border-white/10">
+            {project.category}
           </span>
-        ))}
-        {project.techStack.length > 4 && (
-          <span className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/40 border border-white/10">
-            +{project.techStack.length - 4}
-          </span>
-        )}
+        </div>
+        <p className="text-sm mb-4 line-clamp-2 text-slate-400 leading-relaxed">
+          {project.shortDescription}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {project.techStack.slice(0, 4).map((tech) => (
+            <span key={tech} className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/70 border border-white/10">
+              {tech}
+            </span>
+          ))}
+          {project.techStack.length > 4 && (
+            <span className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/40 border border-white/10">
+              +{project.techStack.length - 4}
+            </span>
+          )}
+        </div>
       </div>
     </motion.div>
   );
@@ -65,15 +95,16 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.15 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
       <motion.div
-        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9, y: 30 }}
-        transition={{ type: 'spring', damping: 25 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ type: 'spring', damping: 30, stiffness: 400 }}
         onClick={(e) => e.stopPropagation()}
         className="relative z-10 w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-3xl p-6 sm:p-8 bg-black border border-white/15 shadow-[0_0_40px_rgba(255,255,255,0.06)]"
       >
@@ -157,16 +188,6 @@ function ProjectModal({ project, onClose }: { project: Project; onClose: () => v
                 Live Demo
               </Button>
             )}
-            {project.githubUrl && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => window.open(project.githubUrl, '_blank')}
-              >
-                <FiGithub />
-                Source Code
-              </Button>
-            )}
           </div>
         </div>
       </motion.div>
@@ -216,7 +237,7 @@ export default function Projects() {
       >
         <AnimatePresence mode="popLayout">
           {filteredProjects.map((project, i) => (
-            <AnimatedWrapper key={project.id} delay={i * 0.1}>
+            <AnimatedWrapper key={project.id} delay={i * 0.05}>
               <ProjectCard
                 project={project}
                 onClick={() => setSelectedProject(project)}

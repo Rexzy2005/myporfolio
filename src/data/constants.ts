@@ -8,22 +8,22 @@ export const navLinks = [
 ];
 
 export const socialLinks = {
-  github: 'https://github.com/devrex',
-  linkedin: 'https://linkedin.com/in/devrex',
-  twitter: 'https://twitter.com/devrex',
-  email: 'hello@devrex.dev',
+  github: 'https://github.com/Rexzy2005',
+  linkedin: 'https://linkedin.com/in/pererat-timothy',
+  twitter: 'https://twitter.com/dev_rexzy',
+  email: 'timothypererat2004@gmail.com',
 };
 
 export const personalInfo = {
   name: 'Pererat Timothy',
   brandName: 'DevRex',
-  title: 'Full-Stack Developer',
+  title: 'Software Developer',
   subtitle: 'Frontend Specialist',
   yearsOfExperience: 5,
   projectsDelivered: 30,
   happyClients: 20,
-  bio: `I'm a passionate full-stack developer with 5+ years of experience crafting exceptional digital experiences. I specialize in building performant, accessible, and visually stunning web applications using modern technologies like React, TypeScript, and Node.js.`,
+  bio: `I'm a passionate software developer with 5+ years of experience crafting exceptional digital experiences. I specialize in building performant, accessible, and visually stunning web applications using modern technologies like React, TypeScript, and Node.js.`,
   longBio: `With a deep focus on frontend excellence and a solid foundation in backend architecture, I bridge the gap between beautiful design and robust engineering. From e-commerce platforms to DeFi applications, I've delivered solutions that make a real impact. I believe in clean code, continuous learning, and building products that users love.`,
-  location: 'Remote',
+  location: 'Hybrid',
   availability: 'Open to opportunities',
 };

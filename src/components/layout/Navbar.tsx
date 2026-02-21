@@ -52,18 +52,24 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'fixed z-50 transition-all duration-300',
           isScrolled
-            ? 'py-3 shadow-lg shadow-black/10 bg-surface-950/80 backdrop-blur-xl border-b border-white/5'
-            : 'bg-transparent py-5'
+            ? 'top-4 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:max-w-6xl lg:rounded-full py-3 px-6 shadow-lg shadow-black/20 bg-surface-950/80 backdrop-blur-xl border border-white/10 overflow-hidden'
+            : 'top-0 left-0 right-0 bg-transparent py-5'
         )}
       >
           {/* Scroll progress bar */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-brand-500 to-neon origin-left"
+            className={cn(
+              'absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left',
+              isScrolled ? 'rounded-full' : ''
+            )}
             style={{ scaleX }}
           />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className={cn(
+          'mx-auto flex items-center justify-between',
+          isScrolled ? 'px-2 gap-6' : 'max-w-7xl px-4 sm:px-6 lg:px-8'
+        )}>
           {/* Logo */}
           <motion.a
             href="#home"
@@ -83,7 +89,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
                 className={cn(
-                  'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+                  'px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap',
                   activeSection === link.href.replace('#', '')
                     ? 'text-neon bg-neon/10'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
@@ -96,17 +102,6 @@ export default function Navbar() {
 
           {/* Right side actions */}
           <div className="flex items-center gap-3">
-            {/* Hire Me CTA */}
-            <Button
-              variant="primary"
-              size="sm"
-              glow
-              className="hidden sm:inline-flex"
-              onClick={() => scrollToSection('#contact')}
-            >
-              Hire Me
-            </Button>
-
             {/* Mobile menu button */}
             <motion.button
               whileTap={{ scale: 0.9 }}
@@ -163,7 +158,7 @@ export default function Navbar() {
               <div className="mt-8">
                 <Button
                   variant="primary"
-                  size="lg"
+                  size="md"
                   glow
                   className="w-full"
                   onClick={() => scrollToSection('#contact')}

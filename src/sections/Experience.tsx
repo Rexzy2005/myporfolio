@@ -1,26 +1,42 @@
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Badge from '@/components/ui/Badge';
 import { experiences } from '@/data/experience';
 import { cn } from '@/utils/cn';
-import { useInView } from 'react-intersection-observer';
 
 function TimelineItem({ experience, index }: { experience: typeof experiences[0]; index: number }) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+  const itemRef = useRef<HTMLDivElement>(null);
   const isLeft = index % 2 === 0;
 
+  // Scroll-linked progress: 0 when item top enters bottom of viewport, 1 when item top reaches center
+  const { scrollYProgress } = useScroll({
+    target: itemRef,
+    offset: ['start end', 'start 0.4'],
+  });
+
+  // Derived animated values tied to scroll
+  const dotScale = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const dotOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
+  const lineScaleY = useTransform(scrollYProgress, [0.3, 1], [0, 1]);
+  const cardOpacity = useTransform(scrollYProgress, [0.1, 0.5], [0, 1]);
+  const cardXLeft = useTransform(scrollYProgress, [0.1, 0.5], [-30, 0]);
+  const cardXRight = useTransform(scrollYProgress, [0.1, 0.5], [30, 0]);
+  const cardY = useTransform(scrollYProgress, [0.1, 0.5], [20, 0]);
+  const pulseScale = useTransform(scrollYProgress, [0.2, 0.6], [0, 2]);
+  const pulseOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6], [0, 0.5, 0]);
+  const glowOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
+
   return (
-    <div ref={ref} className="relative flex items-start mb-12 last:mb-0">
+    <div ref={itemRef} className="relative flex items-start mb-12 last:mb-0">
       {/* Desktop layout */}
       <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 w-full">
         {/* Left content */}
         <div className={cn('flex', isLeft ? 'justify-end' : 'justify-end')}>
           {isLeft ? (
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ opacity: cardOpacity, x: cardXLeft }}
               className="p-6 rounded-2xl max-w-md w-full glass hover:bg-white/5"
             >
               <TimelineContent experience={experience} />
@@ -28,9 +44,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           ) : (
             <div className="flex items-center justify-end h-full">
               <motion.span
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.3 }}
+                style={{ opacity: cardOpacity }}
                 className="text-sm font-medium text-slate-500"
               >
                 {experience.startDate} — {experience.endDate}
@@ -41,19 +55,29 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
 
         {/* Center dot & line */}
         <div className="relative flex flex-col items-center">
+          {/* Outer pulse ring */}
           <motion.div
-            initial={{ scale: 0 }}
-            animate={inView ? { scale: 1 } : {}}
-            transition={{ type: 'spring', stiffness: 300, delay: 0.1 }}
-            className={cn(
-              'w-4 h-4 rounded-full border-2 z-10',
-              index === 0
-                ? 'bg-neon border-neon glow-sm'
-                : 'bg-surface-800 border-brand-500'
-            )}
+            style={{ scale: pulseScale, opacity: pulseOpacity }}
+            className="absolute top-0 w-4 h-4 rounded-full bg-neon z-0"
           />
+          {/* Glow ring */}
+          <motion.div
+            style={{ opacity: glowOpacity }}
+            className="absolute top-[-2px] left-[-2px] w-5 h-5 rounded-full bg-neon/20 blur-sm z-0"
+          />
+          {/* Dot */}
+          <motion.div
+            style={{ scale: dotScale, opacity: dotOpacity }}
+            className="w-4 h-4 rounded-full border-2 z-10 bg-neon border-neon shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+          />
+          {/* Animated line */}
           {index < experiences.length - 1 && (
-            <div className="w-px flex-1 mt-2 bg-glass-border" />
+            <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
+              <motion.div
+                style={{ scaleY: lineScaleY }}
+                className="absolute inset-0 origin-top bg-gradient-to-b from-neon/80 to-brand-500/30"
+              />
+            </div>
           )}
         </div>
 
@@ -61,9 +85,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
         <div className={cn('flex', isLeft ? 'justify-start' : 'justify-start')}>
           {!isLeft ? (
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{ opacity: cardOpacity, x: cardXRight }}
               className="p-6 rounded-2xl max-w-md w-full glass hover:bg-white/5"
             >
               <TimelineContent experience={experience} />
@@ -71,9 +93,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           ) : (
             <div className="flex items-center h-full">
               <motion.span
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.3 }}
+                style={{ opacity: cardOpacity }}
                 className="text-sm font-medium text-slate-500"
               >
                 {experience.startDate} — {experience.endDate}
@@ -86,25 +106,28 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
       {/* Mobile layout */}
       <div className="md:hidden flex gap-4 w-full">
         <div className="relative flex flex-col items-center">
+          {/* Outer pulse ring (mobile) */}
           <motion.div
-            initial={{ scale: 0 }}
-            animate={inView ? { scale: 1 } : {}}
-            transition={{ type: 'spring', stiffness: 300 }}
-            className={cn(
-              'w-3 h-3 rounded-full border-2 z-10 mt-2',
-              index === 0
-                ? 'bg-neon border-neon glow-sm'
-                : 'bg-surface-800 border-brand-500'
-            )}
+            style={{ scale: pulseScale, opacity: pulseOpacity }}
+            className="absolute top-2 w-3 h-3 rounded-full bg-neon z-0"
           />
+          {/* Dot (mobile) */}
+          <motion.div
+            style={{ scale: dotScale, opacity: dotOpacity }}
+            className="w-3 h-3 rounded-full border-2 z-10 mt-2 bg-neon border-neon shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+          />
+          {/* Animated line (mobile) */}
           {index < experiences.length - 1 && (
-            <div className="w-px flex-1 mt-2 bg-glass-border" />
+            <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
+              <motion.div
+                style={{ scaleY: lineScaleY }}
+                className="absolute inset-0 origin-top bg-gradient-to-b from-neon/80 to-brand-500/30"
+              />
+            </div>
           )}
         </div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          style={{ opacity: cardOpacity, y: cardY }}
           className="flex-1 p-5 rounded-2xl glass hover:bg-white/5"
         >
           <span className="text-xs font-medium text-slate-500">

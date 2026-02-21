@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { FiDownload, FiArrowDown } from 'react-icons/fi';
+import { FiArrowDown } from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
 import Button from '@/components/ui/Button';
 import { personalInfo, socialLinks } from '@/data/constants';
@@ -122,12 +122,10 @@ export default function Hero() {
               variant="outline"
               size="md"
               onClick={() => {
-                // TODO: Replace with actual resume PDF path
-                window.open('/resume.pdf', '_blank');
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              <FiDownload />
-              Download CV
+              Hire Me
             </Button>
           </motion.div>
 
