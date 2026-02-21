@@ -52,24 +52,18 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
-          'fixed z-50 transition-all duration-300',
+          'fixed z-50 transition-all duration-300 top-4 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:max-w-[1440px] lg:rounded-full py-3 px-10 overflow-hidden border',
           isScrolled
-            ? 'top-4 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:max-w-6xl lg:rounded-full py-3 px-6 shadow-lg shadow-black/20 bg-surface-950/80 backdrop-blur-xl border border-white/10 overflow-hidden'
-            : 'top-0 left-0 right-0 bg-transparent py-5'
+            ? 'shadow-lg shadow-black/20 bg-surface-950/80 backdrop-blur-xl border-white/10'
+            : 'bg-surface-950/40 backdrop-blur-md border-white/5'
         )}
       >
           {/* Scroll progress bar */}
           <motion.div
-            className={cn(
-              'absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left',
-              isScrolled ? 'rounded-full' : ''
-            )}
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left rounded-full"
             style={{ scaleX }}
           />
-        <div className={cn(
-          'mx-auto flex items-center justify-between',
-          isScrolled ? 'px-2 gap-6' : 'max-w-7xl px-4 sm:px-6 lg:px-8'
-        )}>
+        <div className="mx-auto flex items-center justify-between px-2 gap-12">
           {/* Logo */}
           <motion.a
             href="#home"
