@@ -52,18 +52,18 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
-          'fixed z-50 transition-all duration-300 top-4 left-4 right-4 lg:left-1/2 lg:-translate-x-1/2 lg:max-w-[1440px] lg:rounded-full py-3 px-10 overflow-hidden border',
+          'fixed z-50 transition-all duration-300 top-0 left-0 right-0 w-full lg:top-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[70vw] lg:max-w-[1200px] lg:rounded-full py-4 px-4 lg:py-3 lg:px-8 overflow-hidden',
           isScrolled
-            ? 'shadow-lg shadow-black/20 bg-surface-950/80 backdrop-blur-xl border-white/10'
-            : 'bg-surface-950/40 backdrop-blur-md border-white/5'
+            ? 'shadow-lg shadow-black/20 bg-surface-950/90 backdrop-blur-xl border-b lg:border border-white/10'
+            : 'bg-transparent border-transparent'
         )}
       >
           {/* Scroll progress bar */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left rounded-full"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left lg:rounded-full"
             style={{ scaleX }}
           />
-        <div className="mx-auto flex items-center justify-between px-2 gap-12">
+        <div className="mx-auto flex items-center justify-between w-full px-2 lg:px-4">
           {/* Logo */}
           <motion.a
             href="#home"
@@ -76,7 +76,7 @@ export default function Navbar() {
           </motion.a>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-1 ml-auto">
             {navLinks.map((link) => (
               <a
                 key={link.name}
