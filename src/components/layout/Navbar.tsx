@@ -71,8 +71,8 @@ export default function Navbar() {
             className="text-2xl font-bold tracking-tight"
             whileHover={{ scale: 1.05 }}
           >
-            <span className="text-gradient">Dev</span>
-            <span className="text-white transition-colors">Rex</span>
+            <span className="text-white">Dev</span>
+            <span className="text-brand-400 transition-colors">Rex</span>
           </motion.a>
 
           {/* Desktop Nav */}

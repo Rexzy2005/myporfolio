@@ -77,12 +77,12 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
       className="relative group"
     >
       <motion.div
-        animate={isHovered ? { scale: 1.1, y: -4 } : { scale: 1, y: 0 }}
+        animate={isHovered ? { scale: 1.05, y: -4 } : { scale: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="relative flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl cursor-pointer transition-all duration-300 glass hover:bg-white/10"
+        className="relative flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl cursor-pointer transition-all duration-300 bg-surface-900 border border-white/5 hover:bg-surface-800"
         style={{
-          boxShadow: isHovered ? `0 0 20px ${skill.color}30, 0 0 60px ${skill.color}15` : 'none',
-          borderColor: isHovered ? `${skill.color}40` : undefined,
+          boxShadow: isHovered ? `0 0 20px ${skill.color}20` : 'none',
+          borderColor: isHovered ? `${skill.color}30` : undefined,
         }}
       >
         <skill.icon
@@ -177,7 +177,7 @@ export default function Skills() {
       {/* Tab buttons */}
       <AnimatedWrapper>
         <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-2xl p-1.5 gap-1 glass">
+          <div className="inline-flex rounded-2xl p-1.5 gap-1 bg-surface-900 border border-white/5">
             {tabs.map((tab) => (
               <button
                 key={tab.key}
@@ -192,7 +192,7 @@ export default function Skills() {
                 {activeTab === tab.key && (
                   <motion.div
                     layoutId="activeSkillTab"
-                    className="absolute inset-0 bg-linear-to-r from-brand-600 to-brand-500 rounded-xl"
+                    className="absolute inset-0 bg-brand-600 rounded-xl"
                     transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                   />
                 )}

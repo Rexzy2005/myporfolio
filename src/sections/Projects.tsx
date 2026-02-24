@@ -19,29 +19,32 @@ const categories = [
 function ProjectCard({ project, onClick }: { project: Project; onClick: () => void }) {
   return (
     <motion.div
-      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      whileHover={{ y: -8, transition: { duration: 0.3, ease: "easeOut" } }}
       onClick={onClick}
-      className="cursor-pointer overflow-hidden group rounded-2xl bg-black border border-white/10 transition-all duration-300 hover:border-white/30 hover:shadow-[0_0_30px_rgba(255,255,255,0.08),0_0_60px_rgba(255,255,255,0.04)]"
+      className="cursor-pointer overflow-hidden group rounded-3xl bg-surface-900/50 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:border-brand-500/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.1),0_0_80px_rgba(99,102,241,0.05)] relative"
     >
+      {/* Hover Glow Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 via-transparent to-neon/0 group-hover:from-brand-500/10 group-hover:to-neon/5 transition-all duration-500 pointer-events-none" />
+
       {/* Image */}
-      <div className="relative h-48 overflow-hidden bg-white/5">
+      <div className="relative h-56 overflow-hidden bg-surface-800">
         <img
           src={project.image}
           alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
           onError={(e) => {
             e.currentTarget.style.display = 'none';
             e.currentTarget.nextElementSibling?.classList.remove('hidden');
           }}
         />
-        <div className="hidden absolute inset-0 bg-gradient-to-br from-white/10 to-white/5 flex items-center justify-center">
-          <span className="text-5xl font-bold text-white/20 group-hover:text-white/40 transition-all duration-300">
+        <div className="hidden absolute inset-0 bg-gradient-to-br from-brand-500/20 to-neon/10 flex items-center justify-center">
+          <span className="text-6xl font-black text-white/30 group-hover:text-white/50 transition-all duration-300 drop-shadow-2xl">
             {project.title.charAt(0)}
           </span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-          <span className="text-white font-medium text-sm tracking-wide">
-            View Case Study →
+        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 flex items-end justify-center pb-6">
+          <span className="text-white font-semibold text-sm tracking-widest uppercase translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+            View Case Study
           </span>
         </div>
         {/* Live demo icon - top right of image */}
@@ -51,35 +54,35 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="absolute top-3 right-3 p-2 rounded-full bg-black/60 backdrop-blur-sm text-white/70 hover:text-white hover:bg-black/80 border border-white/10 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-black/40 backdrop-blur-md text-white/80 hover:text-white hover:bg-brand-500 hover:shadow-[0_0_20px_rgba(99,102,241,0.5)] border border-white/10 hover:border-brand-400 transition-all duration-300 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
             title="Live Demo"
           >
-            <FiExternalLink size={14} />
+            <FiExternalLink size={16} />
           </a>
         )}
       </div>
 
       {/* Content */}
-      <div className="p-5">
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="text-lg font-bold text-white group-hover:text-white/90 leading-tight">
+      <div className="p-6 relative z-10">
+        <div className="flex items-start justify-between gap-4 mb-3">
+          <h3 className="text-xl font-bold text-white group-hover:text-brand-300 transition-colors duration-300 leading-tight">
             {project.title}
           </h3>
-          <span className="shrink-0 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider rounded-full bg-white/5 text-white/40 border border-white/10">
+          <span className="shrink-0 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full bg-brand-500/10 text-brand-300 border border-brand-500/20 shadow-[0_0_10px_rgba(99,102,241,0.1)]">
             {project.category}
           </span>
         </div>
-        <p className="text-sm mb-4 line-clamp-2 text-slate-400 leading-relaxed">
+        <p className="text-sm mb-6 line-clamp-2 text-slate-400 leading-relaxed font-light">
           {project.shortDescription}
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-2">
           {project.techStack.slice(0, 4).map((tech) => (
-            <span key={tech} className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/70 border border-white/10">
+            <span key={tech} className="px-3 py-1.5 text-xs font-medium rounded-md bg-surface-800 text-slate-300 border border-white/5 group-hover:border-white/10 transition-colors duration-300">
               {tech}
             </span>
           ))}
           {project.techStack.length > 4 && (
-            <span className="px-2.5 py-1 text-xs font-medium rounded-lg bg-white/5 text-white/40 border border-white/10">
+            <span className="px-3 py-1.5 text-xs font-medium rounded-md bg-surface-800/50 text-slate-500 border border-white/5">
               +{project.techStack.length - 4}
             </span>
           )}

@@ -25,8 +25,8 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }} className="text-2xl font-bold">
-              <span className="text-gradient">Dev</span>
-              <span className="text-white">Rex</span>
+              <span className="text-white">Dev</span>
+              <span className="text-brand-400">Rex</span>
             </a>
             <p className="mt-2 text-sm text-slate-500">
               Building exceptional digital experiences.

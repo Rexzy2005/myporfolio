@@ -27,7 +27,7 @@ export default function SectionHeading({
       )}
     >
       <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-        <span className="text-gradient">{title}</span>
+        <span className="text-white">{title}</span>
       </h2>
       {subtitle && (
         <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
@@ -35,7 +35,7 @@ export default function SectionHeading({
         </p>
       )}
       <div className={cn(
-        'mt-6 h-1 w-20 rounded-full bg-linear-to-r from-brand-500 to-neon',
+        'mt-6 h-1 w-20 rounded-full bg-brand-500',
         align === 'center' && 'mx-auto'
       )} />
     </motion.div>

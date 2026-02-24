@@ -37,7 +37,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           {isLeft ? (
             <motion.div
               style={{ opacity: cardOpacity, x: cardXLeft }}
-              className="p-6 rounded-2xl max-w-md w-full glass hover:bg-white/5"
+              className="p-6 rounded-2xl max-w-md w-full bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
             >
               <TimelineContent experience={experience} />
             </motion.div>
@@ -86,7 +86,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           {!isLeft ? (
             <motion.div
               style={{ opacity: cardOpacity, x: cardXRight }}
-              className="p-6 rounded-2xl max-w-md w-full glass hover:bg-white/5"
+              className="p-6 rounded-2xl max-w-md w-full bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
             >
               <TimelineContent experience={experience} />
             </motion.div>
@@ -128,7 +128,7 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
         </div>
         <motion.div
           style={{ opacity: cardOpacity, y: cardY }}
-          className="flex-1 p-5 rounded-2xl glass hover:bg-white/5"
+          className="flex-1 p-5 rounded-2xl bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
         >
           <span className="text-xs font-medium text-slate-500">
             {experience.startDate} — {experience.endDate}

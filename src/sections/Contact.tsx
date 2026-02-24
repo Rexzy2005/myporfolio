@@ -63,7 +63,7 @@ export default function Contact() {
     }
   };
 
-  const inputStyles = 'w-full px-4 py-3 rounded-xl text-sm transition-all duration-200 outline-none glass text-white placeholder:text-slate-600 focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/30';
+  const inputStyles = 'w-full px-4 py-3 rounded-xl text-sm transition-all duration-200 outline-none bg-surface-900 border border-white/10 text-white placeholder:text-slate-500 focus:border-brand-500/50 focus:ring-1 focus:ring-brand-500/30';
 
   return (
     <Container id="contact">
@@ -126,7 +126,7 @@ export default function Contact() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-xl transition-all duration-200 glass text-slate-400 hover:text-neon hover:border-neon/20"
+                    className="p-3 rounded-xl transition-all duration-200 bg-surface-900 border border-white/10 text-slate-400 hover:text-brand-400 hover:border-brand-400/30"
                   >
                     <Icon size={20} />
                   </a>

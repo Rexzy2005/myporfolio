@@ -79,14 +79,14 @@ export default function About() {
         {/* Right — Bio & Stats */}
         <div>
           <AnimatedWrapper direction="right">
-            <h3 className="text-2xl font-bold mb-4 text-white">
+            <h3 className="text-2xl font-bold mb-4 text-white text-center lg:text-left">
               I&apos;m {personalInfo.name}, a{' '}
-              <span className="text-gradient">{personalInfo.title}</span>
+              <span className="text-brand-400">{personalInfo.title}</span>
             </h3>
-            <p className="text-lg leading-relaxed mb-4 text-slate-400">
+            <p className="text-lg leading-relaxed mb-4 text-slate-400 text-center lg:text-left">
               {personalInfo.bio}
             </p>
-            <p className="text-base leading-relaxed text-slate-500">
+            <p className="text-base leading-relaxed text-slate-500 text-center lg:text-left">
               {personalInfo.longBio}
             </p>
           </AnimatedWrapper>

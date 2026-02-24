@@ -11,13 +11,10 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Background grid pattern */}
-      <div className="absolute inset-0 bg-grid opacity-40" />
-      <div className="absolute inset-0 bg-radial-glow" />
-
       {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-600/20 rounded-full blur-[120px] animate-float" />
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-600/10 rounded-full blur-[120px] animate-float" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon/10 rounded-full blur-[150px] animate-float" style={{ animationDelay: '3s' }} />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="flex flex-col items-center text-center">
@@ -27,8 +24,11 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-neon/5 text-neon border-neon/20">
-              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-white/5 text-slate-300 border-white/10 backdrop-blur-md shadow-lg">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
+              </span>
               {personalInfo.availability}
             </span>
           </motion.div>
@@ -38,21 +38,22 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-8"
+            className="mt-12"
           >
-            <div className="inline-block rounded-2xl p-6 sm:p-8 font-mono text-left w-full max-w-2xl glass border-brand-500/10">
+            <div className="inline-block rounded-2xl p-6 sm:p-8 font-mono text-left w-full max-w-2xl glass border-white/10 shadow-2xl relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               {/* Terminal bar */}
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-white/10">
-                <div className="w-3 h-3 rounded-full bg-red-500" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                <div className="w-3 h-3 rounded-full bg-green-500" />
-                <span className="ml-2 text-slate-500 text-xs">devrex@portfolio ~ </span>
+              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-white/10 relative z-10">
+                <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-[0_0_10px_rgba(255,95,86,0.5)]" />
+                <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0.5)]" />
+                <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-[0_0_10px_rgba(39,201,63,0.5)]" />
+                <span className="ml-2 text-slate-400 text-xs font-medium tracking-wider">devrex@portfolio ~ </span>
               </div>
-              <div className="text-sm sm:text-base">
-                <p className="text-slate-500">
-                  <span className="text-neon">$</span> whoami
+              <div className="text-sm sm:text-base relative z-10">
+                <p className="text-slate-400">
+                  <span className="text-neon font-bold">$</span> whoami
                 </p>
-                <div className="mt-2 text-white">
+                <div className="mt-3 text-slate-200">
                   <TypeAnimation
                     sequence={[
                       500,
@@ -69,6 +70,7 @@ export default function Hero() {
                     speed={50}
                     repeat={Infinity}
                     cursor={true}
+                    className="text-slate-200"
                   />
                 </div>
               </div>
@@ -80,13 +82,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10"
+            className="mt-12"
           >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white drop-shadow-2xl">
               {personalInfo.name}
             </h1>
-            <p className="mt-4 text-xl sm:text-2xl font-medium text-slate-400">
-              {personalInfo.title} · <span className="text-gradient">{personalInfo.subtitle}</span>
+            <p className="mt-6 text-xl sm:text-2xl md:text-3xl font-medium text-slate-400 tracking-wide">
+              {personalInfo.title} <span className="mx-2 text-white/20">|</span> <span className="text-brand-400 font-bold">{personalInfo.subtitle}</span>
             </p>
           </motion.div>
 
@@ -95,7 +97,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-6 max-w-xl text-lg leading-relaxed text-slate-400"
+            className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-slate-400 font-light text-center"
           >
             {personalInfo.bio}
           </motion.p>
@@ -105,22 +107,24 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-10 flex items-center justify-center gap-3"
+            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
           >
             <Button
               variant="primary"
-              size="md"
+              size="lg"
               glow
+              className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-full shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.6)] transition-all duration-300"
               onClick={() => {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               View My Work
-              <FiArrowDown className="ml-1" />
+              <FiArrowDown className="ml-2 animate-bounce" />
             </Button>
             <Button
               variant="outline"
-              size="md"
+              size="lg"
+              className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-full border-white/20 hover:bg-white/5 hover:border-white/40 transition-all duration-300"
               onClick={() => {
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -134,23 +138,23 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1 }}
-            className="mt-10 flex items-center gap-4"
+            className="mt-16 flex items-center gap-6"
           >
             <a
               href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl transition-all duration-200 text-slate-500 hover:text-white hover:bg-white/5"
+              className="p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
-              <FaGithub size={22} />
+              <FaGithub size={24} />
             </a>
             <a
               href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 rounded-xl transition-all duration-200 text-slate-500 hover:text-white hover:bg-white/5"
+              className="p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-[#0A66C2] hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(10,102,194,0.2)]"
             >
-              <FaLinkedinIn size={22} />
+              <FaLinkedinIn size={24} />
             </a>
           </motion.div>
         </div>
