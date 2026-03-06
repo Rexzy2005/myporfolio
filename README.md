@@ -71,3 +71,11 @@ export default defineConfig([
   },
 ])
 ```
+
+
+ziralabs
+reduce the font size of the text Pererat Timothy to the standard on mobile screen to avoid text wrap on mobile screen
+the padding on the view work and hire me button should be reduced on the mobile screen and also it should be side by side on mobile screen also reduce the padding of the github and linking icon on the hero section
+
+also add this skill of me knowing how o build telegram bot for projects
+

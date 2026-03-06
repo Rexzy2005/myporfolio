@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
-import { FiSend, FiMail, FiMapPin, FiCheck, FiLoader } from 'react-icons/fi';
+import { FiSend, FiMail, FiMapPin, FiCheck, FiLoader, FiSmartphone, FiGlobe, FiCode, FiEdit3 } from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 import emailjs from '@emailjs/browser';
 import Container from '@/components/ui/Container';
@@ -37,22 +37,51 @@ export default function Contact() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const templates = {
+    mobile: {
+      label: 'Mobile App',
+      icon: <FiSmartphone className="w-4 h-4" />,
+      subject: 'Mobile App Project Inquiry',
+      message: "Hi! I have a mobile app project idea. Here is the context: [brief description]. My budget range is [budget], and I'm looking to have this completed by [timeline]."
+    },
+    website: {
+      label: 'Website',
+      icon: <FiGlobe className="w-4 h-4" />,
+      subject: 'Website Project Inquiry',
+      message: "Hi! I have a website project idea. Here is the context: [brief description]. My budget range is [budget], and I'm looking to have this completed by [timeline]."
+    },
+    custom: {
+      label: 'Custom Project',
+      icon: <FiCode className="w-4 h-4" />,
+      subject: 'Custom Project Inquiry',
+      message: "Hi! I have a custom project idea. Here is the context: [brief description]. My budget range is [budget], and I'm looking to have this completed by [timeline]."
+    }
+  };
+
+  const handleTemplateClick = (key: keyof typeof templates) => {
+    setForm(prev => ({
+      ...prev,
+      subject: templates[key].subject,
+      message: templates[key].message
+    }));
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus('sending');
 
     try {
-      // TODO: Replace with your actual EmailJS service ID, template ID, and public key
+      // Replace YOUR_PUBLIC_KEY with your actual EmailJS public key
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
+        'service_uv2nunj',
+        'template_blwadh4',
         {
           from_name: form.name,
           from_email: form.email,
           subject: form.subject,
           message: form.message,
         },
-        'YOUR_PUBLIC_KEY'
+        '3ggzlaLaifzwhfsrP'
       );
       setStatus('success');
       setForm({ name: '', email: '', subject: '', message: '' });
@@ -198,6 +227,34 @@ export default function Contact() {
                 rows={5}
                 className={`${inputStyles} resize-none`}
               />
+            </div>
+
+            <div className="space-y-3 pt-2">
+              <p className="text-sm text-slate-400">Quick start with a template:</p>
+              <div className="flex flex-wrap gap-2">
+                {(Object.keys(templates) as Array<keyof typeof templates>).map((key) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => handleTemplateClick(key)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 bg-surface-800 border border-white/10 text-slate-300 hover:bg-brand-500/10 hover:text-brand-400 hover:border-brand-500/30"
+                  >
+                    <span className="text-brand-400">{templates[key].icon}</span>
+                    {templates[key].label}
+                  </button>
+                ))}
+              </div>
+              
+              {form.message.includes('[brief description]') && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-200/80 text-sm flex items-start gap-3"
+                >
+                  <FiEdit3 className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
+                  <p>Please customize the template with your specific details before sending.</p>
+                </motion.div>
+              )}
             </div>
 
             <Button

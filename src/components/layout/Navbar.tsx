@@ -54,7 +54,7 @@ export default function Navbar() {
         className={cn(
           'fixed z-50 transition-all duration-300 top-0 left-0 right-0 w-full lg:top-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[70vw] lg:max-w-[1200px] lg:rounded-full py-4 px-4 lg:py-3 lg:px-8 overflow-hidden',
           isScrolled
-            ? 'shadow-lg shadow-black/20 bg-surface-950/90 backdrop-blur-xl border-b lg:border border-white/10'
+            ? 'shadow-lg shadow-black/20 bg-surface-900/95 backdrop-blur-xl border-b lg:border border-white/10'
             : 'bg-transparent border-transparent'
         )}
       >

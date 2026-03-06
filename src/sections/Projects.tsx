@@ -24,7 +24,7 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
       className="cursor-pointer overflow-hidden group rounded-3xl bg-surface-900/50 backdrop-blur-sm border border-white/5 transition-all duration-500 hover:border-brand-500/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.1),0_0_80px_rgba(99,102,241,0.05)] relative"
     >
       {/* Hover Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-500/0 via-transparent to-neon/0 group-hover:from-brand-500/10 group-hover:to-neon/5 transition-all duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-brand-500/0 via-transparent to-neon/0 group-hover:from-brand-500/10 group-hover:to-neon/5 transition-all duration-500 pointer-events-none" />
 
       {/* Image */}
       <div className="relative h-56 overflow-hidden bg-surface-800">
@@ -37,12 +37,12 @@ function ProjectCard({ project, onClick }: { project: Project; onClick: () => vo
             e.currentTarget.nextElementSibling?.classList.remove('hidden');
           }}
         />
-        <div className="hidden absolute inset-0 bg-gradient-to-br from-brand-500/20 to-neon/10 flex items-center justify-center">
+        <div className="hidden absolute inset-0 bg-linear-to-br from-brand-500/20 to-neon/10 flex items-center justify-center">
           <span className="text-6xl font-black text-white/30 group-hover:text-white/50 transition-all duration-300 drop-shadow-2xl">
             {project.title.charAt(0)}
           </span>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-surface-950 via-surface-950/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 flex items-end justify-center pb-6">
+        <div className="absolute inset-0 bg-linear-to-t from-surface-950 via-surface-950/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500 flex items-end justify-center pb-6">
           <span className="text-white font-semibold text-sm tracking-widest uppercase translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
             View Case Study
           </span>

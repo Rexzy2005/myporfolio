@@ -84,7 +84,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-12"
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white drop-shadow-2xl">
               {personalInfo.name}
             </h1>
             <p className="mt-6 text-xl sm:text-2xl md:text-3xl font-medium text-slate-400 tracking-wide">
@@ -107,24 +107,24 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6"
+            className="mt-12 flex flex-row items-center justify-center gap-3 sm:gap-6 w-full sm:w-auto"
           >
             <Button
               variant="primary"
               size="lg"
               glow
-              className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-full shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.6)] transition-all duration-300"
+              className="flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-lg font-semibold rounded-full shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.6)] transition-all duration-300"
               onClick={() => {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
               View My Work
-              <FiArrowDown className="ml-2 animate-bounce" />
+              <FiArrowDown className="ml-1 sm:ml-2 animate-bounce" />
             </Button>
             <Button
               variant="outline"
               size="lg"
-              className="w-full sm:w-auto px-8 py-4 text-lg font-semibold rounded-full border-white/20 hover:bg-white/5 hover:border-white/40 transition-all duration-300"
+              className="flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-lg font-semibold rounded-full border-white/20 hover:bg-white/5 hover:border-white/40 transition-all duration-300"
               onClick={() => {
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -138,23 +138,23 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 1 }}
-            className="mt-16 flex items-center gap-6"
+            className="mt-12 sm:mt-16 flex items-center gap-4 sm:gap-6"
           >
             <a
               href={socialLinks.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              className="p-3 sm:p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
             >
-              <FaGithub size={24} />
+              <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
             <a
               href={socialLinks.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-[#0A66C2] hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(10,102,194,0.2)]"
+              className="p-3 sm:p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-[#0A66C2] hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(10,102,194,0.2)]"
             >
-              <FaLinkedinIn size={24} />
+              <FaLinkedinIn className="w-5 h-5 sm:w-6 sm:h-6" />
             </a>
           </motion.div>
         </div>

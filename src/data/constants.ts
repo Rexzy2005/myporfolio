@@ -9,7 +9,7 @@ export const navLinks = [
 
 export const socialLinks = {
   github: 'https://github.com/Rexzy2005',
-  linkedin: 'https://linkedin.com/in/pererat-timothy',
+  linkedin: 'https://www.linkedin.com/in/pererat-timothy-b33a51375',
   twitter: 'https://twitter.com/dev_rexzy',
   email: 'timothypererat2004@gmail.com',
 };
