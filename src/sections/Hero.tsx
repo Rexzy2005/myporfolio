@@ -13,7 +13,7 @@ export default function Hero() {
     >
       {/* Floating orbs */}
       <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-600/10 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-neon/10 rounded-full blur-[150px] animate-float" style={{ animationDelay: '3s' }} />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-[150px] animate-float" style={{ animationDelay: '3s' }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-brand-500/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -26,8 +26,8 @@ export default function Hero() {
           >
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-white/5 text-slate-300 border-white/10 backdrop-blur-md shadow-lg">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-neon"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
               </span>
               {personalInfo.availability}
             </span>
@@ -51,7 +51,7 @@ export default function Hero() {
               </div>
               <div className="text-sm sm:text-base relative z-10">
                 <p className="text-slate-400">
-                  <span className="text-neon font-bold">$</span> whoami
+                  <span className="text-brand-400 font-bold">$</span> whoami
                 </p>
                 <div className="mt-3 text-slate-200">
                   <TypeAnimation

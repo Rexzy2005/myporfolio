@@ -18,9 +18,9 @@
   --color-brand-900: #312e81;
   --color-brand-950: #1e1b4b;
 
-  /* Neon accent - Shifted to a sophisticated cyan/teal */
-  --color-neon: #2dd4bf;
-  --color-neon-glow: rgba(45, 212, 191, 0.25);
+  /* Neon accent - Blue to match brand */
+  --color-neon: #818cf8;
+  --color-neon-glow: rgba(99, 102, 241, 0.25);
 
   /* Dark theme surface colors - Deeper, richer blacks */
   --color-surface-950: #020617;
@@ -52,6 +52,16 @@
     background: var(--color-surface-950);
     color: #f1f5f9;
     overflow-x: hidden;
+    cursor: none;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: none;
   }
 
   ::selection {
@@ -92,7 +102,7 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #818cf8, #2dd4bf, #a78bfa);
+    background: linear-gradient(135deg, #a5b4fc, #6366f1, #818cf8);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -118,7 +128,7 @@
     background: radial-gradient(
       circle 1000px at 50% 0%,
       rgba(79, 70, 229, 0.2),
-      rgba(45, 212, 191, 0.05) 50%,
+      rgba(99, 102, 241, 0.08) 50%,
       transparent 80%
     );
     animation: glowWobble 15s ease-in-out infinite alternate;
@@ -206,5 +216,51 @@
   100% {
     transform: translate(30px, -10px) scale(0.9);
     opacity: 0.8;
+  }
+}
+
+/* ===== Custom Cursor ===== */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(129, 140, 248, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  background: var(--color-neon);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px var(--color-neon-glow);
+}
+
+/* Restore default cursor on touch / small screens */
+@media (hover: none), (pointer: coarse) {
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  [role="button"] {
+    cursor: auto;
+  }
+  .custom-cursor-ring,
+  .custom-cursor-dot {
+    display: none;
   }
 }

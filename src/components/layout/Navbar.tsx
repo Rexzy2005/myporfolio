@@ -52,7 +52,7 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={cn(
-          'fixed z-50 transition-all duration-300 top-0 left-0 right-0 w-full lg:top-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[70vw] lg:max-w-[1200px] lg:rounded-full py-4 px-4 lg:py-3 lg:px-8 overflow-hidden',
+          'fixed z-50 transition-all duration-300 top-0 left-0 right-0 w-full lg:top-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[70vw] lg:max-w-300 lg:rounded-full py-4 px-4 lg:py-3 lg:px-8 overflow-hidden',
           isScrolled
             ? 'shadow-lg shadow-black/20 bg-surface-900/95 backdrop-blur-xl border-b lg:border border-white/10'
             : 'bg-transparent border-transparent'
@@ -60,7 +60,7 @@ export default function Navbar() {
       >
           {/* Scroll progress bar */}
           <motion.div
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-500 to-neon origin-left lg:rounded-full"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-400 to-brand-600 origin-left lg:rounded-full"
             style={{ scaleX }}
           />
         <div className="mx-auto flex items-center justify-between w-full px-2 lg:px-4">
@@ -85,7 +85,7 @@ export default function Navbar() {
                 className={cn(
                   'px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap',
                   activeSection === link.href.replace('#', '')
-                    ? 'text-neon bg-neon/10'
+                    ? 'text-brand-400 bg-brand-500/10'
                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                 )}
               >
@@ -140,7 +140,7 @@ export default function Navbar() {
                     className={cn(
                       'px-4 py-3 text-lg font-medium rounded-xl transition-all',
                       activeSection === link.href.replace('#', '')
-                        ? 'text-neon bg-neon/10'
+                    ? 'text-brand-400 bg-brand-500/10'
                         : 'text-slate-400 hover:text-white hover:bg-white/5'
                     )}
                   >

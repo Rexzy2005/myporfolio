@@ -123,7 +123,7 @@ export default function Contact() {
                   <p className="text-xs text-slate-500">Email</p>
                   <a
                     href={`mailto:${socialLinks.email}`}
-                    className="font-medium transition-colors text-white hover:text-neon"
+                    className="font-medium transition-colors text-white hover:text-brand-400"
                   >
                     {socialLinks.email}
                   </a>

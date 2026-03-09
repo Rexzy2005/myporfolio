@@ -58,24 +58,24 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           {/* Outer pulse ring */}
           <motion.div
             style={{ scale: pulseScale, opacity: pulseOpacity }}
-            className="absolute top-0 w-4 h-4 rounded-full bg-neon z-0"
+            className="absolute top-0 w-4 h-4 rounded-full bg-brand-400 z-0"
           />
           {/* Glow ring */}
           <motion.div
             style={{ opacity: glowOpacity }}
-            className="absolute top-[-2px] left-[-2px] w-5 h-5 rounded-full bg-neon/20 blur-sm z-0"
+            className="absolute -top-0.5 -left-0.5 w-5 h-5 rounded-full bg-brand-400/20 blur-sm z-0"
           />
           {/* Dot */}
           <motion.div
             style={{ scale: dotScale, opacity: dotOpacity }}
-            className="w-4 h-4 rounded-full border-2 z-10 bg-neon border-neon shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+            className="w-4 h-4 rounded-full border-2 z-10 bg-brand-400 border-brand-400 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
           />
           {/* Animated line */}
           {index < experiences.length - 1 && (
             <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
               <motion.div
                 style={{ scaleY: lineScaleY }}
-                className="absolute inset-0 origin-top bg-gradient-to-b from-neon/80 to-brand-500/30"
+                className="absolute inset-0 origin-top bg-linear-to-b from-brand-400/80 to-brand-600/30"
               />
             </div>
           )}
@@ -109,19 +109,19 @@ function TimelineItem({ experience, index }: { experience: typeof experiences[0]
           {/* Outer pulse ring (mobile) */}
           <motion.div
             style={{ scale: pulseScale, opacity: pulseOpacity }}
-            className="absolute top-2 w-3 h-3 rounded-full bg-neon z-0"
+            className="absolute top-2 w-3 h-3 rounded-full bg-brand-400 z-0"
           />
           {/* Dot (mobile) */}
           <motion.div
             style={{ scale: dotScale, opacity: dotOpacity }}
-            className="w-3 h-3 rounded-full border-2 z-10 mt-2 bg-neon border-neon shadow-[0_0_8px_rgba(0,240,255,0.5)]"
+            className="w-3 h-3 rounded-full border-2 z-10 mt-2 bg-brand-400 border-brand-400 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
           />
           {/* Animated line (mobile) */}
           {index < experiences.length - 1 && (
             <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
               <motion.div
                 style={{ scaleY: lineScaleY }}
-                className="absolute inset-0 origin-top bg-gradient-to-b from-neon/80 to-brand-500/30"
+                className="absolute inset-0 origin-top bg-linear-to-b from-brand-400/80 to-brand-600/30"
               />
             </div>
           )}
@@ -162,7 +162,7 @@ function TimelineContent({
             key={i}
             className="text-xs flex items-start gap-2 text-slate-500"
           >
-            <span className="text-neon mt-0.5">▸</span>
+            <span className="text-brand-400 mt-0.5">▸</span>
             {achievement}
           </li>
         ))}

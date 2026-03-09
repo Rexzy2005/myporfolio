@@ -59,7 +59,7 @@ export default function About() {
         <AnimatedWrapper direction="left">
           <div className="relative mx-auto lg:mx-0 w-72 h-72 sm:w-80 sm:h-80">
             {/* Subtle glow */}
-            <div className="absolute inset-0 rounded-full bg-linear-to-br from-brand-500 to-neon opacity-10 blur-xl" />
+            <div className="absolute inset-0 rounded-full bg-brand-500 opacity-10 blur-xl" />
             {/* Image frame */}
             <div className="relative w-full h-full rounded-full overflow-hidden border border-brand-500/20 bg-surface-800">
               <img
@@ -69,7 +69,7 @@ export default function About() {
               />
             </div>
             {/* Floating badge */}
-            <div className="absolute -bottom-2 -right-2 px-4 py-2 rounded-lg text-sm font-medium glass text-neon border-neon/20">
+            <div className="absolute -bottom-2 -right-2 px-4 py-2 rounded-lg text-sm font-medium glass text-brand-400 border-brand-500/20">
               <FiMapPin className="inline mr-1" />
               {personalInfo.location}
             </div>
@@ -99,7 +99,7 @@ export default function About() {
                   key={label}
                   className="text-center p-3 rounded-xl transition-all glass hover:bg-white/5"
                 >
-                  <Icon className="mx-auto mb-1.5 text-neon" size={20} />
+                  <Icon className="mx-auto mb-1.5 text-brand-400" size={20} />
                   <div className="text-2xl font-bold text-white">
                     <CountUp target={value} />
                     {suffix}

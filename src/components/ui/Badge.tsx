@@ -10,7 +10,7 @@ export default function Badge({ children, variant = 'default', className }: Badg
   const variants = {
     default: 'bg-surface-800 text-slate-300 border-surface-700',
     brand: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
-    neon: 'bg-neon/10 text-neon border-neon/20',
+    neon: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
   };
 
   return (

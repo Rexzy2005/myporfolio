@@ -55,7 +55,7 @@ export default function Footer() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl transition-all duration-200 text-slate-500 hover:text-neon hover:bg-neon/10"
+                className="p-2.5 rounded-xl transition-all duration-200 text-slate-500 hover:text-brand-400 hover:bg-brand-500/10"
                 aria-label={label}
               >
                 <Icon size={20} />
