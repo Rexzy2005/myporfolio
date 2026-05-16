@@ -1,45 +1,43 @@
 @import "tailwindcss";
 
-/* ===== Custom Theme Variables ===== */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  /* Mercury Design System — Color Tokens */
+  --color-mercury-blue: #5266eb;
+  --color-ghost-blue: #cdddff;
+  --color-deep-space: #171721;
+  --color-midnight-slate: #1e1e2a;
+  --color-graphite: #272735;
+  --color-lead: #70707d;
+  --color-starlight: #ededf3;
+  --color-silver: #c3c3cc;
+  --color-pure-white: #ffffff;
 
-  /* Brand Colors - Refined to a more premium deep blue/indigo */
-  --color-brand-50: #eef2ff;
-  --color-brand-100: #e0e7ff;
-  --color-brand-200: #c7d2fe;
-  --color-brand-300: #a5b4fc;
-  --color-brand-400: #818cf8;
-  --color-brand-500: #6366f1;
-  --color-brand-600: #4f46e5;
-  --color-brand-700: #4338ca;
-  --color-brand-800: #3730a3;
-  --color-brand-900: #312e81;
-  --color-brand-950: #1e1b4b;
+  /* Fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Neon accent - Blue to match brand */
-  --color-neon: #818cf8;
-  --color-neon-glow: rgba(99, 102, 241, 0.25);
+  /* Mercury Typography Scale */
+  --text-caption: 12px;
+  --text-body-sm: 14px;
+  --text-body: 16px;
+  --text-subheading: 18px;
+  --text-heading-sm: 21px;
+  --text-heading: 32px;
+  --text-heading-lg: 49px;
+  --text-display: 65px;
 
-  /* Dark theme surface colors - Deeper, richer blacks */
-  --color-surface-950: #020617;
-  --color-surface-900: #0f172a;
-  --color-surface-800: #1e293b;
-  --color-surface-700: #334155;
-  --color-surface-600: #475569;
-
-  /* Premium Glass */
-  --color-glass: rgba(255, 255, 255, 0.03);
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-glass-hover: rgba(255, 255, 255, 0.06);
+  /* Border Radius — Mercury spec */
+  --radius-none: 0px;
+  --radius-container: 4px;
+  --radius-button: 32px;
+  --radius-button-header: 40px;
+  --radius-input: 32px;
 }
 
-/* ===== Base Styles ===== */
 @layer base {
   * {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-brand-600) transparent;
+    scrollbar-color: #272735 transparent;
   }
 
   html {
@@ -49,218 +47,16 @@
 
   body {
     font-family: var(--font-sans);
-    background: var(--color-surface-950);
-    color: #f1f5f9;
+    background: #1e1e2a;
+    color: #ededf3;
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
-    cursor: none;
+    font-weight: 400;
+    letter-spacing: 0.16px;
+    line-height: 1.5;
   }
 
   ::selection {
-    background-color: var(--color-brand-500);
-    color: white;
-  }
-}
-
-/* ===== Utility Classes ===== */
-@layer utilities {
-  .glass {
-    background: var(--color-glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--color-glass-border);
-    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-  }
-
-  .glass-hover:hover {
-    background: var(--color-glass-hover);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-
-  .glow {
-    box-shadow:
-      0 0 20px var(--color-neon-glow),
-      0 0 40px var(--color-neon-glow);
-  }
-
-  .glow-sm {
-    box-shadow: 0 0 15px var(--color-neon-glow);
-  }
-
-  .glow-text {
-    text-shadow:
-      0 0 15px var(--color-neon-glow),
-      0 0 30px var(--color-neon-glow);
-  }
-
-  .text-gradient {
-    background: linear-gradient(135deg, #a5b4fc, #6366f1, #818cf8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% auto;
-    animation: textShine 4s linear infinite;
-  }
-
-  .bg-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 40px 40px;
-    mask-image: radial-gradient(ellipse at center, black 80%, transparent 100%);
-    -webkit-mask-image: radial-gradient(
-      ellipse at center,
-      black 80%,
-      transparent 100%
-    );
-    animation: gridWobble 25s ease-in-out infinite alternate;
-  }
-
-  .bg-radial-glow {
-    background: radial-gradient(
-      circle 1000px at 50% 0%,
-      rgba(79, 70, 229, 0.2),
-      rgba(99, 102, 241, 0.08) 50%,
-      transparent 80%
-    );
-    animation: glowWobble 15s ease-in-out infinite alternate;
-  }
-
-  .noise-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: 50;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  .animate-pulse-glow {
-    animation: pulse-glow 2s ease-in-out infinite;
-  }
-}
-
-/* ===== Keyframes ===== */
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%,
-  100% {
-    box-shadow: 0 0 10px var(--color-neon-glow);
-    opacity: 1;
-  }
-  50% {
-    box-shadow:
-      0 0 30px var(--color-neon-glow),
-      0 0 60px var(--color-neon-glow);
-    opacity: 0.8;
-  }
-}
-
-@keyframes textShine {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 200% 50%;
-  }
-}
-
-@keyframes gridWobble {
-  0% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
-  33% {
-    transform: translate(20px, -20px) scale(1.05) rotate(1deg);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95) rotate(-1deg);
-  }
-  100% {
-    transform: translate(0, 0) scale(1) rotate(0deg);
-  }
-}
-
-@keyframes glowWobble {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(-30px, 20px) scale(1.1);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(30px, -10px) scale(0.9);
-    opacity: 0.8;
-  }
-}
-
-/* ===== Custom Cursor ===== */
-.custom-cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 36px;
-  height: 36px;
-  border: 1.5px solid rgba(129, 140, 248, 0.6);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-
-.custom-cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 6px;
-  height: 6px;
-  background: var(--color-neon);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 8px var(--color-neon-glow);
-}
-
-/* Restore default cursor on touch / small screens */
-@media (hover: none), (pointer: coarse) {
-  body,
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  [role="button"] {
-    cursor: auto;
-  }
-  .custom-cursor-ring,
-  .custom-cursor-dot {
-    display: none;
+    background: #5266eb;
+    color: #ffffff;
   }
 }

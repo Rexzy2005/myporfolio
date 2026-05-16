@@ -387,7 +387,7 @@ export const softSkills: Skill[] = [
     proficiency: 'advanced',
     years: 3,
     description: 'Leading cross-functional teams, sprint planning, mentoring junior devs',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Problem Solving',
@@ -396,7 +396,7 @@ export const softSkills: Skill[] = [
     proficiency: 'expert',
     years: 5,
     description: 'Breaking down complex problems, systematic debugging, creative solutions',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Communication',
@@ -405,7 +405,7 @@ export const softSkills: Skill[] = [
     proficiency: 'advanced',
     years: 5,
     description: 'Technical documentation, client presentations, stakeholder updates',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Client Relations',
@@ -414,7 +414,7 @@ export const softSkills: Skill[] = [
     proficiency: 'advanced',
     years: 4,
     description: 'Requirement gathering, expectation management, regular reporting',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Project Management',
@@ -423,7 +423,7 @@ export const softSkills: Skill[] = [
     proficiency: 'advanced',
     years: 3,
     description: 'Agile/Scrum methodology, estimation, risk assessment',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Time Management',
@@ -432,7 +432,7 @@ export const softSkills: Skill[] = [
     proficiency: 'advanced',
     years: 5,
     description: 'Deadline-driven delivery, prioritization, multi-project juggling',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Code Review',
@@ -441,7 +441,7 @@ export const softSkills: Skill[] = [
     proficiency: 'expert',
     years: 4,
     description: 'Constructive feedback, knowledge sharing, best practices enforcement',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
   {
     name: 'Continuous Learning',
@@ -450,7 +450,7 @@ export const softSkills: Skill[] = [
     proficiency: 'expert',
     years: 5,
     description: 'Staying current with tech trends, open-source contributions, self-improvement',
-    color: '#00f0ff',
+    color: '#5266eb',
   },
 ];
 

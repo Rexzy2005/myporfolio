@@ -1,193 +1,122 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FiChevronDown } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
-import Badge from '@/components/ui/Badge';
+import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
 import { experiences } from '@/data/experience';
-import { cn } from '@/utils/cn';
 
-function TimelineItem({ experience, index }: { experience: typeof experiences[0]; index: number }) {
-  const itemRef = useRef<HTMLDivElement>(null);
-  const isLeft = index % 2 === 0;
-
-  // Scroll-linked progress: 0 when item top enters bottom of viewport, 1 when item top reaches center
-  const { scrollYProgress } = useScroll({
-    target: itemRef,
-    offset: ['start end', 'start 0.4'],
-  });
-
-  // Derived animated values tied to scroll
-  const dotScale = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const dotOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const lineScaleY = useTransform(scrollYProgress, [0.3, 1], [0, 1]);
-  const cardOpacity = useTransform(scrollYProgress, [0.1, 0.5], [0, 1]);
-  const cardXLeft = useTransform(scrollYProgress, [0.1, 0.5], [-30, 0]);
-  const cardXRight = useTransform(scrollYProgress, [0.1, 0.5], [30, 0]);
-  const cardY = useTransform(scrollYProgress, [0.1, 0.5], [20, 0]);
-  const pulseScale = useTransform(scrollYProgress, [0.2, 0.6], [0, 2]);
-  const pulseOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.6], [0, 0.5, 0]);
-  const glowOpacity = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
+function ExperienceRow({ experience, index }: { experience: typeof experiences[0]; index: number }) {
+  const [isOpen, setIsOpen] = useState(index === 0);
 
   return (
-    <div ref={itemRef} className="relative flex items-start mb-12 last:mb-0">
-      {/* Desktop layout */}
-      <div className="hidden md:grid md:grid-cols-[1fr_auto_1fr] md:gap-8 w-full">
-        {/* Left content */}
-        <div className={cn('flex', isLeft ? 'justify-end' : 'justify-end')}>
-          {isLeft ? (
-            <motion.div
-              style={{ opacity: cardOpacity, x: cardXLeft }}
-              className="p-6 rounded-2xl max-w-md w-full bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
-            >
-              <TimelineContent experience={experience} />
-            </motion.div>
-          ) : (
-            <div className="flex items-center justify-end h-full">
-              <motion.span
-                style={{ opacity: cardOpacity }}
-                className="text-sm font-medium text-slate-500"
-              >
-                {experience.startDate} — {experience.endDate}
-              </motion.span>
-            </div>
-          )}
-        </div>
-
-        {/* Center dot & line */}
-        <div className="relative flex flex-col items-center">
-          {/* Outer pulse ring */}
-          <motion.div
-            style={{ scale: pulseScale, opacity: pulseOpacity }}
-            className="absolute top-0 w-4 h-4 rounded-full bg-brand-400 z-0"
-          />
-          {/* Glow ring */}
-          <motion.div
-            style={{ opacity: glowOpacity }}
-            className="absolute -top-0.5 -left-0.5 w-5 h-5 rounded-full bg-brand-400/20 blur-sm z-0"
-          />
-          {/* Dot */}
-          <motion.div
-            style={{ scale: dotScale, opacity: dotOpacity }}
-            className="w-4 h-4 rounded-full border-2 z-10 bg-brand-400 border-brand-400 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
-          />
-          {/* Animated line */}
-          {index < experiences.length - 1 && (
-            <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
-              <motion.div
-                style={{ scaleY: lineScaleY }}
-                className="absolute inset-0 origin-top bg-linear-to-b from-brand-400/80 to-brand-600/30"
-              />
-            </div>
-          )}
-        </div>
-
-        {/* Right content */}
-        <div className={cn('flex', isLeft ? 'justify-start' : 'justify-start')}>
-          {!isLeft ? (
-            <motion.div
-              style={{ opacity: cardOpacity, x: cardXRight }}
-              className="p-6 rounded-2xl max-w-md w-full bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
-            >
-              <TimelineContent experience={experience} />
-            </motion.div>
-          ) : (
-            <div className="flex items-center h-full">
-              <motion.span
-                style={{ opacity: cardOpacity }}
-                className="text-sm font-medium text-slate-500"
-              >
-                {experience.startDate} — {experience.endDate}
-              </motion.span>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Mobile layout */}
-      <div className="md:hidden flex gap-4 w-full">
-        <div className="relative flex flex-col items-center">
-          {/* Outer pulse ring (mobile) */}
-          <motion.div
-            style={{ scale: pulseScale, opacity: pulseOpacity }}
-            className="absolute top-2 w-3 h-3 rounded-full bg-brand-400 z-0"
-          />
-          {/* Dot (mobile) */}
-          <motion.div
-            style={{ scale: dotScale, opacity: dotOpacity }}
-            className="w-3 h-3 rounded-full border-2 z-10 mt-2 bg-brand-400 border-brand-400 shadow-[0_0_8px_rgba(99,102,241,0.5)]"
-          />
-          {/* Animated line (mobile) */}
-          {index < experiences.length - 1 && (
-            <div className="w-px flex-1 mt-2 bg-glass-border relative overflow-hidden">
-              <motion.div
-                style={{ scaleY: lineScaleY }}
-                className="absolute inset-0 origin-top bg-linear-to-b from-brand-400/80 to-brand-600/30"
-              />
-            </div>
-          )}
-        </div>
-        <motion.div
-          style={{ opacity: cardOpacity, y: cardY }}
-          className="flex-1 p-5 rounded-2xl bg-surface-900 border border-white/5 hover:bg-surface-800 transition-colors duration-300"
+    <AnimatedWrapper delay={index * 0.05}>
+      <div className="border-b border-lead/20">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="w-full flex items-center justify-between py-7 text-left group"
         >
-          <span className="text-xs font-medium text-slate-500">
-            {experience.startDate} — {experience.endDate}
-          </span>
-          <TimelineContent experience={experience} />
-        </motion.div>
-      </div>
-    </div>
-  );
-}
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 min-w-0">
+            <span
+              className="text-[clamp(17px,2.4vw,22px)] font-[480] text-starlight leading-[1.2] group-hover:text-pure-white transition-colors duration-150"
+              style={{ letterSpacing: '0.01em' }}
+            >
+              {experience.role}
+            </span>
+            <div className="flex items-center gap-4">
+              <span className="text-[13px] font-[400] text-lead tracking-[0.26px]">
+                {experience.company}
+              </span>
+              <span className="text-[11px] font-[400] text-lead/40 tracking-[0.22px] uppercase">
+                {experience.location}
+              </span>
+            </div>
+          </div>
+          <div className="flex items-center gap-5 shrink-0 ml-6">
+            <span className="hidden sm:block text-[12px] font-[400] text-lead/50 tracking-[0.24px]">
+              {experience.startDate} to {experience.endDate}
+            </span>
+            <FiChevronDown
+              size={16}
+              className={`text-lead transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </div>
+        </button>
 
-function TimelineContent({
-  experience,
-}: {
-  experience: typeof experiences[0];
-}) {
-  return (
-    <>
-      <h3 className="text-lg font-bold text-white">
-        {experience.role}
-      </h3>
-      <p className="text-sm font-medium mt-0.5 text-brand-400">
-        {experience.company} · {experience.location}
-      </p>
-      <p className="text-sm mt-3 text-slate-400">
-        {experience.description}
-      </p>
-      <ul className="mt-3 space-y-1.5">
-        {experience.achievements.map((achievement, i) => (
-          <li
-            key={i}
-            className="text-xs flex items-start gap-2 text-slate-500"
-          >
-            <span className="text-brand-400 mt-0.5">▸</span>
-            {achievement}
-          </li>
-        ))}
-      </ul>
-      <div className="flex flex-wrap gap-1.5 mt-4">
-        {experience.techUsed.map((tech) => (
-          <Badge key={tech} variant="brand">{tech}</Badge>
-        ))}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="pb-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-6 lg:gap-14">
+                <div className="sm:hidden">
+                  <p className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase">
+                    {experience.startDate} to {experience.endDate}
+                  </p>
+                </div>
+                <div className="hidden lg:block">
+                  <p className="text-[11px] font-[400] text-lead tracking-[0.22px] uppercase">
+                    {experience.startDate}
+                  </p>
+                  <p className="mt-1 text-[11px] font-[400] text-lead/40 tracking-[0.22px] uppercase">
+                    {experience.endDate}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-[16px] font-[400] leading-[1.7] text-lead tracking-[0.16px] mb-6">
+                    {experience.description}
+                  </p>
+                  <ul className="space-y-3 mb-7">
+                    {experience.achievements.map((item, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-[14px] font-[400] text-lead leading-[1.6] tracking-[0.26px]"
+                      >
+                        <span className="text-mercury-blue mt-0.5 shrink-0 select-none">+</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="flex flex-wrap gap-2">
+                    {experience.techUsed.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-3 py-1 text-[11px] font-[400] tracking-[0.22px] text-lead border border-lead/25 bg-graphite/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
-    </>
+    </AnimatedWrapper>
   );
 }
 
 export default function Experience() {
   return (
-    <Container id="experience">
-      <SectionHeading
-        title="Experience"
-        subtitle="My professional journey and career milestones"
-      />
-      <div className="max-w-4xl mx-auto">
-        {experiences.map((exp, i) => (
-          <TimelineItem key={exp.id} experience={exp} index={i} />
-        ))}
-      </div>
-    </Container>
+    <div className="bg-deep-space">
+      <Container id="experience">
+        <SectionHeading
+          tag="Experience"
+          title="Professional journey"
+          subtitle="My career milestones and the roles that shaped my craft."
+        />
+
+        <div className="border-t border-lead/20">
+          {experiences.map((exp, i) => (
+            <ExperienceRow key={exp.id} experience={exp} index={i} />
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 }

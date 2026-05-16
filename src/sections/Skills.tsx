@@ -10,17 +10,9 @@ type Tab = 'languages' | 'technical' | 'soft';
 
 const tabs: { key: Tab; label: string; data: Skill[] }[] = [
   { key: 'languages', label: 'Languages', data: languages },
-  { key: 'technical', label: 'Technical Skills', data: technicalSkills },
+  { key: 'technical', label: 'Technical', data: technicalSkills },
   { key: 'soft', label: 'Soft Skills', data: softSkills },
 ];
-
-const proficiencyColors: Record<string, string> = {
-  expert: 'text-green-400',
-  advanced: 'text-blue-400',
-  proficient: 'text-cyan-400',
-  intermediate: 'text-yellow-400',
-  familiar: 'text-orange-400',
-};
 
 function SkillNode({ skill, index }: { skill: Skill; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -28,104 +20,82 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
   const [tooltipStyle, setTooltipStyle] = useState<React.CSSProperties>({});
   const [arrowStyle, setArrowStyle] = useState<React.CSSProperties>({});
 
-  const updateTooltipPosition = useCallback(() => {
+  const updatePosition = useCallback(() => {
     if (!nodeRef.current) return;
     const rect = nodeRef.current.getBoundingClientRect();
-    const tooltipW = 240; // w-60 = 240px
-    const padding = 12;
-    const screenW = window.innerWidth;
-
-    // Default: centered above
-    let left = rect.width / 2 - tooltipW / 2;
-    // Clamp so tooltip doesn't go off-screen
-    const absLeft = rect.left + left;
-    const absRight = absLeft + tooltipW;
-
-    let arrowLeft = '50%';
-
-    if (absLeft < padding) {
-      const shift = padding - absLeft;
+    const W = 220;
+    const pad = 12;
+    const vw = window.innerWidth;
+    let left = rect.width / 2 - W / 2;
+    const absL = rect.left + left;
+    const absR = absL + W;
+    let arrowL = '50%';
+    if (absL < pad) {
+      const shift = pad - absL;
       left += shift;
-      // Move arrow to stay pointing at the card center
-      arrowLeft = `${Math.max(16, tooltipW / 2 - shift)}px`;
-    } else if (absRight > screenW - padding) {
-      const shift = absRight - (screenW - padding);
+      arrowL = `${Math.max(16, W / 2 - shift)}px`;
+    } else if (absR > vw - pad) {
+      const shift = absR - (vw - pad);
       left -= shift;
-      arrowLeft = `${Math.min(tooltipW - 16, tooltipW / 2 + shift)}px`;
+      arrowL = `${Math.min(W - 16, W / 2 + shift)}px`;
     }
-
     setTooltipStyle({ left: `${left}px`, transform: 'none' });
-    setArrowStyle({ left: arrowLeft, transform: 'translateX(-50%) rotate(45deg)' });
+    setArrowStyle({ left: arrowL, transform: 'translateX(-50%) rotate(45deg)' });
   }, []);
-
-  const handleEnter = () => {
-    updateTooltipPosition();
-    setIsHovered(true);
-  };
 
   return (
     <motion.div
       ref={nodeRef}
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.5 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      onMouseEnter={handleEnter}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      transition={{ duration: 0.25, delay: index * 0.025 }}
+      onMouseEnter={() => { updatePosition(); setIsHovered(true); }}
       onMouseLeave={() => setIsHovered(false)}
-      onTouchStart={handleEnter}
-      onTouchEnd={() => setIsHovered(false)}
-      className="relative group"
+      className="relative"
     >
       <motion.div
-        animate={isHovered ? { scale: 1.05, y: -4 } : { scale: 1, y: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-        className="relative flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl cursor-pointer transition-all duration-300 bg-surface-900 border border-white/5 hover:bg-surface-800"
-        style={{
-          boxShadow: isHovered ? `0 0 20px ${skill.color}20` : 'none',
-          borderColor: isHovered ? `${skill.color}30` : undefined,
-        }}
+        animate={isHovered ? { y: -2 } : { y: 0 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+        className={cn(
+          'flex flex-col items-center justify-center w-[96px] h-[96px] sm:w-[104px] sm:h-[104px] cursor-default transition-colors duration-200 border border-lead/20',
+          isHovered ? 'bg-graphite border-lead/40' : 'bg-midnight-slate'
+        )}
       >
         <skill.icon
-          size={32}
-          style={{ color: isHovered ? skill.color : undefined }}
-          className="transition-colors duration-300 text-slate-400"
+          size={24}
+          style={{ color: isHovered ? skill.color : '#70707d' }}
+          className="transition-colors duration-200"
         />
-        <span className="mt-2 text-xs font-medium text-center leading-tight px-1 text-slate-400">
+        <span className="mt-2.5 text-[10px] font-[400] text-center leading-tight px-2 text-lead tracking-[0.02em]">
           {skill.name}
         </span>
       </motion.div>
 
-      {/* Tooltip */}
       <AnimatePresence>
         {isHovered && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="absolute z-50 bottom-full mb-3 w-60 p-4 rounded-xl text-sm pointer-events-none bg-surface-800 border border-glass-border shadow-xl"
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 5 }}
+            transition={{ duration: 0.12 }}
+            className="absolute z-50 bottom-full mb-3 w-[220px] p-4 pointer-events-none bg-graphite border border-lead/30"
             style={tooltipStyle}
           >
-            <div className="flex items-center gap-2 mb-2">
-              <skill.icon size={16} style={{ color: skill.color }} />
-              <span className="font-semibold text-white">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[13px] font-[480] text-starlight" style={{ letterSpacing: '0.01em' }}>
                 {skill.name}
               </span>
-              <span className={cn('ml-auto text-xs font-medium capitalize', proficiencyColors[skill.proficiency])}>
+              <span className="text-[10px] font-[400] text-lead uppercase tracking-[0.1em]">
                 {skill.proficiency}
               </span>
             </div>
-            <p className="text-xs leading-relaxed text-slate-400">
-              {skill.description}
-            </p>
+            <p className="text-[12px] leading-[1.55] text-lead tracking-[0.24px]">{skill.description}</p>
             {skill.years > 0 && (
-              <p className="mt-2 text-xs text-slate-500">
-                {skill.years}+ years experience
-              </p>
+              <p className="mt-2 text-[10px] text-lead/50 tracking-[0.2em] uppercase">{skill.years}+ yrs</p>
             )}
-            {/* Arrow */}
             <div
-              className="absolute -bottom-2 w-4 h-4 bg-surface-800 border-r border-b border-glass-border"
+              className="absolute -bottom-[9px] w-4 h-4 bg-graphite border-r border-b border-lead/30"
               style={arrowStyle}
             />
           </motion.div>
@@ -137,13 +107,14 @@ function SkillNode({ skill, index }: { skill: Skill; index: number }) {
 
 function SkillGroup({ label, skills }: { label: string; skills: Skill[] }) {
   return (
-    <div className="mb-8">
+    <div className="mb-12">
       {label && (
-        <h4 className="text-sm font-semibold uppercase tracking-wider mb-4 text-center text-slate-500">
-          {label}
-        </h4>
+        <div className="flex items-center gap-4 mb-6">
+          <span className="text-[11px] font-[400] text-lead/60 uppercase tracking-[0.22px] shrink-0">{label}</span>
+          <div className="flex-1 h-px bg-lead/15" />
+        </div>
       )}
-      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+      <div className="flex flex-wrap gap-2.5">
         {skills.map((skill, i) => (
           <SkillNode key={skill.name} skill={skill} index={i} />
         ))}
@@ -157,84 +128,64 @@ export default function Skills() {
 
   const activeData = tabs.find((t) => t.key === activeTab)!;
 
-  // Group technical skills by subcategory
-  const groupedTechnical = activeTab === 'technical'
-    ? technicalSkills.reduce<Record<string, Skill[]>>((acc, skill) => {
-        const key = skill.subcategory || 'Other';
-        if (!acc[key]) acc[key] = [];
-        acc[key].push(skill);
-        return acc;
-      }, {})
-    : null;
+  const groupedTechnical =
+    activeTab === 'technical'
+      ? technicalSkills.reduce<Record<string, Skill[]>>((acc, skill) => {
+          const key = skill.subcategory || 'Other';
+          if (!acc[key]) acc[key] = [];
+          acc[key].push(skill);
+          return acc;
+        }, {})
+      : null;
 
   return (
-    <Container id="skills">
-      <SectionHeading
-        title="Skills & Expertise"
-        subtitle="Technologies, languages, and skills I've mastered over 5+ years of professional development"
-      />
+    <div className="bg-deep-space">
+      <Container id="skills">
+        <SectionHeading tag="Skills" title="Technologies and expertise" />
 
-      {/* Tab buttons */}
-      <AnimatedWrapper>
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex rounded-2xl p-1.5 gap-1 bg-surface-900 border border-white/5">
+        <AnimatedWrapper>
+          <div className="inline-flex gap-0 mb-14 border border-lead/20 overflow-hidden" style={{ borderRadius: '32px' }}>
             {tabs.map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key)}
                 className={cn(
-                  'relative px-3 py-2 text-xs sm:px-5 sm:py-2.5 sm:text-sm font-medium rounded-xl transition-all duration-300',
+                  'px-6 py-2.5 text-[13px] font-[400] tracking-[0.26px] transition-colors duration-150',
                   activeTab === tab.key
-                    ? 'text-white'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-mercury-blue text-pure-white'
+                    : 'bg-transparent text-lead hover:text-starlight'
                 )}
               >
-                {activeTab === tab.key && (
-                  <motion.div
-                    layoutId="activeSkillTab"
-                    className="absolute inset-0 bg-brand-600 rounded-xl"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{tab.label}</span>
+                {tab.label}
               </button>
             ))}
           </div>
-        </div>
-      </AnimatedWrapper>
+        </AnimatedWrapper>
 
-      {/* Skill nodes */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          {groupedTechnical ? (
-            Object.entries(groupedTechnical).map(([group, skills]) => (
-              <SkillGroup key={group} label={group} skills={skills} />
-            ))
-          ) : (
-            <SkillGroup label="" skills={activeData.data} />
-          )}
-        </motion.div>
-      </AnimatePresence>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeTab}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.18 }}
+          >
+            {groupedTechnical ? (
+              Object.entries(groupedTechnical).map(([group, skills]) => (
+                <SkillGroup key={group} label={group} skills={skills} />
+              ))
+            ) : (
+              <SkillGroup label="" skills={activeData.data} />
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-      {/* Legend */}
-      <AnimatedWrapper delay={0.4}>
-        <div className="mt-12 flex flex-wrap justify-center gap-4 text-xs">
-          {Object.entries(proficiencyColors).map(([level, color]) => (
-            <span key={level} className="flex items-center gap-1.5">
-              <span className={cn('w-2 h-2 rounded-full', color.replace('text-', 'bg-'))} />
-              <span className="capitalize text-slate-500">
-                {level}
-              </span>
-            </span>
-          ))}
-        </div>
-      </AnimatedWrapper>
-    </Container>
+        <AnimatedWrapper delay={0.1}>
+          <div className="mt-8 pt-8 border-t border-lead/15">
+            <p className="text-[11px] text-lead/40 tracking-[0.24px]">Hover any icon for details</p>
+          </div>
+        </AnimatedWrapper>
+      </Container>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { FaGithub, FaLinkedinIn, FaXTwitter, FaHeart } from 'react-icons/fa6';
+import { FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 import { socialLinks, navLinks } from '@/data/constants';
 
 const socialIcons = [
@@ -10,64 +10,59 @@ const socialIcons = [
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const scrollToSection = (href: string) => {
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollTo = (href: string) =>
+    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="border-t border-glass-border bg-surface-950">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+    <footer className="bg-deep-space border-t border-lead/15">
+      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 py-14">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-10 border-b border-lead/15">
           {/* Brand */}
-          <div>
-            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }} className="text-2xl font-bold">
-              <span className="text-white">Dev</span>
-              <span className="text-brand-400">Rex</span>
-            </a>
-            <p className="mt-2 text-sm text-slate-500">
-              Building exceptional digital experiences.
-            </p>
-          </div>
+          <a
+            href="#home"
+            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
+            className="text-[17px] font-[480] text-starlight hover:text-pure-white transition-colors tracking-[0.01em]"
+          >
+            DevRex
+          </a>
 
-          {/* Quick Nav */}
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* Nav */}
+          <nav className="flex flex-wrap gap-x-8 gap-y-3">
             {navLinks.slice(0, 5).map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
-                className="text-sm transition-colors text-slate-500 hover:text-white"
+                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
+                className="text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.26px]"
               >
                 {link.name}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-end gap-4">
+          {/* Socials */}
+          <div className="flex items-center gap-5">
             {socialIcons.map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl transition-all duration-200 text-slate-500 hover:text-brand-400 hover:bg-brand-500/10"
+                className="text-lead/50 hover:text-starlight transition-colors"
                 aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={16} />
               </a>
             ))}
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-8 pt-8 border-t text-center text-sm border-glass-border text-slate-600">
-          <p className="flex items-center justify-center gap-1">
-            &copy; {currentYear} DevRex. Built with <FaHeart className="text-red-500 text-xs" /> by Pererat Timothy
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-[12px] font-[400] text-lead/40 tracking-[0.24px]">
+            &copy; {currentYear} DevRex. All rights reserved.
+          </p>
+          <p className="text-[12px] font-[400] text-lead/30 tracking-[0.24px]">
+            Built by Pererat Timothy
           </p>
         </div>
       </div>

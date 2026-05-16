@@ -1,115 +1,100 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import { navLinks } from '@/data/constants';
 import { cn } from '@/utils/cn';
-import Button from '@/components/ui/Button';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Scroll progress
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
-
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Update active section based on scroll position
-      const sections = navLinks.map((link) => link.href.replace('#', ''));
-      for (const section of sections.reverse()) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
-          }
+      setIsScrolled(window.scrollY > 40);
+      const ids = navLinks.map((l) => l.href.replace('#', ''));
+      for (const id of [...ids].reverse()) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= 140) {
+          setActiveSection(id);
+          break;
         }
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const id = href.replace('#', '');
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileOpen(false);
-    }
+  const scrollTo = (href: string) => {
+    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+    setIsMobileOpen(false);
   };
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
+      <motion.header
+        initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: 'easeOut' }}
         className={cn(
-          'fixed z-50 transition-all duration-300 top-0 left-0 right-0 w-full lg:top-4 lg:left-1/2 lg:-translate-x-1/2 lg:w-[70vw] lg:max-w-300 lg:rounded-full py-4 px-4 lg:py-3 lg:px-8 overflow-hidden',
+          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           isScrolled
-            ? 'shadow-lg shadow-black/20 bg-surface-900/95 backdrop-blur-xl border-b lg:border border-white/10'
-            : 'bg-transparent border-transparent'
+            ? 'bg-deep-space/92 backdrop-blur-md border-b border-lead/15'
+            : 'bg-transparent'
         )}
       >
-          {/* Scroll progress bar */}
-          <motion.div
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-linear-to-r from-brand-400 to-brand-600 origin-left lg:rounded-full"
-            style={{ scaleX }}
-          />
-        <div className="mx-auto flex items-center justify-between w-full px-2 lg:px-4">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 h-[60px] flex items-center justify-between">
           {/* Logo */}
-          <motion.a
+          <a
             href="#home"
-            onClick={(e) => { e.preventDefault(); scrollToSection('#home'); }}
-            className="text-2xl font-bold tracking-tight"
-            whileHover={{ scale: 1.05 }}
+            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
+            className="text-[17px] font-[480] text-starlight tracking-[0.01em] hover:text-pure-white transition-colors"
           >
-            <span className="text-white">Dev</span>
-            <span className="text-brand-400 transition-colors">Rex</span>
-          </motion.a>
+            DevRex
+          </a>
 
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-1 ml-auto">
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                 className={cn(
-                  'px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap',
+                  'text-[13px] font-[400] tracking-[0.26px] transition-colors duration-150',
                   activeSection === link.href.replace('#', '')
-                    ? 'text-brand-400 bg-brand-500/10'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    ? 'text-starlight'
+                    : 'text-lead hover:text-starlight'
                 )}
               >
                 {link.name}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Right side actions */}
-          <div className="flex items-center gap-3">
-            {/* Mobile menu button */}
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="lg:hidden p-2.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/5"
-              aria-label="Toggle menu"
+          {/* CTA */}
+          <div className="hidden lg:flex items-center">
+            <button
+              onClick={() => scrollTo('#contact')}
+              className="px-5 py-2 text-[13px] font-[480] tracking-[0.26px] text-starlight bg-graphite/60 hover:bg-graphite border border-lead/25 hover:border-lead/50 transition-colors duration-150"
+              style={{ borderRadius: '40px' }}
             >
-              {isMobileOpen ? <HiX size={24} /> : <HiMenuAlt3 size={24} />}
-            </motion.button>
+              Hire Me
+            </button>
           </div>
-        </div>
-      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
+          {/* Mobile toggle */}
+          <button
+            onClick={() => setIsMobileOpen(!isMobileOpen)}
+            className="lg:hidden p-2 text-lead hover:text-starlight transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileOpen ? <HiX size={20} /> : <HiMenuAlt3 size={20} />}
+          </button>
+        </div>
+      </motion.header>
+
+      {/* Mobile drawer */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -119,46 +104,43 @@ export default function Navbar() {
             className="fixed inset-0 z-40 lg:hidden"
             onClick={() => setIsMobileOpen(false)}
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-deep-space/80 backdrop-blur-sm" />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-0 bottom-0 w-72 max-w-[85vw] p-6 pt-20 bg-surface-900/95 backdrop-blur-xl border-l border-glass-border"
+              className="absolute right-0 top-0 bottom-0 w-[260px] max-w-[85vw] px-6 pt-20 pb-8 bg-midnight-slate border-l border-lead/15 flex flex-col"
             >
-              <div className="flex flex-col gap-2">
+              <nav className="flex flex-col">
                 {navLinks.map((link, i) => (
                   <motion.a
                     key={link.name}
                     href={link.href}
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    onClick={(e) => { e.preventDefault(); scrollToSection(link.href); }}
+                    transition={{ delay: i * 0.04 }}
+                    onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
                     className={cn(
-                      'px-4 py-3 text-lg font-medium rounded-xl transition-all',
+                      'py-4 text-[17px] font-[300] tracking-[0.01em] border-b border-lead/15 transition-colors',
                       activeSection === link.href.replace('#', '')
-                    ? 'text-brand-400 bg-brand-500/10'
-                        : 'text-slate-400 hover:text-white hover:bg-white/5'
+                        ? 'text-starlight'
+                        : 'text-lead hover:text-starlight'
                     )}
                   >
                     {link.name}
                   </motion.a>
                 ))}
-              </div>
-
+              </nav>
               <div className="mt-8">
-                <Button
-                  variant="primary"
-                  size="md"
-                  glow
-                  className="w-full"
-                  onClick={() => scrollToSection('#contact')}
+                <button
+                  onClick={() => scrollTo('#contact')}
+                  className="w-full py-3 text-[14px] font-[480] tracking-[0.26px] text-pure-white bg-mercury-blue hover:bg-[#4456d6] transition-colors"
+                  style={{ borderRadius: '32px' }}
                 >
                   Hire Me
-                </Button>
+                </button>
               </div>
             </motion.div>
           </motion.div>

@@ -1,164 +1,141 @@
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
-import { FiArrowDown } from 'react-icons/fi';
-import { FaGithub, FaLinkedinIn } from 'react-icons/fa6';
-import Button from '@/components/ui/Button';
-import { personalInfo, socialLinks } from '@/data/constants';
+import { FiArrowRight } from 'react-icons/fi';
+import { personalInfo } from '@/data/constants';
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: 'easeOut' } as const,
+});
 
 export default function Hero() {
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex flex-col bg-deep-space overflow-hidden"
     >
-      {/* Floating orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-600/10 rounded-full blur-[120px] animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-500/10 rounded-full blur-[150px] animate-float" style={{ animationDelay: '3s' }} />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-brand-500/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* Atmospheric violet bloom */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 90% 55% at 50% -5%, rgba(82,102,235,0.14) 0%, transparent 65%)',
+        }}
+      />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex flex-col items-center text-center">
-          {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border bg-white/5 text-slate-300 border-white/10 backdrop-blur-md shadow-lg">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-400"></span>
-              </span>
+      {/* Main content */}
+      <div className="flex-1 flex items-center justify-center relative z-10">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 w-full py-32 flex flex-col items-center text-center">
+
+          {/* Availability badge */}
+          <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2.5 mb-12 px-4 py-2 border border-lead/30 bg-graphite/30">
+            <span className="w-1.5 h-1.5 rounded-full bg-mercury-blue" />
+            <span className="text-[11px] text-lead tracking-[0.22px] uppercase font-[400]">
               {personalInfo.availability}
             </span>
           </motion.div>
 
-          {/* Terminal-style intro */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12"
+          {/* Name */}
+          <motion.h1
+            {...fadeUp(0.08)}
+            className="text-[clamp(40px,7vw,68px)] leading-[1.1] text-starlight"
+            style={{ fontWeight: 360, letterSpacing: '0.5px' }}
           >
-            <div className="inline-block rounded-2xl p-6 sm:p-8 font-mono text-left w-full max-w-2xl glass border-white/10 shadow-2xl relative overflow-hidden group">
-              <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              {/* Terminal bar */}
-              <div className="flex items-center gap-2 mb-4 pb-4 border-b border-white/10 relative z-10">
-                <div className="w-3 h-3 rounded-full bg-[#ff5f56] shadow-[0_0_10px_rgba(255,95,86,0.5)]" />
-                <div className="w-3 h-3 rounded-full bg-[#ffbd2e] shadow-[0_0_10px_rgba(255,189,46,0.5)]" />
-                <div className="w-3 h-3 rounded-full bg-[#27c93f] shadow-[0_0_10px_rgba(39,201,63,0.5)]" />
-                <span className="ml-2 text-slate-400 text-xs font-medium tracking-wider">devrex@portfolio ~ </span>
-              </div>
-              <div className="text-sm sm:text-base relative z-10">
-                <p className="text-slate-400">
-                  <span className="text-brand-400 font-bold">$</span> whoami
-                </p>
-                <div className="mt-3 text-slate-200">
-                  <TypeAnimation
-                    sequence={[
-                      500,
-                      `> Hi, I'm ${personalInfo.name}`,
-                      1000,
-                      `> I'm a ${personalInfo.title}`,
-                      1000,
-                      `> Specializing in Frontend Development`,
-                      1000,
-                      `> I build exceptional digital experiences`,
-                      2000,
-                    ]}
-                    wrapper="span"
-                    speed={50}
-                    repeat={Infinity}
-                    cursor={true}
-                    className="text-slate-200"
-                  />
-                </div>
-              </div>
-            </div>
-          </motion.div>
+            {personalInfo.name}
+          </motion.h1>
 
-          {/* Main heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12"
-          >
-            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white drop-shadow-2xl">
-              {personalInfo.name}
-            </h1>
-            <p className="mt-6 text-xl sm:text-2xl md:text-3xl font-medium text-slate-400 tracking-wide">
-              {personalInfo.title} <span className="mx-2 text-white/20">|</span> <span className="text-brand-400 font-bold">{personalInfo.subtitle}</span>
-            </p>
-          </motion.div>
-
-          {/* Brief intro */}
+          {/* Title */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-8 max-w-2xl text-lg sm:text-xl leading-relaxed text-slate-400 font-light text-center"
+            {...fadeUp(0.14)}
+            className="mt-5 text-[clamp(15px,2vw,19px)] text-lead font-[400]"
+            style={{ letterSpacing: '0.02em' }}
+          >
+            {personalInfo.title}
+            <span className="mx-3 text-lead/30">·</span>
+            {personalInfo.subtitle}
+          </motion.p>
+
+          {/* Bio */}
+          <motion.p
+            {...fadeUp(0.21)}
+            className="mt-7 text-[16px] font-[400] leading-[1.75] text-lead/80 max-w-[480px] tracking-[0.16px]"
           >
             {personalInfo.bio}
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12 flex flex-row items-center justify-center gap-3 sm:gap-6 w-full sm:w-auto"
-          >
-            <Button
-              variant="primary"
-              size="lg"
-              glow
-              className="flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-lg font-semibold rounded-full shadow-[0_0_40px_rgba(99,102,241,0.4)] hover:shadow-[0_0_60px_rgba(99,102,241,0.6)] transition-all duration-300"
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+          {/* CTAs */}
+          <motion.div {...fadeUp(0.28)} className="mt-10 flex flex-wrap items-center justify-center gap-5">
+            <button
+              onClick={() => scrollTo('projects')}
+              className="px-8 py-3.5 bg-mercury-blue text-pure-white text-[15px] font-[480] tracking-[0.1px] hover:bg-[#4456d6] active:bg-[#3a49c4] transition-colors duration-150"
+              style={{ borderRadius: '32px' }}
             >
               View My Work
-              <FiArrowDown className="ml-1 sm:ml-2 animate-bounce" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="flex-1 sm:flex-none px-4 py-3 sm:px-8 sm:py-4 text-sm sm:text-lg font-semibold rounded-full border-white/20 hover:bg-white/5 hover:border-white/40 transition-all duration-300"
-              onClick={() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            </button>
+            <button
+              onClick={() => scrollTo('contact')}
+              className="inline-flex items-center gap-2 text-[15px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px]"
             >
-              Hire Me
-            </Button>
+              Let's Talk <FiArrowRight size={14} />
+            </button>
           </motion.div>
 
           {/* Social links */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="mt-12 sm:mt-16 flex items-center gap-4 sm:gap-6"
+            {...fadeUp(0.36)}
+            className="mt-10 flex items-center gap-8"
           >
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 sm:p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-white hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-            >
-              <FaGithub className="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
-            <a
-              href={socialLinks.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 sm:p-4 rounded-full bg-white/5 border border-white/10 transition-all duration-300 text-slate-400 hover:text-[#0A66C2] hover:bg-white/10 hover:scale-110 hover:shadow-[0_0_20px_rgba(10,102,194,0.2)]"
-            >
-              <FaLinkedinIn className="w-5 h-5 sm:w-6 sm:h-6" />
-            </a>
+            {[
+              { label: 'GitHub', href: 'https://github.com/Rexzy2005' },
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/in/pererat-timothy-b33a51375' },
+              { label: 'Email', href: 'mailto:timothypererat2004@gmail.com' },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={label !== 'Email' ? '_blank' : undefined}
+                rel={label !== 'Email' ? 'noopener noreferrer' : undefined}
+                className="text-[13px] font-[400] text-lead/50 hover:text-starlight transition-colors tracking-[0.28px]"
+              >
+                {label}
+              </a>
+            ))}
           </motion.div>
         </div>
       </div>
+
+      {/* Stats bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="relative z-10 border-t border-lead/20"
+      >
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-3 divide-x divide-lead/20">
+            {[
+              { value: `${personalInfo.yearsOfExperience}+`, label: 'Years Experience' },
+              { value: `${personalInfo.projectsDelivered}+`, label: 'Projects Delivered' },
+              { value: `${personalInfo.happyClients}+`, label: 'Happy Clients' },
+            ].map(({ value, label }) => (
+              <div key={label} className="py-8 px-4 sm:px-10 text-center">
+                <p
+                  className="text-[30px] leading-none text-starlight"
+                  style={{ fontWeight: 360, letterSpacing: '0.01em' }}
+                >
+                  {value}
+                </p>
+                <p className="mt-2 text-[11px] font-[400] text-lead/60 tracking-[0.22px] uppercase">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

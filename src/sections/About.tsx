@@ -1,118 +1,72 @@
-import { FiMapPin, FiBriefcase, FiCode, FiUsers } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiArrowRight } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
-import { personalInfo } from '@/data/constants';
-import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from 'react';
+import { personalInfo, socialLinks } from '@/data/constants';
 
-function CountUp({ target, duration = 2000 }: { target: number; duration?: number }) {
-  const [count, setCount] = useState(0);
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.5 });
-
-  useEffect(() => {
-    if (!inView) return;
-    let startTime: number;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [inView, target, duration]);
-
-  return <span ref={ref}>{count}</span>;
-}
-
-const stats = [
-  {
-    icon: FiBriefcase,
-    value: personalInfo.yearsOfExperience,
-    label: 'Years Experience',
-    suffix: '+',
-  },
-  {
-    icon: FiCode,
-    value: personalInfo.projectsDelivered,
-    label: 'Projects Delivered',
-    suffix: '+',
-  },
-  {
-    icon: FiUsers,
-    value: personalInfo.happyClients,
-    label: 'Happy Clients',
-    suffix: '+',
-  },
+const facts = [
+  { label: 'Role', value: personalInfo.title },
+  { label: 'Speciality', value: personalInfo.subtitle },
+  { label: 'Location', value: personalInfo.location },
+  { label: 'Status', value: personalInfo.availability },
 ];
 
 export default function About() {
   return (
-    <Container id="about">
-      <SectionHeading
-        title="About Me"
-        subtitle="Get to know the developer behind the code"
-      />
+    <div className="bg-midnight-slate">
+      <Container id="about">
+        <SectionHeading
+          tag="About"
+          title="The developer behind the code"
+        />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        {/* Left — Profile image */}
-        <AnimatedWrapper direction="left">
-          <div className="relative mx-auto lg:mx-0 w-72 h-72 sm:w-80 sm:h-80">
-            {/* Subtle glow */}
-            <div className="absolute inset-0 rounded-full bg-brand-500 opacity-10 blur-xl" />
-            {/* Image frame */}
-            <div className="relative w-full h-full rounded-full overflow-hidden border border-brand-500/20 bg-surface-800">
-              <img
-                src="/dev-rex.jpg"
-                alt={personalInfo.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-2 -right-2 px-4 py-2 rounded-lg text-sm font-medium glass text-brand-400 border-brand-500/20">
-              <FiMapPin className="inline mr-1" />
-              {personalInfo.location}
-            </div>
-          </div>
-        </AnimatedWrapper>
-
-        {/* Right — Bio & Stats */}
-        <div>
-          <AnimatedWrapper direction="right">
-            <h3 className="text-2xl font-bold mb-4 text-white text-center lg:text-left">
-              I&apos;m {personalInfo.name}, a{' '}
-              <span className="text-brand-400">{personalInfo.title}</span>
-            </h3>
-            <p className="text-lg leading-relaxed mb-4 text-slate-400 text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-start">
+          {/* Left — bio */}
+          <AnimatedWrapper direction="left">
+            <p
+              className="text-[clamp(18px,2.2vw,21px)] font-[300] leading-[1.65] text-starlight/90"
+              style={{ letterSpacing: '0.01em' }}
+            >
               {personalInfo.bio}
             </p>
-            <p className="text-base leading-relaxed text-slate-500 text-center lg:text-left">
+            <p className="mt-6 text-[16px] font-[400] leading-[1.75] text-lead tracking-[0.16px]">
               {personalInfo.longBio}
             </p>
+
+            <div className="mt-10">
+              <a
+                href={`mailto:${socialLinks.email}`}
+                className="inline-flex items-center gap-2 text-[14px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px]"
+              >
+                {socialLinks.email}
+                <FiArrowRight size={13} />
+              </a>
+            </div>
           </AnimatedWrapper>
 
-          {/* Stats */}
-          <AnimatedWrapper direction="up" delay={0.3}>
-            <div className="grid grid-cols-3 gap-3 mt-8">
-              {stats.map(({ icon: Icon, value, label, suffix }) => (
-                <div
+          {/* Right — quick facts */}
+          <AnimatedWrapper direction="right">
+            <div className="border-t border-lead/30">
+              {facts.map(({ label, value }) => (
+                <motion.div
                   key={label}
-                  className="text-center p-3 rounded-xl transition-all glass hover:bg-white/5"
+                  className="flex items-center justify-between py-5 border-b border-lead/30"
+                  whileHover={{ x: 3 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 >
-                  <Icon className="mx-auto mb-1.5 text-brand-400" size={20} />
-                  <div className="text-2xl font-bold text-white">
-                    <CountUp target={value} />
-                    {suffix}
-                  </div>
-                  <p className="text-[11px] mt-1 text-slate-500">
+                  <span className="text-[11px] font-[400] text-lead tracking-[0.22px] uppercase">
                     {label}
-                  </p>
-                </div>
+                  </span>
+                  <span className="text-[15px] font-[400] text-starlight tracking-[0.16px] text-right">
+                    {value}
+                  </span>
+                </motion.div>
               ))}
             </div>
           </AnimatedWrapper>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 }

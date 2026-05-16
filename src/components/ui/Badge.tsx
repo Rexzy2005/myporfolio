@@ -2,22 +2,14 @@ import { cn } from '@/utils/cn';
 
 interface BadgeProps {
   children: React.ReactNode;
-  variant?: 'default' | 'brand' | 'neon';
   className?: string;
 }
 
-export default function Badge({ children, variant = 'default', className }: BadgeProps) {
-  const variants = {
-    default: 'bg-surface-800 text-slate-300 border-surface-700',
-    brand: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
-    neon: 'bg-brand-500/10 text-brand-400 border-brand-500/20',
-  };
-
+export default function Badge({ children, className }: BadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-full border transition-colors',
-        variants[variant],
+        'inline-flex items-center px-3 py-1 text-[12px] font-[400] tracking-[0.24px] text-silver border border-lead/40 rounded-[4px] bg-graphite/40',
         className
       )}
     >

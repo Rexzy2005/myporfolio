@@ -8,7 +8,10 @@ interface ContainerProps {
 
 export default function Container({ children, className, id }: ContainerProps) {
   return (
-    <section id={id} className={cn('px-4 sm:px-6 lg:px-8 py-20 md:py-28 max-w-7xl mx-auto', className)}>
+    <section
+      id={id}
+      className={cn('px-6 sm:px-8 lg:px-12 py-[80px] md:py-[112px] max-w-[1200px] mx-auto', className)}
+    >
       {children}
     </section>
   );
