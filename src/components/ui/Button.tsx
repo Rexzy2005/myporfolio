@@ -17,9 +17,9 @@ export default function Button({
   const base = 'relative inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 cursor-pointer select-none whitespace-nowrap';
 
   const variants = {
-    /* Mercury Blue — strictly for primary CTAs */
+    /* Mercury Blue for primary CTAs */
     primary: 'bg-mercury-blue text-pure-white hover:bg-[#4456d6] rounded-[32px]',
-    /* Translucent Ghost Blue — secondary actions in header */
+    /* Translucent Ghost Blue for secondary header actions */
     header: 'bg-ghost-blue/20 text-starlight hover:bg-ghost-blue/30 rounded-[40px]',
     /* Text-only ghost link */
     ghost: 'bg-transparent text-starlight hover:text-silver transition-colors',

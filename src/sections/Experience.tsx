@@ -103,7 +103,7 @@ function ExperienceRow({ experience, index }: { experience: typeof experiences[0
 
 export default function Experience() {
   return (
-    <div className="bg-deep-space">
+    <div className="bg-black">
       <Container id="experience">
         <SectionHeading
           tag="Experience"

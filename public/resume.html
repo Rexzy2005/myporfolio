@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pererat Timothy Resume</title>
+    <style>
+      :root {
+        --ink: #151620;
+        --muted: #5f6474;
+        --line: #d9ddea;
+        --accent: #5266eb;
+        --accent-dark: #24315f;
+        --paper: #ffffff;
+        --soft: #f5f7fb;
+        --sidebar: #171721;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: #e9edf5;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      p,
+      li,
+      a,
+      span {
+        overflow-wrap: anywhere;
+      }
+
+      .toolbar {
+        max-width: 960px;
+        margin: 24px auto 14px;
+        padding: 0 16px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      .toolbar a,
+      .toolbar button {
+        border: 1px solid #c7ccdc;
+        background: #ffffff;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      .toolbar .primary {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .page {
+        width: min(960px, calc(100vw - 32px));
+        margin: 0 auto 32px;
+        background: var(--paper);
+        box-shadow: 0 24px 70px rgba(22, 27, 45, 0.14);
+      }
+
+      .sheet {
+        min-height: 1180px;
+        display: grid;
+        grid-template-columns: 290px 1fr;
+      }
+
+      .sidebar {
+        background: var(--sidebar);
+        color: #ffffff;
+        padding: 38px 28px;
+      }
+
+      .avatar {
+        width: 112px;
+        height: 112px;
+        object-fit: cover;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .side-block {
+        margin-top: 28px;
+      }
+
+      .side-title {
+        margin: 0 0 12px;
+        font-size: 10px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 760;
+      }
+
+      .contact-list,
+      .side-list {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .pill {
+        padding: 6px 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 10.5px;
+        font-weight: 650;
+      }
+
+      .content {
+        padding: 40px 44px 38px;
+        margin-top: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 36px;
+        line-height: 1;
+        color: var(--ink);
+        font-weight: 800;
+      }
+
+      .role {
+        margin-top: 8px;
+        color: var(--accent);
+        font-size: 15px;
+        font-weight: 720;
+      }
+
+      .summary {
+        margin-top: 16px;
+        max-width: 660px;
+        color: var(--muted);
+        font-size: 13.5px;
+        line-height: 1.65;
+      }
+
+      .top-line {
+        margin-top: 22px;
+        height: 3px;
+        width: 88px;
+        background: var(--accent);
+      }
+
+      section {
+        margin-top: 28px;
+      }
+
+      h2 {
+        margin-bottom: 13px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .item + .item {
+        margin-top: 16px;
+      }
+
+      .item-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: baseline;
+      }
+
+      h3 {
+        color: var(--ink);
+        font-size: 14.5px;
+        line-height: 1.28;
+        font-weight: 760;
+      }
+
+      .meta {
+        flex-shrink: 0;
+        color: var(--muted);
+        font-size: 11.5px;
+      }
+
+      .sub {
+        margin-top: 2px;
+        color: var(--accent);
+        font-size: 11.5px;
+        font-weight: 720;
+      }
+
+      ul {
+        margin: 7px 0 0;
+        padding-left: 17px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      li + li {
+        margin-top: 3px;
+      }
+
+      .project-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .project {
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--accent);
+        background: var(--soft);
+        padding: 11px 12px;
+      }
+
+      .project p {
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 11.5px;
+        line-height: 1.5;
+      }
+
+      @media print {
+        html,
+        body {
+          background: #ffffff;
+          width: 210mm;
+          height: 297mm;
+          overflow: hidden;
+        }
+
+        .toolbar {
+          display: none;
+        }
+
+        .page {
+          width: 210mm;
+          height: 297mm;
+          margin: 0;
+          box-shadow: none;
+        }
+
+        .sheet {
+          width: 210mm;
+          height: 297mm;
+          min-height: 297mm;
+          grid-template-columns: 62mm 1fr;
+        }
+
+        .sidebar {
+          padding: 9mm 7mm;
+        }
+
+        .avatar {
+          width: 27mm;
+          height: 27mm;
+          border-radius: 4mm;
+        }
+
+        .side-block {
+          margin-top: 7mm;
+        }
+
+        .side-title {
+          margin-bottom: 3mm;
+          font-size: 7.7pt;
+        }
+
+        .contact-list,
+        .side-list {
+          gap: 2.1mm;
+          font-size: 8.3pt;
+        }
+
+        .pill-list {
+          gap: 1.6mm;
+        }
+
+        .pill {
+          padding: 1.4mm 2mm;
+          font-size: 7.8pt;
+        }
+
+        .content {
+          padding: 9mm 10mm 8mm;
+        }
+
+        h1 {
+          font-size: 23pt;
+        }
+
+        .role {
+          margin-top: 2mm;
+          font-size: 10.2pt;
+        }
+
+        .summary {
+          margin-top: 4mm;
+          font-size: 8.9pt;
+          line-height: 1.42;
+        }
+
+        .top-line {
+          margin-top: 5mm;
+          height: 1mm;
+          width: 23mm;
+        }
+
+        section {
+          margin-top: 6mm;
+        }
+
+        h2 {
+          margin-bottom: 3mm;
+          padding-bottom: 2mm;
+          font-size: 8.1pt;
+        }
+
+        .item + .item {
+          margin-top: 4mm;
+        }
+
+        h3 {
+          font-size: 9.8pt;
+        }
+
+        .meta,
+        .sub {
+          font-size: 8.2pt;
+        }
+
+        ul {
+          margin-top: 1.7mm;
+          padding-left: 4.5mm;
+          font-size: 8.25pt;
+          line-height: 1.36;
+        }
+
+        li + li {
+          margin-top: 1mm;
+        }
+
+        .project-grid {
+          gap: 3mm;
+        }
+
+        .project {
+          padding: 2.6mm 3mm;
+        }
+
+        .project p {
+          font-size: 8pt;
+          line-height: 1.35;
+        }
+
+        @page {
+          size: A4;
+          margin: 0;
+        }
+      }
+
+      @media (max-width: 720px) {
+        html,
+        body {
+          max-width: 100%;
+          overflow-x: hidden;
+          background: var(--paper);
+        }
+
+        .toolbar {
+          position: sticky;
+          top: 0;
+          z-index: 10;
+          width: min(100%, 390px);
+          max-width: 390px;
+          margin: 0;
+          padding: 10px;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          background: rgba(255, 255, 255, 0.95);
+          border-bottom: 1px solid var(--line);
+          backdrop-filter: blur(12px);
+        }
+
+        .toolbar a,
+        .toolbar button {
+          min-width: 0;
+          text-align: center;
+          padding: 10px 9px;
+          font-size: 12px;
+        }
+
+        .toolbar .back {
+          grid-column: 1 / -1;
+        }
+
+        .page {
+          width: min(100%, 390px);
+          max-width: 390px;
+          margin: 0;
+          box-shadow: none;
+          overflow-x: hidden;
+        }
+
+        .sheet {
+          min-height: auto;
+          display: block;
+        }
+
+        .sidebar {
+          padding: 28px 20px;
+        }
+
+        .avatar {
+          width: 86px;
+          height: 86px;
+        }
+
+        .content {
+          padding: 30px 20px 42px;
+        }
+
+        h1 {
+          font-size: 31px;
+        }
+
+        .summary {
+          font-size: 13.5px;
+        }
+
+        .item-head {
+          display: block;
+        }
+
+        .meta {
+          margin-top: 3px;
+        }
+
+        .project-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar" aria-label="Resume actions">
+      <a class="back" href="/">Back to portfolio</a>
+      <a class="primary" href="/Pererat-Timothy-Resume.pdf" download>Download PDF</a>
+      <button type="button" onclick="window.print()">Print</button>
+    </div>
+
+    <main class="page">
+      <div class="sheet">
+        <aside class="sidebar">
+          <img class="avatar" src="profile.jpg" alt="Pererat Timothy" />
+
+          <div class="side-block">
+            <p class="side-title">Contact</p>
+            <ul class="contact-list">
+              <li>Jos, Plateau State / Remote</li>
+              <li>WhatsApp: 08133153568</li>
+              <li>timothypererat2004@gmail.com</li>
+              <li>github.com/Rexzy2005</li>
+              <li>linkedin.com/in/pererat-timothy-b33a51375</li>
+              <li>twitter.com/dev_rexzy</li>
+            </ul>
+          </div>
+
+          <div class="side-block">
+            <p class="side-title">Core Stack</p>
+            <div class="pill-list">
+              <span class="pill">React</span>
+              <span class="pill">TypeScript</span>
+              <span class="pill">Next.js</span>
+              <span class="pill">Tailwind CSS</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">PostgreSQL</span>
+              <span class="pill">MongoDB</span>
+              <span class="pill">Solidity</span>
+              <span class="pill">Web3 UX</span>
+              <span class="pill">AI Annotator</span>
+            </div>
+          </div>
+
+          <div class="side-block">
+            <p class="side-title">Hackathons</p>
+            <ul class="side-list">
+              <li>Ika Hackathon: 2nd place with ClearSig.</li>
+              <li>HackJos 2025: 5th place with Script Business Management.</li>
+            </ul>
+          </div>
+
+          <div class="side-block">
+            <p class="side-title">Education</p>
+            <ul class="side-list">
+              <li>Nigerian Army University, Software Engineering, final year.</li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="content">
+          <header>
+            <h1>Pererat Timothy</h1>
+            <p class="role">Product-Focused Software Developer</p>
+            <p class="summary">
+              Product-focused software developer with 5+ years of experience building frontend-heavy and full-stack web products across fintech, Web3, SME tooling, event platforms, and design systems. Strong in React, TypeScript, Next.js, Tailwind CSS, product architecture, and team collaboration.
+            </p>
+            <div class="top-line"></div>
+          </header>
+
+          <section>
+            <h2>Experience</h2>
+            <div class="item">
+              <div class="item-head">
+                <h3>Head of Product Engineering / Frontend Lead</h3>
+                <p class="meta">May 2026 to Present</p>
+              </div>
+              <p class="sub">ClearSig | Remote</p>
+              <ul>
+                <li>Lead product engineering for a Web3 shared wallet product for groups, families, and teams.</li>
+                <li>Handled the complete frontend implementation for the ClearSig hackathon build.</li>
+                <li>Helped the team secure 2nd place at the Ika hackathon.</li>
+              </ul>
+            </div>
+
+            <div class="item">
+              <div class="item-head">
+                <h3>Senior Frontend Developer</h3>
+                <p class="meta">Jan 2026 to Present</p>
+              </div>
+              <p class="sub">Deta Wallet | Remote</p>
+              <ul>
+                <li>Lead frontend architecture and development for a consumer wallet product.</li>
+                <li>Implement secure, responsive interfaces for financial transaction and wallet flows.</li>
+                <li>Collaborate with backend and blockchain teams to integrate wallet functionality.</li>
+              </ul>
+            </div>
+
+            <div class="item">
+              <div class="item-head">
+                <h3>Senior Frontend Developer</h3>
+                <p class="meta">2024 to 2025</p>
+              </div>
+              <p class="sub">Uphouse | Remote</p>
+              <ul>
+                <li>Led frontend delivery across multiple client projects with fast delivery cycles.</li>
+                <li>Built reusable component libraries and responsive product interfaces.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section>
+            <h2>Selected Projects</h2>
+            <div class="project-grid">
+              <div class="project">
+                <h3>ClearSig Shared Wallet</h3>
+                <p>Frontend Lead and Head of Product Engineering for shared wallet request, review, and approval flows.</p>
+              </div>
+              <div class="project">
+                <h3>FYB Studio</h3>
+                <p>Full-stack application for final-year students to personalize templates, preview designs, and export PNG assets.</p>
+              </div>
+              <div class="project">
+                <h3>WinView Microfinance Bank</h3>
+                <p>Digital-first MFB website for trust signals, account opening prompts, app prompts, and support access.</p>
+              </div>
+              <div class="project">
+                <h3>Script Business Management</h3>
+                <p>SME operations platform for sales, inventory, customers, analytics, and local business workflows.</p>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <h2>Strengths</h2>
+            <ul>
+              <li>Frontend architecture for production web apps with clear component systems.</li>
+              <li>Full-stack product development with Next.js, TypeScript, and pragmatic product thinking.</li>
+              <li>Web3 wallet interfaces, transaction approval flows, rapid prototyping, and team collaboration.</li>
+            </ul>
+          </section>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

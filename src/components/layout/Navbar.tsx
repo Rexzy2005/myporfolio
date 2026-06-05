@@ -39,7 +39,7 @@ export default function Navbar() {
         className={cn(
           'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
           isScrolled
-            ? 'bg-deep-space/92 backdrop-blur-md border-b border-lead/15'
+            ? 'bg-black/92 backdrop-blur-md border-b border-lead/15'
             : 'bg-transparent'
         )}
       >
@@ -104,14 +104,14 @@ export default function Navbar() {
             className="fixed inset-0 z-40 lg:hidden"
             onClick={() => setIsMobileOpen(false)}
           >
-            <div className="absolute inset-0 bg-deep-space/80 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 220 }}
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 top-0 bottom-0 w-[260px] max-w-[85vw] px-6 pt-20 pb-8 bg-midnight-slate border-l border-lead/15 flex flex-col"
+              className="absolute right-0 top-0 bottom-0 w-[260px] max-w-[85vw] px-6 pt-20 pb-8 bg-black border-l border-lead/15 flex flex-col"
             >
               <nav className="flex flex-col">
                 {navLinks.map((link, i) => (

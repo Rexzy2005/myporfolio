@@ -14,7 +14,7 @@ export default function Footer() {
     document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <footer className="bg-deep-space border-t border-lead/15">
+    <footer className="bg-black border-t border-lead/15">
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 py-14">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-10 border-b border-lead/15">
           {/* Brand */}

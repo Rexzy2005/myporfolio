@@ -56,7 +56,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-midnight-slate">
+    <div className="bg-black">
       <Container id="contact">
         <SectionHeading
           tag="Contact"
@@ -137,14 +137,22 @@ export default function Contact() {
             <div className="space-y-12">
               <div>
                 <p className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase mb-4">Direct contact</p>
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="inline-flex items-center gap-2 text-[17px] font-[300] text-starlight hover:text-pure-white transition-colors"
-                  style={{ letterSpacing: '0.01em' }}
-                >
-                  {socialLinks.email}
-                  <FiArrowRight size={15} />
-                </a>
+                <div className="space-y-3">
+                  <a
+                    href={`mailto:${socialLinks.email}`}
+                    className="inline-flex items-center gap-2 text-[17px] font-[300] text-starlight hover:text-pure-white transition-colors"
+                    style={{ letterSpacing: '0.01em' }}
+                  >
+                    {socialLinks.email}
+                    <FiArrowRight size={15} />
+                  </a>
+                  <a
+                    href={`tel:${socialLinks.phone}`}
+                    className="block text-[15px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.16px]"
+                  >
+                    WhatsApp: {socialLinks.phone}
+                  </a>
+                </div>
               </div>
 
               <div>

@@ -24,14 +24,21 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
             </span>
             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-6 min-w-0">
               <span
-                className="text-[clamp(18px,2.8vw,26px)] font-[480] text-starlight leading-[1.2] group-hover:text-pure-white transition-colors duration-150 truncate"
+                className="text-[clamp(18px,2.8vw,26px)] font-[480] text-starlight leading-[1.2] group-hover:text-pure-white transition-colors duration-150"
                 style={{ letterSpacing: '0.01em' }}
               >
                 {project.title}
               </span>
-              <span className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase mt-1 sm:mt-0 shrink-0">
-                {project.category}
-              </span>
+              <div className="flex flex-wrap items-center gap-2 mt-2 sm:mt-0">
+                <span className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase shrink-0">
+                  {project.category}
+                </span>
+                {project.status && (
+                  <span className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase shrink-0">
+                    {project.status}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
           <FiChevronDown
@@ -56,6 +63,21 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                     {project.shortDescription}
                   </p>
 
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    {[
+                      ['Role', project.role],
+                      ['Year', project.year],
+                      ['Status', project.status],
+                    ].map(([label, value]) => (
+                      value && (
+                        <div key={label} className="border-t border-lead/20 pt-3">
+                          <p className="text-[10px] text-lead/45 uppercase tracking-[0.2px] mb-1">{label}</p>
+                          <p className="text-[13px] text-starlight tracking-[0.16px]">{value}</p>
+                        </div>
+                      )
+                    ))}
+                  </div>
+
                   <div className="flex flex-wrap gap-2 mb-8">
                     {project.techStack.map((tech) => (
                       <span
@@ -79,14 +101,16 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                         View Live <FiArrowUpRight size={13} />
                       </a>
                     )}
-                    <a
-                      href={socialLinks.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.26px]"
-                    >
-                      <FiGithub size={13} /> Source
-                    </a>
+                    {(project.sourceUrl || socialLinks.github) && (
+                      <a
+                        href={project.sourceUrl || socialLinks.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.26px]"
+                      >
+                        <FiGithub size={13} /> Source
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -112,7 +136,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
 
 export default function Projects() {
   return (
-    <div className="bg-midnight-slate">
+    <div className="bg-black">
       <Container id="projects">
         <SectionHeading
           tag="Work"

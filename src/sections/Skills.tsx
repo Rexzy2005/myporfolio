@@ -139,7 +139,7 @@ export default function Skills() {
       : null;
 
   return (
-    <div className="bg-deep-space">
+    <div className="bg-black">
       <Container id="skills">
         <SectionHeading tag="Skills" title="Technologies and expertise" />
 

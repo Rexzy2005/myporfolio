@@ -3,7 +3,6 @@ import {
   SiJavascript,
   SiTypescript,
   SiHtml5,
-  SiCss3,
   SiPython,
   SiSolidity,
   SiPostgresql,
@@ -25,7 +24,6 @@ import {
   SiGithubactions,
   SiVercel,
   SiNetlify,
-  SiAmazonwebservices,
   SiJest,
   SiCypress,
   SiVitest,
@@ -41,6 +39,8 @@ import {
   FaCodeBranch,
   FaGraduationCap,
   FaRobot,
+  FaAws,
+  FaCss3Alt,
 } from 'react-icons/fa';
 
 export interface Skill {
@@ -61,7 +61,7 @@ export const languages: Skill[] = [
     category: 'language',
     proficiency: 'expert',
     years: 5,
-    description: 'Daily driver — ES6+, async patterns, functional programming',
+    description: 'Daily driver for ES6+, async patterns, and functional programming',
     color: '#F7DF1E',
   },
   {
@@ -84,7 +84,7 @@ export const languages: Skill[] = [
   },
   {
     name: 'CSS3',
-    icon: SiCss3,
+    icon: FaCss3Alt,
     category: 'language',
     proficiency: 'expert',
     years: 5,
@@ -316,7 +316,7 @@ export const technicalSkills: Skill[] = [
   },
   {
     name: 'AWS',
-    icon: SiAmazonwebservices,
+    icon: FaAws,
     category: 'technical',
     subcategory: 'DevOps & Tools',
     proficiency: 'intermediate',
@@ -376,6 +376,16 @@ export const technicalSkills: Skill[] = [
     years: 2,
     description: 'Crafting effective prompts for LLMs, AI-assisted development, RAG pipelines',
     color: '#10B981',
+  },
+  {
+    name: 'AI Annotator',
+    icon: FaRobot,
+    category: 'technical',
+    subcategory: 'AI',
+    proficiency: 'proficient',
+    years: 1,
+    description: 'Dataset labeling, quality review, model evaluation, and structured AI feedback workflows',
+    color: '#22C55E',
   },
 ];
 

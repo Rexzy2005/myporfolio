@@ -12,6 +12,22 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    id: 'clearsig',
+    role: 'Head of Product Engineering / Frontend Lead',
+    company: 'ClearSig',
+    location: 'Remote',
+    startDate: 'May 2026',
+    endDate: 'Present',
+    description: 'Leading product engineering for ClearSig, a Web3 shared wallet product for teams, families, and groups that need transparent transaction approval.',
+    achievements: [
+      'Handled the complete frontend implementation for the ClearSig hackathon build',
+      'Helped the team secure 2nd place at the Ika hackathon',
+      'Own product direction, frontend architecture, and user experience for shared wallet flows',
+      'Collaborate across wallet logic, security messaging, onboarding, and approval interactions',
+    ],
+    techUsed: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Web3 UX', 'Product Engineering'],
+  },
+  {
     id: '1',
     role: 'Senior Frontend Developer',
     company: 'Deta Wallet',

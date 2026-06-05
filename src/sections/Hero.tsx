@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowRight, FiDownload } from 'react-icons/fi';
 import { personalInfo } from '@/data/constants';
 
 const fadeUp = (delay = 0) => ({
@@ -15,7 +15,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col bg-deep-space overflow-hidden"
+      className="relative min-h-screen flex flex-col bg-black overflow-hidden"
     >
       {/* Atmospheric violet bloom */}
       <div
@@ -30,12 +30,16 @@ export default function Hero() {
       <div className="flex-1 flex items-center justify-center relative z-10">
         <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 w-full py-32 flex flex-col items-center text-center">
 
-          {/* Availability badge */}
-          <motion.div {...fadeUp(0)} className="inline-flex items-center gap-2.5 mb-12 px-4 py-2 border border-lead/30 bg-graphite/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-mercury-blue" />
-            <span className="text-[11px] text-lead tracking-[0.22px] uppercase font-[400]">
-              {personalInfo.availability}
-            </span>
+          <motion.div
+            {...fadeUp(0)}
+            className="mb-8 h-[124px] w-[124px] overflow-hidden border border-lead/25 bg-graphite/40 shadow-[0_24px_80px_rgba(82,102,235,0.18)]"
+            style={{ borderRadius: '8px' }}
+          >
+            <img
+              src="/dev-rex.jpg"
+              alt={personalInfo.name}
+              className="h-full w-full object-cover"
+            />
           </motion.div>
 
           {/* Name */}
@@ -51,23 +55,29 @@ export default function Hero() {
           <motion.p
             {...fadeUp(0.14)}
             className="mt-5 text-[clamp(15px,2vw,19px)] text-lead font-[400]"
-            style={{ letterSpacing: '0.02em' }}
           >
             {personalInfo.title}
-            <span className="mx-3 text-lead/30">·</span>
+            <span className="mx-3 text-lead/30">|</span>
             {personalInfo.subtitle}
+          </motion.p>
+
+          <motion.p
+            {...fadeUp(0.18)}
+            className="mt-4 text-[12px] font-[400] text-lead/55 uppercase tracking-[0.22px]"
+          >
+            React | TypeScript | Next.js | Product Engineering
           </motion.p>
 
           {/* Bio */}
           <motion.p
-            {...fadeUp(0.21)}
-            className="mt-7 text-[16px] font-[400] leading-[1.75] text-lead/80 max-w-[480px] tracking-[0.16px]"
+            {...fadeUp(0.23)}
+            className="mt-7 text-[16px] font-[400] leading-[1.75] text-lead/80 max-w-[560px] tracking-[0.16px]"
           >
             {personalInfo.bio}
           </motion.p>
 
           {/* CTAs */}
-          <motion.div {...fadeUp(0.28)} className="mt-10 flex flex-wrap items-center justify-center gap-5">
+          <motion.div {...fadeUp(0.3)} className="mt-10 flex flex-wrap items-center justify-center gap-5">
             <button
               onClick={() => scrollTo('projects')}
               className="px-8 py-3.5 bg-mercury-blue text-pure-white text-[15px] font-[480] tracking-[0.1px] hover:bg-[#4456d6] active:bg-[#3a49c4] transition-colors duration-150"
@@ -75,6 +85,15 @@ export default function Hero() {
             >
               View My Work
             </button>
+            <a
+              href="/Pererat-Timothy-Resume.pdf"
+              download
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-lead/25 text-starlight text-[15px] font-[480] hover:border-lead/50 transition-colors"
+              style={{ borderRadius: '32px' }}
+            >
+              <FiDownload size={15} />
+              Resume
+            </a>
             <button
               onClick={() => scrollTo('contact')}
               className="inline-flex items-center gap-2 text-[15px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px]"
@@ -85,7 +104,7 @@ export default function Hero() {
 
           {/* Social links */}
           <motion.div
-            {...fadeUp(0.36)}
+            {...fadeUp(0.38)}
             className="mt-10 flex items-center gap-8"
           >
             {[

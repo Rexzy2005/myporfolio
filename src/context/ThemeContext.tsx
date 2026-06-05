@@ -1,1 +1,1 @@
-// Dark theme is always active — no toggle, no provider needed.
+// Dark theme is always active. No toggle or provider needed.

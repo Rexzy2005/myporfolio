@@ -14,7 +14,7 @@ const facts = [
 
 export default function About() {
   return (
-    <div className="bg-midnight-slate">
+    <div className="bg-black">
       <Container id="about">
         <SectionHeading
           tag="About"
@@ -22,7 +22,7 @@ export default function About() {
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-start">
-          {/* Left — bio */}
+          {/* Bio */}
           <AnimatedWrapper direction="left">
             <p
               className="text-[clamp(18px,2.2vw,21px)] font-[300] leading-[1.65] text-starlight/90"
@@ -45,7 +45,7 @@ export default function About() {
             </div>
           </AnimatedWrapper>
 
-          {/* Right — quick facts */}
+          {/* Quick facts */}
           <AnimatedWrapper direction="right">
             <div className="border-t border-lead/30">
               {facts.map(({ label, value }) => (

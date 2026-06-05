@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* Mercury Design System — Color Tokens */
+  /* Mercury Design System color tokens */
   --color-mercury-blue: #5266eb;
   --color-ghost-blue: #cdddff;
   --color-deep-space: #171721;
@@ -26,7 +26,7 @@
   --text-heading-lg: 49px;
   --text-display: 65px;
 
-  /* Border Radius — Mercury spec */
+  /* Border radius tokens */
   --radius-none: 0px;
   --radius-container: 4px;
   --radius-button: 32px;
@@ -47,7 +47,7 @@
 
   body {
     font-family: var(--font-sans);
-    background: #1e1e2a;
+    background: #000000;
     color: #ededf3;
     overflow-x: hidden;
     font-weight: 400;
