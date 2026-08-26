@@ -4,6 +4,7 @@ import {
   SiTypescript,
   SiHtml5,
   SiPython,
+  SiDart,
   SiSolidity,
   SiPostgresql,
   SiPhp,
@@ -27,6 +28,7 @@ import {
   SiJest,
   SiCypress,
   SiVitest,
+  SiFlutter,
   SiFigma,
 } from 'react-icons/si';
 import {
@@ -99,6 +101,15 @@ export const languages: Skill[] = [
     years: 2,
     description: 'Scripting, automation, Django basics, data processing',
     color: '#3776AB',
+  },
+  {
+    name: 'Dart',
+    icon: SiDart,
+    category: 'language',
+    proficiency: 'proficient',
+    years: 2,
+    description: 'Flutter application development, asynchronous programming, and strongly typed mobile code',
+    color: '#0175C2',
   },
   {
     name: 'Solidity',
@@ -190,6 +201,26 @@ export const technicalSkills: Skill[] = [
     years: 2,
     description: 'Complex animations, gestures, layout transitions',
     color: '#0055FF',
+  },
+  {
+    name: 'Flutter',
+    icon: SiFlutter,
+    category: 'technical',
+    subcategory: 'Mobile App Development',
+    proficiency: 'advanced',
+    years: 2,
+    description: 'Cross-platform mobile apps, Material 3 design, BLE integrations, local-first data flows',
+    color: '#02569B',
+  },
+  {
+    name: 'React Native',
+    icon: SiReact,
+    category: 'technical',
+    subcategory: 'Mobile App Development',
+    proficiency: 'proficient',
+    years: 2,
+    description: 'Cross-platform app UI, device integrations, mobile state management, native-friendly UX',
+    color: '#61DAFB',
   },
   // Backend
   {

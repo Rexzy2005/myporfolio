@@ -14,7 +14,8 @@ export interface Project {
   role?: string;
   year?: string;
   status?: string;
-  category: 'fullstack' | 'frontend' | 'web3' | 'backend';
+  category: 'fullstack' | 'frontend' | 'web3' | 'backend' | 'machine-learning';
+  categories?: Array<'mobile-app' | 'machine-learning'>;
   featured: boolean;
 }
 
@@ -111,21 +112,41 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: 'script-bms',
-    title: 'Script Business Management',
-    shortDescription: 'An all-in-one business management platform built for Nigerian SMEs to manage sales, inventory, and customers.',
-    fullDescription: 'Script is a smart business management system designed specifically for Nigerian small and medium enterprises. It provides a unified platform to manage sales, track inventory, monitor cash flow, and maintain customer relationships with local payment integrations and practical workflows tailored to the Nigerian market.',
-    problem: 'Nigerian SMEs often rely on scattered tools, manual spreadsheets, or expensive foreign software that doesn\'t understand the local market. They need an affordable, reliable platform that supports local currencies, payment methods, and business workflows.',
-    approach: 'Built a comprehensive, local-first platform with features like sales management, inventory tracking, advanced analytics, customer management, and team collaboration. Integrated Nigerian payment providers and optimized the app for low-bandwidth environments with offline-capable features.',
-    outcome: 'Placed 5th at HackJos 2025 and shaped a practical SME management product around sales, inventory, customer management, and analytics.',
-    techStack: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL'],
-    features: ['Sales management with payment tracking', 'Real-time inventory tracking with reorder alerts', 'Advanced analytics and business insights', 'Customer relationship management', 'Team collaboration with role-based permissions', 'Nigerian bank & Flutterwave payment integration'],
-    image: '/projects/script.png',
-    liveUrl: 'https://scripttool.vercel.app/',
-    role: 'Product Engineer',
+    id: 'soilsense',
+    title: 'SoilSense',
+    shortDescription: 'A local-first Flutter app that connects to Bluetooth soil sensors, measures NPK, pH, salinity, and moisture, and recommends crop-specific fertilizer plans for Nigerian farmers.',
+    fullDescription: 'SoilSense is a mobile agritech product built to make soil testing easier for farmers in the field. It connects to a custom BLE soil-testing device, captures real-time soil data, and turns those readings into practical fertilizer recommendations and agronomic advice without requiring internet access or a complex onboarding flow.',
+    problem: 'Farmers often make fertilizer decisions without reliable soil data, which leads to poor input usage, lower yields, and avoidable crop losses. In many cases, field-level diagnostics are unavailable because the tools are expensive, disconnected, or not designed for local agricultural needs.',
+    approach: 'Developed a mobile-first agritech workflow around BLE device pairing, sensor reading capture, local SQLite storage, and recommendation logic tailored to maize and rice farming in Nigeria. The app is designed for offline use, field workflows, and data history tracking to help farmers act on actual soil health trends instead of guesswork.',
+    outcome: 'Created a practical, device-enabled fertilizer decision support tool that brings measurable soil data and agronomic guidance directly to farmers in the field, helping make crop planning more efficient and data-driven.',
+    techStack: ['Flutter', 'Dart', 'Riverpod', 'Drift', 'SQLite', 'Bluetooth Low Energy', 'FlChart'],
+    features: ['BLE soil device pairing and live sensor readings', 'NPK, pH, salinity, and moisture tracking', 'Crop-specific fertilizer recommendations for maize and rice', 'Field history and trend charts over time', 'Offline-first local data storage', 'Practical agronomic suggestions for soil management'],
+    image: '/projects/soilsense_logo.png',
+    sourceUrl: 'https://github.com/DevRex-X-Spectre/fertilizer_recomendation_system',
+    role: 'Mobile Product Engineer',
     year: '2025',
-    status: 'Hackathon build',
-    category: 'fullstack',
+    status: 'In development',
+    category: 'machine-learning',
+    categories: ['mobile-app', 'machine-learning'],
+    featured: true,
+  },
+  {
+    id: 'nsl-translator',
+    title: 'NSL Translator',
+    shortDescription: 'A Flutter mobile app that uses computer vision and an on-device sign-language model to translate Nigerian Sign Language into accessible digital communication.',
+    fullDescription: 'NSL Translator is a mobile accessibility project focused on making Nigerian Sign Language easier to understand in everyday communication. The Flutter app brings together camera-based sign capture, a trained landmark-based machine-learning model, and a practical translation experience designed for fast interaction on mobile devices.',
+    problem: 'Nigerian Sign Language users can face communication barriers when the people around them do not understand sign language. A mobile translation tool can provide a more accessible bridge between signed communication and spoken or written language.',
+    approach: 'Built the mobile application around Flutter and a custom machine-learning workflow. The supporting model project covers sign-language data collection, annotation, MediaPipe landmark extraction, augmentation, dataset preparation, evaluation, and TensorFlow Lite export for mobile inference.',
+    outcome: 'Created the foundation for an offline-capable Nigerian Sign Language translation experience that brings locally relevant accessibility technology to mobile users.',
+    techStack: ['Flutter', 'Dart', 'Python', 'MediaPipe', 'TensorFlow Lite', 'Computer Vision', 'Supabase'],
+    features: ['Camera-based Nigerian Sign Language capture', 'Landmark-driven sign recognition model', 'Mobile-first Flutter interface', 'TensorFlow Lite deployment path for on-device inference', 'Dataset annotation, augmentation, and evaluation workflow', 'Accessible communication support without a web dependency'],
+    image: '/projects/nsl_logo.png',
+    sourceUrl: 'https://github.com/Rexzy2005/NSL_Translator',
+    role: 'Mobile and Machine Learning Engineer',
+    year: '2025',
+    status: 'In development',
+    category: 'machine-learning',
+    categories: ['mobile-app', 'machine-learning'],
     featured: true,
   },
 ];

@@ -25,12 +25,12 @@ export default function About() {
           {/* Bio */}
           <AnimatedWrapper direction="left">
             <p
-              className="text-[clamp(18px,2.2vw,21px)] font-[300] leading-[1.65] text-starlight/90"
-              style={{ letterSpacing: '0.01em' }}
+              className="max-w-[680px] text-[clamp(19px,2.35vw,24px)] font-[350] leading-[1.55] text-starlight/90"
+              style={{ letterSpacing: '0' }}
             >
               {personalInfo.bio}
             </p>
-            <p className="mt-6 text-[16px] font-[400] leading-[1.75] text-lead tracking-[0.16px]">
+            <p className="mt-7 max-w-[650px] text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
               {personalInfo.longBio}
             </p>
 
@@ -51,14 +51,14 @@ export default function About() {
               {facts.map(({ label, value }) => (
                 <motion.div
                   key={label}
-                  className="flex items-center justify-between py-5 border-b border-lead/30"
+                  className="depth-surface flex items-center justify-between py-5 border-b border-lead/30"
                   whileHover={{ x: 3 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 >
-                  <span className="text-[11px] font-[400] text-lead tracking-[0.22px] uppercase">
+                  <span className="font-mono text-[10px] font-[500] text-lead/70 tracking-[0.12em] uppercase">
                     {label}
                   </span>
-                  <span className="text-[15px] font-[400] text-starlight tracking-[0.16px] text-right">
+                  <span className="max-w-[260px] text-[14px] font-[450] leading-[1.35] text-starlight tracking-[0.04em] text-right">
                     {value}
                   </span>
                 </motion.div>

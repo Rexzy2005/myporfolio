@@ -7,9 +7,24 @@ import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
 import { projects, type Project } from '@/data/projects';
 import { socialLinks } from '@/data/constants';
 
+const categoryLabels: Record<Project['category'], string> = {
+  fullstack: 'Full-Stack',
+  frontend: 'Frontend',
+  web3: 'Web3',
+  backend: 'Backend',
+  'machine-learning': 'Machine Learning',
+};
+const additionalCategoryLabels = {
+  'mobile-app': 'Mobile App',
+  'machine-learning': 'Machine Learning',
+} as const;
+
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
   const num = String(index + 1).padStart(2, '0');
+  const displayCategories = project.categories
+    ? project.categories.map((category) => additionalCategoryLabels[category])
+    : [categoryLabels[project.category]];
 
   return (
     <AnimatedWrapper delay={index * 0.05}>
@@ -30,9 +45,11 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                 {project.title}
               </span>
               <div className="flex flex-wrap items-center gap-2 mt-2 sm:mt-0">
-                <span className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase shrink-0">
-                  {project.category}
-                </span>
+                {displayCategories.map((category) => (
+                  <span key={category} className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase shrink-0">
+                    {category}
+                  </span>
+                ))}
                 {project.status && (
                   <span className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase shrink-0">
                     {project.status}
@@ -140,7 +157,7 @@ export default function Projects() {
       <Container id="projects">
         <SectionHeading
           tag="Work"
-          title="Selected works"
+          title="My Works"
           subtitle="Products I have built, focusing on clean code, seamless UX, and real-world impact."
         />
 
@@ -149,29 +166,6 @@ export default function Projects() {
             <ProjectRow key={project.id} project={project} index={i} />
           ))}
         </div>
-
-        <AnimatedWrapper delay={0.15}>
-          <div className="mt-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pt-10 border-t border-lead/15">
-            <div>
-              <p className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase mb-2">Open Source</p>
-              <p
-                className="text-[20px] font-[300] text-starlight"
-                style={{ letterSpacing: '0.01em' }}
-              >
-                More work on GitHub
-              </p>
-            </div>
-            <a
-              href={socialLinks.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-mercury-blue text-pure-white text-[13px] font-[480] tracking-[0.26px] hover:bg-[#4456d6] transition-colors shrink-0"
-              style={{ borderRadius: '32px' }}
-            >
-              Visit GitHub <FiArrowUpRight size={13} />
-            </a>
-          </div>
-        </AnimatedWrapper>
       </Container>
     </div>
   );

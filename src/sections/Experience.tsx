@@ -67,30 +67,9 @@ function ExperienceRow({ experience, index }: { experience: typeof experiences[0
                   </p>
                 </div>
                 <div>
-                  <p className="text-[16px] font-[400] leading-[1.7] text-lead tracking-[0.16px] mb-6">
+                  <p className="text-[16px] font-[400] leading-[1.7] text-lead tracking-[0.16px]">
                     {experience.description}
                   </p>
-                  <ul className="space-y-3 mb-7">
-                    {experience.achievements.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-3 text-[14px] font-[400] text-lead leading-[1.6] tracking-[0.26px]"
-                      >
-                        <span className="text-mercury-blue mt-0.5 shrink-0 select-none">+</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    {experience.techUsed.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1 text-[11px] font-[400] tracking-[0.22px] text-lead border border-lead/25 bg-graphite/30"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </div>
             </motion.div>

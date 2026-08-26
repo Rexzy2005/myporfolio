@@ -9,13 +9,13 @@ import { hackathons } from '@/data/hackathons';
 const coreStrengths = [
   'Frontend architecture for production web apps',
   'Full-stack product development with Next.js and TypeScript',
-  'Web3 wallet interfaces and transaction approval flows',
+  'Mobile app development with Flutter and React Native',
+  'Machine learning applications with computer vision and on-device models',
   'Product engineering, rapid prototyping, and team collaboration',
-  'AI annotation, prompt workflows, and quality review',
 ];
 
 export default function Resume() {
-  const featuredExperience = experiences.slice(0, 3);
+  const featuredExperience = experiences.filter(({ id }) => ['clearsig', '3', '4'].includes(id));
 
   return (
     <div className="bg-black">
@@ -47,7 +47,7 @@ export default function Resume() {
                     {personalInfo.name}
                   </h3>
                   <p className="mt-3 text-[15px] text-lead tracking-[0.16px]">
-                    {personalInfo.title} focused on frontend, full-stack product development, and Web3 product interfaces.
+                    {personalInfo.title} focused on web products, mobile applications, machine learning, and Web3 product interfaces.
                   </p>
                 </div>
               </div>
