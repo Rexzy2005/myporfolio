@@ -16,6 +16,7 @@ import {
   SiFramer,
   SiNodedotjs,
   SiExpress,
+  SiTelegram,
   SiMongodb,
   SiMysql,
   SiFirebase,
@@ -242,6 +243,16 @@ export const technicalSkills: Skill[] = [
     years: 4,
     description: 'Middleware, routing, authentication, error handling',
     color: '#ffffff',
+  },
+  {
+    name: 'Telegram Bot Development',
+    icon: SiTelegram,
+    category: 'technical',
+    subcategory: 'Backend',
+    proficiency: 'proficient',
+    years: 0, // 0 hides the "+ yrs" line in the tooltip
+    description: 'Custom Telegram bots for projects: commands, automation, notifications, and API integrations',
+    color: '#26A5E4',
   },
   // Databases
   {

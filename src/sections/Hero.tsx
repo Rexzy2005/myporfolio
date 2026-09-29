@@ -118,7 +118,7 @@ export default function Hero() {
           {/* Name */}
           <motion.h1
             {...fadeUp(0.08)}
-            className="text-[clamp(40px,7vw,68px)] leading-[1.1] text-starlight"
+            className="text-[clamp(30px,7vw,68px)] leading-[1.1] text-starlight"
             style={{ fontWeight: 360, letterSpacing: '0.5px' }}
           >
             {personalInfo.name}
@@ -149,11 +149,14 @@ export default function Hero() {
             {personalInfo.bio}
           </motion.p>
 
-          {/* CTAs */}
-          <motion.div {...fadeUp(0.3)} className="mt-10 flex flex-wrap items-center justify-center gap-5">
+          {/* CTAs (compact on phones so the buttons sit side by side; original sizing from `sm` up) */}
+          <motion.div
+            {...fadeUp(0.3)}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-2 gap-y-3 sm:mt-10 sm:gap-5"
+          >
             <button
               onClick={() => scrollTo('projects')}
-              className="px-8 py-3.5 bg-mercury-blue text-pure-white text-[15px] font-[480] tracking-[0.1px] hover:bg-[#4456d6] active:bg-[#3a49c4] transition-colors duration-150"
+              className="px-4 py-2.5 bg-mercury-blue text-pure-white text-[13px] font-[480] tracking-[0.1px] hover:bg-[#4456d6] active:bg-[#3a49c4] transition-colors duration-150 sm:px-8 sm:py-3.5 sm:text-[15px]"
               style={{ borderRadius: '32px' }}
             >
               View My Work
@@ -161,24 +164,24 @@ export default function Hero() {
             <a
               href="/Pererat-Timothy-Resume.pdf"
               download
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-lead/25 text-starlight text-[15px] font-[480] hover:border-lead/50 transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 border border-lead/25 text-starlight text-[13px] font-[480] hover:border-lead/50 transition-colors sm:gap-2 sm:px-7 sm:py-3.5 sm:text-[15px]"
               style={{ borderRadius: '32px' }}
             >
-              <FiDownload size={15} />
+              <FiDownload className="size-3.5 sm:size-[15px]" />
               Resume
             </a>
             <button
               onClick={() => scrollTo('contact')}
-              className="inline-flex items-center gap-2 text-[15px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px]"
+              className="inline-flex items-center gap-1.5 py-2 text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px] sm:gap-2 sm:py-0 sm:text-[15px]"
             >
-              Let's Talk <FiArrowRight size={14} />
+              Let's Talk <FiArrowRight className="size-[13px] sm:size-3.5" />
             </button>
           </motion.div>
 
           {/* Social links */}
           <motion.div
             {...fadeUp(0.38)}
-            className="mt-10 flex items-center justify-center gap-4 sm:gap-5"
+            className="mt-8 flex items-center justify-center gap-3 sm:mt-10 sm:gap-5"
           >
             {[
               { label: 'GitHub', href: socialLinks.github, Icon: FaGithub },
@@ -192,9 +195,9 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white/3 text-lead/80 transition-all duration-200 hover:bg-mercury-blue/10 hover:text-starlight"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/3 text-lead/80 transition-all duration-200 hover:bg-mercury-blue/10 hover:text-starlight sm:h-11 sm:w-11"
               >
-                <Icon size={18} />
+                <Icon className="size-4 sm:size-[18px]" />
               </a>
             ))}
           </motion.div>
