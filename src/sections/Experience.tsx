@@ -1,101 +1,57 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronDown } from 'react-icons/fi';
-import Container from '@/components/ui/Container';
-import SectionHeading from '@/components/ui/SectionHeading';
-import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
-import { experiences } from '@/data/experience';
+import Reveal from '@/components/ui/Reveal';
+import Section from '@/components/ui/Section';
+import { experiences, groupLabels, type ExperienceGroup } from '@/data/experience';
 
-function ExperienceRow({ experience, index }: { experience: typeof experiences[0]; index: number }) {
-  const [isOpen, setIsOpen] = useState(index === 0);
-
-  return (
-    <AnimatedWrapper delay={index * 0.05}>
-      <div className="border-b border-lead/20">
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between py-7 text-left group"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-8 min-w-0">
-            <span
-              className="text-[clamp(17px,2.4vw,22px)] font-[480] text-starlight leading-[1.2] group-hover:text-pure-white transition-colors duration-150"
-              style={{ letterSpacing: '0.01em' }}
-            >
-              {experience.role}
-            </span>
-            <div className="flex items-center gap-4">
-              <span className="text-[13px] font-[400] text-lead tracking-[0.26px]">
-                {experience.company}
-              </span>
-              <span className="text-[11px] font-[400] text-lead/40 tracking-[0.22px] uppercase">
-                {experience.location}
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-5 shrink-0 ml-6">
-            <span className="hidden sm:block text-[12px] font-[400] text-lead/50 tracking-[0.24px]">
-              {experience.startDate} to {experience.endDate}
-            </span>
-            <FiChevronDown
-              size={16}
-              className={`text-lead transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-            />
-          </div>
-        </button>
-
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="pb-10 grid grid-cols-1 lg:grid-cols-[140px_1fr] gap-6 lg:gap-14">
-                <div className="sm:hidden">
-                  <p className="text-[11px] font-[400] text-lead/50 tracking-[0.22px] uppercase">
-                    {experience.startDate} to {experience.endDate}
-                  </p>
-                </div>
-                <div className="hidden lg:block">
-                  <p className="text-[11px] font-[400] text-lead tracking-[0.22px] uppercase">
-                    {experience.startDate}
-                  </p>
-                  <p className="mt-1 text-[11px] font-[400] text-lead/40 tracking-[0.22px] uppercase">
-                    {experience.endDate}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[16px] font-[400] leading-[1.7] text-lead tracking-[0.16px]">
-                    {experience.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </AnimatedWrapper>
-  );
-}
+const groups: ExperienceGroup[] = ['leadership', 'engineering', 'additional'];
 
 export default function Experience() {
   return (
-    <div className="bg-black">
-      <Container id="experience">
-        <SectionHeading
-          tag="Experience"
-          title="Professional journey"
-          subtitle="My career milestones and the roles that shaped my craft."
-        />
-
-        <div className="border-t border-lead/20">
-          {experiences.map((exp, i) => (
-            <ExperienceRow key={exp.id} experience={exp} index={i} />
-          ))}
-        </div>
-      </Container>
-    </div>
+    <Section
+      id="experience"
+      index="03"
+      eyebrow="Experience"
+      title="Where I have worked"
+      intro="Engineering, leadership, and mentoring roles, from frontend delivery to system architecture and technical direction."
+    >
+      <div className="space-y-16">
+        {groups.map((group) => {
+          const roles = experiences.filter((item) => item.group === group);
+          if (roles.length === 0) return null;
+          return (
+            <div key={group}>
+              <Reveal>
+                <h3 className="font-mono text-micro uppercase text-fg-muted">{groupLabels[group]}</h3>
+              </Reveal>
+              <ul className="mt-4 border-b border-line">
+                {roles.map((role) => (
+                  <li key={role.id}>
+                    <Reveal className="grid gap-3 border-t border-line py-7 md:grid-cols-12 md:gap-x-12">
+                      <div className="md:col-span-3">
+                        {role.period && <p className="font-mono text-micro uppercase text-fg-muted">{role.period}</p>}
+                        {role.location && (
+                          <p className="mt-1 font-mono text-micro uppercase text-fg-faint">{role.location}</p>
+                        )}
+                      </div>
+                      <div className="md:col-span-9">
+                        <h4 className="text-body-lg text-fg">{role.role}</h4>
+                        <p className="text-body text-fg-muted">{role.org}</p>
+                        {role.summary && <p className="mt-3 max-w-2xl text-body text-fg-muted">{role.summary}</p>}
+                        {role.points && (
+                          <ul className="mt-3 max-w-2xl list-disc space-y-1.5 pl-5 text-body text-fg-muted marker:text-line-ui">
+                            {role.points.map((point) => (
+                              <li key={point}>{point}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </Section>
   );
 }

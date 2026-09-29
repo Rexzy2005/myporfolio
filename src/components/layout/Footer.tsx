@@ -1,69 +1,44 @@
-import { FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
-import { socialLinks, navLinks } from '@/data/constants';
-
-const socialIcons = [
-  { icon: FaGithub, href: socialLinks.github, label: 'GitHub' },
-  { icon: FaLinkedinIn, href: socialLinks.linkedin, label: 'LinkedIn' },
-  { icon: FaXTwitter, href: socialLinks.twitter, label: 'Twitter' },
-];
+import SocialLinks from '@/components/ui/SocialLinks';
+import { nav, profile } from '@/data/profile';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const scrollTo = (href: string) =>
-    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' });
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-black border-t border-lead/15">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 py-14">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 pb-10 border-b border-lead/15">
-          {/* Brand */}
-          <a
-            href="#home"
-            onClick={(e) => { e.preventDefault(); scrollTo('#home'); }}
-            className="text-[17px] font-[480] text-starlight hover:text-pure-white transition-colors tracking-[0.01em]"
-          >
-            DevRex
-          </a>
+    <footer className="border-t border-line">
+      <div className="container-page py-12">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p className="font-mono text-[0.9375rem] tracking-tight text-fg">
+              rexzy<span className="text-accent-soft">.dev</span>
+            </p>
+            <p className="mt-2 max-w-xs text-small text-fg-muted">
+              {profile.name}. {profile.title}.
+            </p>
+          </div>
 
-          {/* Nav */}
-          <nav className="flex flex-wrap gap-x-8 gap-y-3">
-            {navLinks.slice(0, 5).map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); scrollTo(link.href); }}
-                className="text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.26px]"
-              >
-                {link.name}
-              </a>
-            ))}
+          <nav aria-label="Footer">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-small">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="text-fg-muted transition-colors hover:text-fg">
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </nav>
 
-          {/* Socials */}
-          <div className="flex items-center gap-5">
-            {socialIcons.map(({ icon: Icon, href, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lead/50 hover:text-starlight transition-colors"
-                aria-label={label}
-              >
-                <Icon size={16} />
-              </a>
-            ))}
-          </div>
+          <SocialLinks />
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-[12px] font-[400] text-lead/40 tracking-[0.24px]">
-            &copy; {currentYear} DevRex. All rights reserved.
+        <div className="mt-10 flex flex-col gap-3 border-t border-line pt-6 text-small text-fg-faint sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            &copy; {year} {profile.name}. Built with React, TypeScript, and Tailwind CSS.
           </p>
-          <p className="text-[12px] font-[400] text-lead/30 tracking-[0.24px]">
-            Built by Pererat Timothy
-          </p>
+          <a href="#home" className="text-fg-muted transition-colors hover:text-fg">
+            Back to top
+          </a>
         </div>
       </div>
     </footer>
