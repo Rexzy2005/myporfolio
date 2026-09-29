@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8">
+<!-- Source for public/og-image.png. Open in a browser and capture a 1200x630 screenshot of the page
+     (or render it headlessly) whenever the positioning changes. Fonts are the self-hosted ones. -->
+<style>
+@font-face{font-family:'Inter';font-weight:100 900;src:url(../public/fonts/inter-latin-wght-normal.woff2) format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-weight:100 800;src:url(../public/fonts/jetbrains-mono-latin-wght-normal.woff2) format('woff2')}
+*{box-sizing:border-box;margin:0}
+body{width:1200px;height:630px;background:#050507;color:#ededf3;font-family:Inter,sans-serif;position:relative;overflow:hidden}
+.grid{position:absolute;inset:0;background-image:linear-gradient(#ffffff0a 1px,transparent 1px),linear-gradient(90deg,#ffffff0a 1px,transparent 1px);background-size:60px 60px;-webkit-mask-image:radial-gradient(ellipse 80% 90% at 20% 10%,#000 0%,transparent 75%);mask-image:radial-gradient(ellipse 80% 90% at 20% 10%,#000 0%,transparent 75%)}
+.wrap{position:absolute;inset:0;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+.top{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:24px;letter-spacing:.02em;color:#a8a8b7}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:#4ade80;margin-right:12px}
+h1{font-weight:400;font-size:108px;line-height:1.02;letter-spacing:-.035em;max-width:900px}
+h1 span{color:#9aa6ff}
+.name{font-family:'JetBrains Mono',monospace;font-size:26px;letter-spacing:.14em;text-transform:uppercase;color:#8c8c9b;margin-bottom:28px}
+.bottom{font-family:'JetBrains Mono',monospace;font-size:22px;line-height:1.65;color:#a8a8b7;border-top:1px solid #363645;padding-top:26px;white-space:nowrap}
+.bottom b{font-weight:500;color:#ededf3}
+</style>
+<div class="grid"></div>
+<div class="wrap">
+  <div class="top"><span>rexzy.dev</span><span><i class="dot"></i>Open to opportunities</span></div>
+  <div><p class="name">Pererat Timothy · Rexzy</p><h1>Software <span>&amp;</span><br>Systems Engineer</h1></div>
+  <div class="bottom">Applications · Distributed systems · Cloud infrastructure<br>Automation · Reliability · Architecture</div>
+</div>

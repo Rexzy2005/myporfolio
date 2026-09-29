@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables and local tooling config
+.env
+.env.*
+!.env.example
+.vercel

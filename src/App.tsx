@@ -1,31 +1,39 @@
-import Navbar from '@/components/layout/Navbar';
+import { useEffect } from 'react';
 import Footer from '@/components/layout/Footer';
-import BackToTop from '@/components/ui/BackToTop';
-import Hero from '@/sections/Hero';
+import Header from '@/components/layout/Header';
 import About from '@/sections/About';
-import Skills from '@/sections/Skills';
-import Projects from '@/sections/Projects';
-import Hackathons from '@/sections/Hackathons';
-import Experience from '@/sections/Experience';
-import Resume from '@/sections/Resume';
+import Capabilities from '@/sections/Capabilities';
 import Contact from '@/sections/Contact';
+import Experience from '@/sections/Experience';
+import Hero from '@/sections/Hero';
+import Work from '@/sections/Work';
 
 export default function App() {
+  // The page is rendered client-side, so the browser cannot honour a #section
+  // deep link on first load (the target does not exist yet). Do it once mounted.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (id) document.getElementById(id)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }, []);
+
   return (
-    <div className="relative overflow-x-hidden">
-      <Navbar />
-      <main>
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-fg focus:px-4 focus:py-2 focus:text-small focus:font-medium focus:text-ink"
+      >
+        Skip to content
+      </a>
+      <Header />
+      <main id="main">
         <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Hackathons />
+        <Capabilities />
+        <Work />
         <Experience />
-        <Resume />
+        <About />
         <Contact />
       </main>
-      <BackToTop />
       <Footer />
-    </div>
+    </>
   );
 }
