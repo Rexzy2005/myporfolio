@@ -1,121 +1,56 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/dev-rex.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Rexzy (Pererat Timothy) | Software &amp; Systems Engineer</title>
     <meta
       name="description"
-      content="Software and systems engineer building and operating reliable systems, from application architecture and distributed systems to cloud infrastructure."
+      content="DevRex | Pererat Timothy - Software Developer specializing in Frontend Development. 5+ years of experience building exceptional digital experiences."
+    />
+    <meta
+      name="keywords"
+      content="web developer, Software developer, frontend developer, React, TypeScript, portfolio"
     />
     <meta name="author" content="Pererat Timothy" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <link rel="canonical" href="https://www.rexzy.dev/" />
-
-    <meta name="theme-color" content="#050507" />
-    <meta name="color-scheme" content="dark" />
-    <style>
-      html {
-        background: #050507;
-      }
-    </style>
-
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-
-    <!-- Self-hosted variable fonts (SIL OFL). Preloaded because both are used above the fold. -->
-    <link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jetbrains-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Rexzy" />
-    <meta property="og:title" content="Rexzy (Pererat Timothy) | Software &amp; Systems Engineer" />
+    <meta
+      property="og:title"
+      content="DevRex | Software Developer Portfolio"
+    />
     <meta
       property="og:description"
-      content="Software and systems engineer building and operating reliable systems, from application architecture and distributed systems to cloud infrastructure."
+      content="Pererat Timothy | Software Developer specializing in Frontend Development with 5+ years of experience."
     />
-    <meta property="og:url" content="https://www.rexzy.dev/" />
-    <meta property="og:image" content="https://www.rexzy.dev/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Rexzy: Software and Systems Engineer" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/dev-rex.jpg" />
+    <meta property="og:image:alt" content="DevRex logo" />
 
-    <!-- Twitter / X -->
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:creator" content="@dev_rexzy" />
-    <meta name="twitter:title" content="Rexzy (Pererat Timothy) | Software &amp; Systems Engineer" />
+    <meta
+      name="twitter:title"
+      content="DevRex | Software Developer Portfolio"
+    />
     <meta
       name="twitter:description"
-      content="Software and systems engineer building and operating reliable systems, from application architecture and distributed systems to cloud infrastructure."
+      content="Pererat Timothy | Software Developer specializing in Frontend Development."
     />
-    <meta name="twitter:image" content="https://www.rexzy.dev/og-image.png" />
-    <meta name="twitter:image:alt" content="Rexzy: Software and Systems Engineer" />
+    <meta name="twitter:image" content="/dev-rex.jpg" />
 
-    <!-- Structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Person",
-            "@id": "https://www.rexzy.dev/#person",
-            "name": "Pererat Timothy",
-            "alternateName": "Rexzy",
-            "url": "https://www.rexzy.dev/",
-            "image": "https://www.rexzy.dev/images/portrait-960.webp",
-            "jobTitle": "Software & Systems Engineer",
-            "description": "Software and systems engineer building and operating reliable systems, from application architecture and distributed systems to cloud infrastructure.",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Jos",
-              "addressRegion": "Plateau State",
-              "addressCountry": "NG"
-            },
-            "sameAs": [
-              "https://github.com/Rexzy2005",
-              "https://www.linkedin.com/in/pererat-timothy-b33a51375",
-              "https://x.com/dev_rexzy"
-            ],
-            "knowsAbout": [
-              "Software engineering",
-              "Systems engineering",
-              "Distributed systems",
-              "Cloud infrastructure",
-              "Web3",
-              "Frontend engineering"
-            ]
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://www.rexzy.dev/#website",
-            "url": "https://www.rexzy.dev/",
-            "name": "Rexzy",
-            "inLanguage": "en",
-            "publisher": { "@id": "https://www.rexzy.dev/#person" }
-          }
-        ]
-      }
-    </script>
+    <title>DevRex | Pererat Timothy - Software Developer</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="bg-gray-950 text-white antialiased">
     <div id="root"></div>
-    <noscript>
-      <main style="max-width: 40rem; margin: 5rem auto; padding: 0 1.5rem; color: #ededf3; font-family: system-ui, sans-serif; line-height: 1.65">
-        <h1 style="font-weight: 400">Pererat Timothy (Rexzy): Software &amp; Systems Engineer</h1>
-        <p style="color: #a8a8b7">
-          I design, build, and operate reliable software systems across applications, infrastructure, cloud
-          environments, and distributed systems. This site needs JavaScript to display its full content.
-        </p>
-        <ul>
-          <li><a style="color: #9aa6ff" href="https://github.com/Rexzy2005">GitHub</a></li>
-          <li><a style="color: #9aa6ff" href="https://www.linkedin.com/in/pererat-timothy-b33a51375">LinkedIn</a></li>
-          <li><a style="color: #9aa6ff" href="mailto:timothypererat2004@gmail.com">timothypererat2004@gmail.com</a></li>
-          <li><a style="color: #9aa6ff" href="/Pererat-Timothy-Resume.pdf">Résumé (PDF)</a></li>
-        </ul>
-      </main>
-    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

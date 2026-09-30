@@ -1,72 +1,77 @@
-import { FaGithub, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6';
-import { FiArrowUpRight, FiDownload } from 'react-icons/fi';
-import ButtonLink from '@/components/ui/ButtonLink';
-import Reveal from '@/components/ui/Reveal';
-import Section from '@/components/ui/Section';
-import { links, profile } from '@/data/profile';
+import { motion } from 'framer-motion';
+import { FaDiscord, FaEnvelope, FaLinkedinIn, FaXTwitter, FaWhatsapp } from 'react-icons/fa6';
+import { FiArrowRight } from 'react-icons/fi';
+import Container from '@/components/ui/Container';
+import SectionHeading from '@/components/ui/SectionHeading';
+import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
+import { socialLinks } from '@/data/constants';
 
-const channels = [
-  { label: 'LinkedIn', detail: 'in/pererat-timothy-b33a51375', href: links.linkedin, Icon: FaLinkedinIn },
-  { label: 'GitHub', detail: 'Rexzy2005', href: links.github, Icon: FaGithub },
-  { label: 'X (Twitter)', detail: '@dev_rexzy', href: links.x, Icon: FaXTwitter },
-  { label: 'WhatsApp', detail: 'Message me directly', href: links.whatsapp, Icon: FaWhatsapp },
+const socialItems = [
+  {
+    icon: FaWhatsapp,
+    href: `https://wa.me/2348133153568?text=${encodeURIComponent('Hi Pererat, I would like to discuss a project opportunity.')}`,
+    message: 'Discuss a project',
+  },
+  {
+    icon: FaLinkedinIn,
+    href: `https://www.linkedin.com/in/pererat-timothy-b33a51375/?text=${encodeURIComponent('Hi Pererat, I would love to connect and discuss an opportunity.')}`,
+    message: 'Connect professionally',
+  },
+  {
+    icon: FaXTwitter,
+    href: `https://x.com/compose/post?text=${encodeURIComponent('Hi Pererat, I would love to connect and discuss an opportunity.')}`,
+    message: 'Send a quick message',
+  },
+  {
+    icon: FaDiscord,
+    href: `https://discord.com/users/dev_rex?text=${encodeURIComponent('Hi Pererat, I would love to connect and discuss an opportunity.')}`,
+    message: 'Chat in real time',
+  },
+  {
+    icon: FaEnvelope,
+    href: `mailto:${socialLinks.email}?subject=${encodeURIComponent('Project Inquiry')}&body=${encodeURIComponent('Hi Pererat, I would like to discuss a project opportunity.')}`,
+    message: 'Send a formal email',
+  },
 ];
 
 export default function Contact() {
   return (
-    <Section id="contact" index="05" eyebrow="Contact" title="Let’s build something useful.">
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-x-12">
-        <Reveal className="lg:col-span-7">
-          <p className="max-w-xl text-body-lg text-fg-muted">
-            Open to senior systems and software engineering roles, technical leadership, and consulting
-            engagements. Email is the quickest way to reach me.
-          </p>
-          <a
-            href={`mailto:${profile.email}`}
-            className="mt-8 inline-block break-all text-heading text-fg underline decoration-line-ui decoration-1 underline-offset-8 transition-colors hover:text-accent-soft hover:decoration-accent-soft"
-          >
-            {profile.email}
-          </a>
-          <div className="mt-8 flex flex-wrap gap-x-2 gap-y-3 sm:gap-x-3">
-            <ButtonLink
-              href={links.resumePdf}
-              download
-              variant="primary"
-              icon={<FiDownload aria-hidden="true" className="size-4" />}
-            >
-              Download résumé (PDF)
-            </ButtonLink>
-            <ButtonLink href={links.resumeWeb} variant="secondary">
-              View résumé online
-            </ButtonLink>
-          </div>
-        </Reveal>
+    <div className="bg-black">
+      <Container id="contact">
+        <SectionHeading
+          tag="Contact"
+          title="Let’s connect"
+          subtitle="Open to collaboration, product work, and new opportunities. Reach out on any of the channels below."
+        />
 
-        <Reveal className="lg:col-span-5" delay={90}>
-          <ul className="divide-y divide-line border-y border-line">
-            {channels.map(({ label, detail, href, Icon }) => (
-              <li key={label}>
-                <a
+        <div className="mx-auto max-w-5xl">
+          <AnimatedWrapper direction="up">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5 place-items-center justify-items-center">
+              {socialItems.map(({ icon: Icon, href, message }) => (
+                <motion.a
+                  key={message}
                   href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-4 py-4 transition-colors hover:text-accent-soft"
+                  target={href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel={href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group flex w-full max-w-[260px] flex-col items-center justify-center gap-4 rounded-2xl border border-lead/15 bg-white/[0.02] px-5 py-7 text-center transition-colors duration-200 hover:border-mercury-blue/40 hover:bg-mercury-blue/5"
                 >
-                  <span className="flex items-center gap-4">
-                    <Icon aria-hidden="true" className="size-5 shrink-0 text-fg-muted transition-colors group-hover:text-accent-soft" />
-                    <span>
-                      <span className="block text-body text-fg group-hover:text-accent-soft">{label}</span>
-                      <span className="block text-small text-fg-muted">{detail}</span>
-                    </span>
-                  </span>
-                  <FiArrowUpRight aria-hidden="true" className="size-4 shrink-0 text-fg-faint" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </div>
-    </Section>
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/[0.03] text-starlight transition-colors group-hover:bg-mercury-blue/10 group-hover:text-pure-white">
+                    <Icon size={28} />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-[11px] uppercase tracking-[0.24px] text-lead/55">{message}</p>
+                  </div>
+                  <div className="inline-flex items-center gap-2 text-[12px] font-[400] text-mercury-blue">
+                    Open <FiArrowRight size={12} />
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+          </AnimatedWrapper>
+        </div>
+      </Container>
+    </div>
   );
 }

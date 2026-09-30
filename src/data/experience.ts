@@ -1,115 +1,110 @@
-export type ExperienceGroup = 'leadership' | 'engineering' | 'additional';
-
 export interface Experience {
   id: string;
-  group: ExperienceGroup;
   role: string;
-  org: string;
-  /** Omitted when unknown. Never guess a date. */
-  period?: string;
-  location?: string;
-  summary?: string;
-  points?: string[];
+  company: string;
+  location: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  achievements: string[];
+  techUsed: string[];
 }
 
-export const groupLabels: Record<ExperienceGroup, string> = {
-  leadership: 'Technical leadership',
-  engineering: 'Engineering',
-  additional: 'Additional roles',
-};
-
-/**
- * Titles follow the owner's brief, which is deliberately conservative
- * ("do not inflate job titles"). Two places differ from the older CV/site and
- * need the owner's confirmation:
- *   - ClearSig: CV says "Head of Product Engineering / Frontend Lead";
- *     the brief says "Frontend Engineer / Software Engineering contributor".
- *   - GeoPonix: CV says "Co-founder & CTO"; the brief says "Co-founder, COO & CTO".
- * DETALINK and nHub Foundation come from the brief only (no dates in any
- * source). They may overlap with "Deta Wallet" and "NHUD Foundation" from the
- * CV; they are kept separate until the owner confirms.
- */
 export const experiences: Experience[] = [
   {
-    id: 'geoponix',
-    group: 'leadership',
-    role: 'Co-founder, COO & CTO',
-    org: 'GeoPonix',
-    period: '2026 to present',
-    location: 'Remote',
-    summary:
-      'Technical and product direction for an agricultural intelligence company built on geospatial data and AI.',
-    points: [
-      'Define product and engineering direction for the core platform.',
-      'Lead technical decisions, architecture, and product execution.',
-      'Connect business goals to technical delivery.',
-    ],
-  },
-  {
-    id: 'kenule',
-    group: 'leadership',
-    role: 'Co-founder & CTO',
-    org: 'Kenule Africa',
-    period: '2026 to present',
-    location: 'Remote',
-    summary: 'Technical vision and product engineering direction for the company’s digital products.',
-    points: [
-      'Lead technical planning and execution across the company’s digital products.',
-      'Translate product vision into scalable, maintainable engineering decisions.',
-    ],
-  },
-  {
     id: 'clearsig',
-    group: 'engineering',
-    role: 'Frontend Engineer / Software Engineering contributor',
-    org: 'ClearSig',
-    period: 'May 2026 to present',
+    role: 'Head of Product Engineering / Frontend Lead',
+    company: 'ClearSig',
     location: 'Remote',
-    summary: 'Building a policy-governed shared treasury and multi-chain wallet.',
-    points: [
-      'Handled the complete frontend implementation for the ClearSig hackathon build.',
-      'Helped the team secure 2nd place at the Ika hackathon.',
-      'Collaborate across wallet logic, security messaging, onboarding, and approval interactions.',
+    startDate: 'May 2026',
+    endDate: 'Present',
+    description: 'Leading product engineering for ClearSig, a Web3 shared wallet product for teams, families, and groups that need transparent transaction approval.',
+    achievements: [
+      'Handled the complete frontend implementation for the ClearSig hackathon build',
+      'Helped the team secure 2nd place at the Ika hackathon',
+      'Own product direction, frontend architecture, and user experience for shared wallet flows',
+      'Collaborate across wallet logic, security messaging, onboarding, and approval interactions',
     ],
+    techUsed: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Web3 UX', 'Product Engineering'],
   },
   {
-    id: 'deta-wallet',
-    group: 'engineering',
+    id: '1',
     role: 'Senior Frontend Developer',
-    org: 'Deta Wallet',
-    period: 'Jan 2026 to present',
+    company: 'Deta Wallet',
     location: 'Remote',
-    summary: 'Consumer wallet product for a fintech startup.',
-    points: [
-      'Lead frontend architecture and development.',
-      'Implement secure, responsive interfaces for financial transaction and wallet flows.',
-      'Collaborate with backend and blockchain teams to integrate wallet functionality.',
+    startDate: 'Jan 2026',
+    endDate: 'Present',
+    description: 'Building a consumer wallet application as the senior frontend developer for a fintech startup.',
+    achievements: [
+      'Leading frontend architecture and development of the consumer wallet product',
+      'Implementing secure, responsive UI components for financial transactions',
+      'Collaborating with backend and blockchain teams to integrate wallet functionality',
+      'Establishing frontend coding standards and component library for the team',
     ],
+    techUsed: ['React', 'TypeScript', 'Tailwind CSS', 'Web3.js', 'REST APIs'],
   },
   {
-    id: 'nhud',
-    group: 'engineering',
+    id: '2',
     role: 'Frontend Developer (Intern)',
-    org: 'NHUD Foundation',
-    period: 'Aug 2025 to Jan 2026',
+    company: 'NHUD Foundation',
     location: 'On-site',
-    points: [
-      'Developed and maintained responsive web interfaces for the foundation’s projects.',
-      'Improved page load performance and accessibility across multiple pages.',
-      'Collaborated with designers and backend developers to deliver features on schedule.',
+    startDate: 'Aug 2025',
+    endDate: 'Jan 2026',
+    description: 'Completed a hands-on internship building frontend interfaces for the foundation\'s digital platforms.',
+    achievements: [
+      'Developed and maintained responsive web interfaces for the foundation\'s projects',
+      'Collaborated with designers and backend developers to deliver features on schedule',
+      'Improved page load performance and accessibility across multiple pages',
+      'Gained practical experience working in a professional team environment',
     ],
+    techUsed: ['React', 'JavaScript', 'TypeScript', 'Tailwind CSS', 'Git'],
   },
   {
-    id: 'detalink',
-    group: 'additional',
-    role: 'Core Developer',
-    org: 'DETALINK',
+    id: '3',
+    role: 'Co-founder & CTO',
+    company: 'Geoponix',
+    location: 'Remote',
+    startDate: '2026',
+    endDate: 'Present',
+    description: 'Leading technical strategy and product engineering for Geoponix, shaping the platform architecture and user experience for the company’s digital product.',
+    achievements: [
+      'Define product and engineering direction for the core platform',
+      'Lead frontend architecture and product execution for high-impact user experiences',
+      'Collaborate on technical decisions that connect business goals with product delivery',
+      'Build scalable, user-centered systems that support the company’s long-term vision',
+    ],
+    techUsed: ['React', 'TypeScript', 'Next.js', 'Product Strategy', 'Architecture', 'Team Leadership'],
   },
   {
-    id: 'nhub',
-    group: 'additional',
-    role: 'Frontend Mentor',
-    org: 'nHub Foundation',
-    summary: 'Mentoring in frontend engineering.',
+    id: '4',
+    role: 'Co-founder & CTO',
+    company: 'Kenule Africa',
+    location: 'Remote',
+    startDate: '2026',
+    endDate: 'Present',
+    description: 'Driving the technical vision and product engineering direction for Kenule Africa while helping shape the company’s digital growth and platform experience.',
+    achievements: [
+      'Lead technical planning and execution across the company’s digital products',
+      'Design and implement user-facing systems that support business growth',
+      'Translate product vision into scalable and maintainable engineering decisions',
+      'Build a strong technical foundation for the company’s startup roadmap',
+    ],
+    techUsed: ['React', 'TypeScript', 'Next.js', 'Product Engineering', 'Leadership', 'Architecture'],
+  },
+  {
+    id: '5',
+    role: 'Software Engineering Student',
+    company: 'Nigerian Army University',
+    location: 'On-site',
+    startDate: '2023',
+    endDate: 'Present',
+    description: 'Pursuing a degree in Software Engineering, currently in final year.',
+    achievements: [
+      'Studying software engineering principles, data structures, and algorithms',
+      'Building personal and academic projects using modern web technologies',
+      'Participating in coding competitions and tech community events',
+      'Combining academic knowledge with real-world professional experience',
+    ],
+    techUsed: ['Python', 'Java', 'C++', 'React', 'Data Structures', 'Algorithms'],
   },
 ];
