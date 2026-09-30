@@ -1,67 +1,72 @@
-import Reveal from '@/components/ui/Reveal';
-import Section from '@/components/ui/Section';
-import { profile } from '@/data/profile';
+import { motion } from 'framer-motion';
+import { FiArrowRight } from 'react-icons/fi';
+import Container from '@/components/ui/Container';
+import SectionHeading from '@/components/ui/SectionHeading';
+import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
+import { personalInfo, socialLinks } from '@/data/constants';
 
 const facts = [
-  ['Based in', profile.location],
-  ['Education', profile.education],
-  ['Availability', profile.availability],
-  [
-    'Interested in',
-    'Senior systems and software engineering roles, technical leadership, and consulting engagements',
-  ],
-] as const;
+  { label: 'Role', value: personalInfo.title },
+  { label: 'Speciality', value: personalInfo.subtitle },
+  { label: 'Location', value: personalInfo.location },
+  { label: 'Status', value: personalInfo.availability },
+];
 
 export default function About() {
   return (
-    <Section
-      id="about"
-      index="04"
-      eyebrow="About"
-      title="Practical, reliable products and the infrastructure behind them"
-    >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-x-12">
-        <Reveal className="lg:col-span-4">
-          <figure>
-            <img
-              src="/images/portrait-480.webp"
-              srcSet="/images/portrait-480.webp 480w, /images/portrait-960.webp 960w"
-              sizes="(min-width: 1024px) 320px, 70vw"
-              width={480}
-              height={600}
-              alt="Portrait of Pererat Timothy, smiling, in a white traditional outfit and a red and green cap."
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/5] w-full max-w-xs rounded-lg border border-line object-cover"
-            />
-          </figure>
-        </Reveal>
+    <div className="bg-black">
+      <Container id="about">
+        <SectionHeading
+          tag="About"
+          title="The developer behind the code"
+        />
 
-        <Reveal className="lg:col-span-8" delay={90}>
-          <div className="max-w-2xl space-y-5 text-body-lg text-fg-muted">
-            <p>
-              I am a software and systems engineer focused on building practical, reliable products and the
-              infrastructure they run on. My work spans application development, system architecture, cloud
-              infrastructure, automation, and distributed systems, along with Web3 and blockchain systems and
-              product engineering.
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-start">
+          {/* Bio */}
+          <AnimatedWrapper direction="left">
+            <p
+              className="max-w-[680px] text-[clamp(19px,2.35vw,24px)] font-[350] leading-[1.55] text-starlight/90"
+              style={{ letterSpacing: '0' }}
+            >
+              {personalInfo.bio}
             </p>
-            <p>
-              Frontend engineering remains a core part of how I work: interfaces that are fast, accessible, and easy
-              to maintain. As a co-founder and CTO I make architecture and technical-direction decisions across
-              products, and I mentor other developers in frontend engineering.
+            <p className="mt-7 max-w-[650px] text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
+              {personalInfo.longBio}
             </p>
-          </div>
 
-          <dl className="mt-10 grid gap-x-10 gap-y-6 border-t border-line pt-8 sm:grid-cols-2">
-            {facts.map(([label, value]) => (
-              <div key={label}>
-                <dt className="font-mono text-micro uppercase text-fg-faint">{label}</dt>
-                <dd className="mt-1.5 text-body text-fg">{value}</dd>
-              </div>
-            ))}
-          </dl>
-        </Reveal>
-      </div>
-    </Section>
+            <div className="mt-10">
+              <a
+                href={`mailto:${socialLinks.email}`}
+                className="inline-flex items-center gap-2 text-[14px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px]"
+              >
+                {socialLinks.email}
+                <FiArrowRight size={13} />
+              </a>
+            </div>
+          </AnimatedWrapper>
+
+          {/* Quick facts */}
+          <AnimatedWrapper direction="right">
+            <div className="border-t border-lead/30">
+              {facts.map(({ label, value }) => (
+                <motion.div
+                  key={label}
+                  className="depth-surface flex items-center justify-between py-5 border-b border-lead/30"
+                  whileHover={{ x: 3 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                >
+                  <span className="font-mono text-[10px] font-[500] text-lead/70 tracking-[0.12em] uppercase">
+                    {label}
+                  </span>
+                  <span className="max-w-[260px] text-[14px] font-[450] leading-[1.35] text-starlight tracking-[0.04em] text-right">
+                    {value}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </AnimatedWrapper>
+        </div>
+      </Container>
+    </div>
   );
 }

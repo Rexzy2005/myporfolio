@@ -1,214 +1,62 @@
 @import "tailwindcss";
 
-/* ==========================================================================
-   Fonts — self-hosted (SIL OFL, see /public/fonts). Variable fonts: one file
-   per family. Metric-matched fallbacks keep layout stable while they load.
-   ========================================================================== */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url('/fonts/inter-latin-wght-normal.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 100 800;
-  font-display: swap;
-  src: url('/fonts/jetbrains-mono-latin-wght-normal.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter Fallback';
-  src: local('Arial'), local('Helvetica');
-  ascent-override: 90.2%;
-  descent-override: 22.48%;
-  line-gap-override: 0%;
-  size-adjust: 107.4%;
-}
-@font-face {
-  font-family: 'JetBrains Mono Fallback';
-  src: local('Courier New'), local('Courier');
-  ascent-override: 102%;
-  descent-override: 30%;
-  line-gap-override: 0%;
-  size-adjust: 100%;
-}
-
-/* ==========================================================================
-   Design tokens
-   Breakpoints (Tailwind defaults): sm 640 · md 768 · lg 1024 · xl 1280 · 2xl 1536
-   Page container: 75rem (see .container-page). Section rhythm: --section-y.
-   ========================================================================== */
 @theme {
-  /* Typography */
-  --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Mercury Design System color tokens */
+  --color-mercury-blue: #5266eb;
+  --color-ghost-blue: #cdddff;
+  --color-deep-space: #171721;
+  --color-midnight-slate: #1e1e2a;
+  --color-graphite: #272735;
+  --color-lead: #70707d;
+  --color-starlight: #ededf3;
+  --color-silver: #c3c3cc;
+  --color-pure-white: #ffffff;
 
-  --text-display: clamp(1.875rem, 9.2vw, 4.75rem);
-  --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.03em;
-  --text-title: clamp(1.75rem, 4.2vw, 2.75rem);
-  --text-title--line-height: 1.1;
-  --text-title--letter-spacing: -0.02em;
-  --text-heading: clamp(1.375rem, 2.4vw, 1.75rem);
-  --text-heading--line-height: 1.2;
-  --text-heading--letter-spacing: -0.015em;
-  --text-body-lg: 1.125rem;
-  --text-body-lg--line-height: 1.65;
-  --text-body: 1rem;
-  --text-body--line-height: 1.65;
-  --text-small: 0.875rem;
-  --text-small--line-height: 1.55;
-  --text-micro: 0.75rem;
-  --text-micro--line-height: 1.4;
-  --text-micro--letter-spacing: 0.1em;
+  /* Fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Colour — surfaces */
-  --color-ink: #050507;
-  --color-surface: #0b0b10;
-  --color-surface-2: #12121a;
-  /* Colour — lines (line/line-strong are decorative; line-ui meets 3:1 for controls) */
-  --color-line: #23232e;
-  --color-line-strong: #363645;
-  --color-line-ui: #5a5a6e;
-  /* Colour — text. Contrast on --color-ink: fg 17.5:1 · muted 8.7:1 · faint 6.2:1 (all AA) */
-  --color-fg: #ededf3;
-  --color-fg-muted: #a8a8b7;
-  --color-fg-faint: #8c8c9b;
-  /* Colour — brand. accent = fills (white text 4.7:1), accent-soft = text on dark (9:1) */
-  --color-accent: #5266eb;
-  --color-accent-hover: #4456d6;
-  --color-accent-soft: #9aa6ff;
-  --color-ok: #4ade80;
+  /* Mercury Typography Scale */
+  --text-caption: 12px;
+  --text-body-sm: 14px;
+  --text-body: 16px;
+  --text-subheading: 18px;
+  --text-heading-sm: 21px;
+  --text-heading: 32px;
+  --text-heading-lg: 49px;
+  --text-display: 65px;
 
-  /* Shape & depth */
-  --radius-pill: 9999px;
-  --shadow-panel: 0 0 0 1px var(--color-line), 0 24px 48px -28px rgb(0 0 0 / 0.9);
-
-  /* Motion */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-rise: rise 700ms var(--ease-out-expo) both;
-
-  @keyframes rise {
-    from {
-      opacity: 0;
-      transform: translateY(12px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
+  /* Border radius tokens */
+  --radius-none: 0px;
+  --radius-container: 4px;
+  --radius-button: 32px;
+  --radius-button-header: 40px;
+  --radius-input: 32px;
 }
 
-/* ==========================================================================
-   Base
-   ========================================================================== */
 @layer base {
-  :root {
-    color-scheme: dark;
-    --section-y: clamp(4.5rem, 10vw, 8rem);
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #272735 transparent;
   }
 
   html {
-    background: var(--color-ink);
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem; /* fixed header offset for in-page anchors */
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+    overflow-x: hidden;
   }
 
   body {
-    background: var(--color-ink);
-    color: var(--color-fg);
     font-family: var(--font-sans);
-    font-size: var(--text-body);
-    line-height: var(--text-body--line-height);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    background: #000000;
+    color: #ededf3;
+    overflow-x: hidden;
+    font-weight: 400;
+    letter-spacing: 0.16px;
+    line-height: 1.5;
   }
 
   ::selection {
-    background: var(--color-accent);
-    color: #fff;
-  }
-
-  :focus-visible {
-    outline: 2px solid var(--color-accent-soft);
-    outline-offset: 3px;
-    border-radius: 3px;
-  }
-
-  h1, h2, h3, h4 {
-    font-weight: 400;
-  }
-}
-
-/* ==========================================================================
-   Components
-   ========================================================================== */
-@layer components {
-  .container-page {
-    margin-inline: auto;
-    width: 100%;
-    max-width: 75rem;
-    padding-inline: 1.5rem;
-  }
-  @media (min-width: 40rem) {
-    .container-page {
-      padding-inline: 2rem;
-    }
-  }
-  @media (min-width: 64rem) {
-    .container-page {
-      padding-inline: 3rem;
-    }
-  }
-
-  /* Faint blueprint grid used behind the hero. Decorative, static, no JS. */
-  .bg-grid {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
-    background-size: 64px 64px;
-    -webkit-mask-image: radial-gradient(ellipse 75% 65% at 12% 0%, #000 0%, transparent 72%);
-    mask-image: radial-gradient(ellipse 75% 65% at 12% 0%, #000 0%, transparent 72%);
-  }
-
-  /* Scroll reveal: toggled by <Reveal /> via IntersectionObserver. */
-  .reveal {
-    opacity: 0;
-    transform: translateY(10px);
-    transition:
-      opacity 650ms var(--ease-out-expo),
-      transform 650ms var(--ease-out-expo);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-  .reveal[data-visible='true'] {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* ==========================================================================
-   Reduced motion: no smooth scrolling, no reveal/entrance animation.
-   ========================================================================== */
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0ms !important;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
+    background: #5266eb;
+    color: #ffffff;
   }
 }

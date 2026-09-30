@@ -1,120 +1,239 @@
-import { FiArrowUpRight } from 'react-icons/fi';
-import ButtonLink from '@/components/ui/ButtonLink';
-import SocialLinks from '@/components/ui/SocialLinks';
-import TextLink from '@/components/ui/TextLink';
-import { links, profile } from '@/data/profile';
+import { motion } from 'framer-motion';
+import { useEffect, useRef, type PointerEvent } from 'react';
+import { FaDiscord, FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { FiArrowRight, FiDownload } from 'react-icons/fi';
+import { personalInfo, socialLinks } from '@/data/constants';
 
-/** Short pointers into the case studies. Roles mirror data/experience.ts. */
-const systems = [
-  {
-    href: '#clearsig',
-    tag: 'Software engineering',
-    name: 'ClearSig',
-    blurb: 'Policy-governed shared treasury and multi-chain wallet.',
-  },
-  {
-    href: '#geoponix',
-    tag: 'Co-founder, COO & CTO',
-    name: 'GeoPonix',
-    blurb: 'Geospatial agricultural intelligence at plot level.',
-  },
-  {
-    href: '#nakama',
-    tag: 'Offline-first systems',
-    name: 'Nakama Academic Digital Systems',
-    blurb: 'Academic systems for schools that keep working offline.',
-  },
-];
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: 'easeOut' } as const,
+});
 
 export default function Hero() {
+  const backgroundRef = useRef<HTMLDivElement>(null);
+  const targetPosition = useRef({ x: 0, y: 0 });
+  const currentPosition = useRef({ x: 0, y: 0 });
+  const animationFrame = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (animationFrame.current !== null) {
+      cancelAnimationFrame(animationFrame.current);
+    }
+  }, []);
+
+  const animateLogo = () => {
+    const current = currentPosition.current;
+    const target = targetPosition.current;
+    current.x += (target.x - current.x) * 0.08;
+    current.y += (target.y - current.y) * 0.08;
+
+    backgroundRef.current?.style.setProperty(
+      'background-position',
+      `calc(50% + ${current.x}px) calc(50% + ${current.y}px)`,
+    );
+
+    if (Math.abs(target.x - current.x) > 0.05 || Math.abs(target.y - current.y) > 0.05) {
+      animationFrame.current = requestAnimationFrame(animateLogo);
+    } else {
+      animationFrame.current = null;
+    }
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const offsetX = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const offsetY = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    targetPosition.current = { x: offsetX * 18, y: offsetY * 14 };
+    if (animationFrame.current === null) {
+      animationFrame.current = requestAnimationFrame(animateLogo);
+    }
+  };
+
+  const resetLogoPosition = () => {
+    targetPosition.current = { x: 0, y: 0 };
+    if (animationFrame.current === null) {
+      animationFrame.current = requestAnimationFrame(animateLogo);
+    }
+  };
+
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
   return (
     <section
       id="home"
-      aria-labelledby="hero-title"
-      className="relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-36 lg:pb-20 lg:pt-44"
+      className="relative min-h-screen flex flex-col bg-black overflow-hidden"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetLogoPosition}
     >
-      <div aria-hidden="true" className="bg-grid pointer-events-none absolute inset-0" />
+      {/* Atmospheric violet bloom */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse 90% 55% at 50% -5%, rgba(82,102,235,0.14) 0%, transparent 65%)',
+        }}
+      />
 
-      <div className="container-page relative">
-        <div className="animate-rise flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-micro uppercase text-fg-muted">
-          <p>
-            {profile.name} · {profile.handle}
-          </p>
-          <p className="inline-flex items-center gap-2">
-            <span aria-hidden="true" className="size-1.5 rounded-full bg-ok" />
-            {profile.availability}
-          </p>
-        </div>
+      {/* Secondary logo background */}
+      <div
+        ref={backgroundRef}
+        className="absolute inset-0 z-[1] pointer-events-none overflow-hidden"
+        style={{
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)), url('/dev-rex.jpg')",
+          backgroundPosition: '50% 50%',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'min(125vw, 1400px) min(125vw, 1400px)',
+          backgroundAttachment: 'fixed',
+          filter: 'saturate(0.9) brightness(0.85)',
+        }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 58% 66% at 50% 50%, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.68) 54%, rgba(0,0,0,0.94) 78%, #000000 100%)',
+          }}
+        />
+      </div>
 
-        <h1
-          id="hero-title"
-          className="animate-rise mt-6 max-w-[9.6em] text-balance text-display text-fg"
-          style={{ animationDelay: '80ms' }}
-        >
-          Software <span className="text-accent-soft">&amp;</span> Systems Engineer
-        </h1>
+      {/* Main content */}
+      <div className="flex-1 flex items-center justify-center relative z-10">
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12 w-full py-32 flex flex-col items-center text-center">
 
-        <div className="mt-10 grid gap-12 sm:mt-12 lg:grid-cols-12 lg:gap-x-12">
-          <div className="animate-rise lg:col-span-7" style={{ animationDelay: '160ms' }}>
-            <p className="max-w-xl text-body-lg text-fg-muted">{profile.lead}</p>
-            <p className="mt-5 max-w-xl font-mono text-micro uppercase text-fg-faint">
-              {profile.disciplines.join(' · ')}
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-x-2 gap-y-3 sm:gap-x-3">
-              <ButtonLink href="#work" variant="primary">
-                View selected work
-              </ButtonLink>
-              <ButtonLink href="#contact" variant="secondary">
-                Contact
-              </ButtonLink>
-            </div>
-            <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-small">
-              <TextLink href="#experience">View experience</TextLink>
-              <TextLink href={links.resumePdf} download>
-                Resume (PDF)
-              </TextLink>
-            </div>
-
-            <SocialLinks className="mt-8" />
-          </div>
-
-          <aside
-            aria-labelledby="hero-systems"
-            className="animate-rise lg:col-span-5"
-            style={{ animationDelay: '240ms' }}
+          {/* <motion.div
+            {...fadeUp(0)}
+            className="mb-8 h-[124px] w-[124px] overflow-hidden border border-lead/25 bg-graphite/40 shadow-[0_24px_80px_rgba(82,102,235,0.18)]"
+            style={{ borderRadius: '8px' }}
           >
-            <div className="overflow-hidden rounded-lg border border-line bg-surface">
-              <p
-                id="hero-systems"
-                className="border-b border-line px-5 py-3 font-mono text-micro uppercase text-fg-faint"
+            <img
+              src="/dev-rex.jpg"
+              alt={personalInfo.name}
+              className="h-full w-full object-cover"
+            />
+          </motion.div> */}
+
+          {/* Name */}
+          <motion.h1
+            {...fadeUp(0.08)}
+            className="text-[clamp(30px,7vw,68px)] leading-[1.1] text-starlight"
+            style={{ fontWeight: 360, letterSpacing: '0.5px' }}
+          >
+            {personalInfo.name}
+          </motion.h1>
+
+          {/* Title */}
+          <motion.p
+            {...fadeUp(0.14)}
+            className="mt-5 text-[clamp(15px,2vw,19px)] text-lead font-[400]"
+          >
+            {personalInfo.title}
+            <span className="mx-3 text-lead/30">|</span>
+            {personalInfo.subtitle}
+          </motion.p>
+
+          <motion.p
+            {...fadeUp(0.18)}
+            className="mt-4 text-[12px] font-[400] text-lead/55 uppercase tracking-[0.22px]"
+          >
+            React | TypeScript | Next.js | Product Engineering
+          </motion.p>
+
+          {/* Bio */}
+          <motion.p
+            {...fadeUp(0.23)}
+            className="mt-7 text-[16px] font-[400] leading-[1.75] text-lead/80 max-w-[560px] tracking-[0.16px]"
+          >
+            {personalInfo.bio}
+          </motion.p>
+
+          {/* CTAs (compact on phones so the buttons sit side by side; original sizing from `sm` up) */}
+          <motion.div
+            {...fadeUp(0.3)}
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-2 gap-y-3 sm:mt-10 sm:gap-5"
+          >
+            <button
+              onClick={() => scrollTo('projects')}
+              className="px-4 py-2.5 bg-mercury-blue text-pure-white text-[13px] font-[480] tracking-[0.1px] hover:bg-[#4456d6] active:bg-[#3a49c4] transition-colors duration-150 sm:px-8 sm:py-3.5 sm:text-[15px]"
+              style={{ borderRadius: '32px' }}
+            >
+              View My Work
+            </button>
+            <a
+              href="/Pererat-Timothy-Resume.pdf"
+              download
+              className="inline-flex items-center gap-1.5 px-4 py-2.5 border border-lead/25 text-starlight text-[13px] font-[480] hover:border-lead/50 transition-colors sm:gap-2 sm:px-7 sm:py-3.5 sm:text-[15px]"
+              style={{ borderRadius: '32px' }}
+            >
+              <FiDownload className="size-3.5 sm:size-[15px]" />
+              Resume
+            </a>
+            <button
+              onClick={() => scrollTo('contact')}
+              className="inline-flex items-center gap-1.5 py-2 text-[13px] font-[400] text-lead hover:text-starlight transition-colors tracking-[0.28px] sm:gap-2 sm:py-0 sm:text-[15px]"
+            >
+              Let's Talk <FiArrowRight className="size-[13px] sm:size-3.5" />
+            </button>
+          </motion.div>
+
+          {/* Social links */}
+          <motion.div
+            {...fadeUp(0.38)}
+            className="mt-8 flex items-center justify-center gap-3 sm:mt-10 sm:gap-5"
+          >
+            {[
+              { label: 'GitHub', href: socialLinks.github, Icon: FaGithub },
+              { label: 'LinkedIn', href: socialLinks.linkedin, Icon: FaLinkedinIn },
+              { label: 'X', href: socialLinks.twitter, Icon: FaXTwitter },
+              { label: 'Discord', href: socialLinks.discord, Icon: FaDiscord },
+            ].map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/3 text-lead/80 transition-all duration-200 hover:bg-mercury-blue/10 hover:text-starlight sm:h-11 sm:w-11"
               >
-                Selected systems
-              </p>
-              <ul className="divide-y divide-line">
-                {systems.map((system) => (
-                  <li key={system.href}>
-                    <a
-                      href={system.href}
-                      className="group flex items-start justify-between gap-4 px-5 py-4 transition-colors hover:bg-surface-2"
-                    >
-                      <span className="min-w-0">
-                        <span className="block font-mono text-micro uppercase text-accent-soft">{system.tag}</span>
-                        <span className="mt-1.5 block text-body text-fg">{system.name}</span>
-                        <span className="mt-0.5 block text-small text-fg-muted">{system.blurb}</span>
-                      </span>
-                      <FiArrowUpRight
-                        aria-hidden="true"
-                        className="mt-1 size-4 shrink-0 text-fg-faint transition-colors group-hover:text-fg"
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </aside>
+                <Icon className="size-4 sm:size-[18px]" />
+              </a>
+            ))}
+          </motion.div>
+
         </div>
       </div>
+
+      {/* Stats bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="relative z-10 border-t border-lead/20"
+      >
+        <div className="max-w-[1200px] mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-3 divide-x divide-lead/20">
+            {[
+              { value: `${personalInfo.yearsOfExperience}+`, label: 'Years Experience' },
+              { value: `${personalInfo.projectsDelivered}+`, label: 'Projects Delivered' },
+              { value: `${personalInfo.happyClients}+`, label: 'Happy Clients' },
+            ].map(({ value, label }) => (
+              <div key={label} className="py-8 px-4 sm:px-10 text-center">
+                <p
+                  className="text-[30px] leading-none text-starlight"
+                  style={{ fontWeight: 360, letterSpacing: '0.01em' }}
+                >
+                  {value}
+                </p>
+                <p className="mt-2 text-[11px] font-[400] text-lead/60 tracking-[0.22px] uppercase">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }
