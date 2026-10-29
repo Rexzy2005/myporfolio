@@ -19,8 +19,8 @@ const socialItems = [
   },
   {
     icon: FaXTwitter,
-    href: `https://x.com/compose/post?text=${encodeURIComponent('Hi Pererat, I would love to connect and discuss an opportunity.')}`,
-    message: 'Send a quick message',
+    href: `https://x.com/Dev_rexzy`,
+    message: 'Follow on X (Twitter)',
   },
   {
     icon: FaDiscord,
