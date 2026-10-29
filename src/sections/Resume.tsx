@@ -16,7 +16,6 @@ const coreStrengths = [
 ];
 
 const resumeContacts = [
-  { label: 'Portfolio', value: 'rexzy.dev', href: 'https://rexzy.dev', Icon: FiGlobe },
   { label: 'Email', value: socialLinks.email, href: `mailto:${socialLinks.email}`, Icon: FiMail },
   { label: 'WhatsApp', value: socialLinks.phone, href: socialLinks.whatsapp, Icon: FaWhatsapp },
   { label: 'GitHub', value: 'github.com/Rexzy2005', href: socialLinks.github, Icon: FaGithub },
