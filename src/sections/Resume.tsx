@@ -15,13 +15,6 @@ const coreStrengths = [
   'Product engineering, rapid prototyping, and team collaboration',
 ];
 
-const resumeContacts = [
-  { label: 'Email', value: socialLinks.email, href: `mailto:${socialLinks.email}`, Icon: FiMail },
-  { label: 'WhatsApp', value: socialLinks.phone, href: socialLinks.whatsapp, Icon: FaWhatsapp },
-  { label: 'GitHub', value: 'github.com/Rexzy2005', href: socialLinks.github, Icon: FaGithub },
-  { label: 'LinkedIn', value: 'LinkedIn profile', href: socialLinks.linkedin, Icon: FaLinkedinIn },
-  { label: 'X', value: 'x.com/dev_rexzy', href: socialLinks.twitter, Icon: FaXTwitter },
-];
 
 export default function Resume() {
   const education = experiences.find(({ id }) => id === '5');
@@ -123,26 +116,6 @@ export default function Resume() {
                   </div>
                 </div>
               )}
-
-              <div className="pt-6 border-t border-lead/15">
-                <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
-                  Contact
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
-                  {resumeContacts.map(({ label, value, href, Icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target={label === 'Email' || label === 'WhatsApp' ? undefined : '_blank'}
-                      rel={label === 'Email' || label === 'WhatsApp' ? undefined : 'noopener noreferrer'}
-                      className="inline-flex min-w-0 items-center gap-2 text-[13px] text-lead hover:text-starlight transition-colors"
-                    >
-                      <Icon size={14} className="shrink-0" aria-hidden="true" />
-                      <span className="truncate">{value}</span>
-                    </a>
-                  ))}
-                </div>
-              </div>
             </div>
           </AnimatedWrapper>
         </div>
