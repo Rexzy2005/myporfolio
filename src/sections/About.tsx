@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiArrowRight } from 'react-icons/fi';
+import { FiArrowDown, FiArrowRight, FiArrowUp } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
@@ -13,6 +14,8 @@ const facts = [
 ];
 
 export default function About() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="bg-black">
       <Container id="about">
@@ -24,15 +27,29 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-16 lg:gap-24 items-start">
           {/* Bio */}
           <AnimatedWrapper direction="left">
-            <p
-              className="max-w-[680px] text-[clamp(19px,2.35vw,24px)] font-[350] leading-[1.55] text-starlight/90"
-              style={{ letterSpacing: '0' }}
+            <p className="max-w-[650px] text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
+              I'm Pererat Timothy, also known as Rexzy, a Software Engineer driven by building meaningful products and engineering systems that solve real-world problems. I'm the Co-founder, COO &amp; CTO of GeoPonix, where I also work as a Hardware Engineer and Mobile Developer building precision-agriculture and agro-intelligence solutions. I'm also the CTO of Kenule Africa, where we're building technology-driven products and empowering young people with practical tech skills.
+            </p>
+            {isExpanded && (
+              <div className="mt-7 max-w-[650px] space-y-7 text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
+                <p>
+                  Beyond my roles, I've worked across web, mobile, SaaS, blockchain, and cloud infrastructure, building solutions that turn complex ideas into practical, scalable products.
+                </p>
+                <p>
+                  I'm a builder at heart. I believe in continuous growth, constant learning, and challenging myself to explore the unfamiliar. I enjoy taking ideas worth building and turning them into real, working products.
+                </p>
+              </div>
+            )}
+
+            <button
+              type="button"
+              onClick={() => setIsExpanded((expanded) => !expanded)}
+              aria-expanded={isExpanded}
+              className="mt-5 inline-flex items-center gap-2 text-[13px] font-[400] text-lead hover:text-starlight transition-colors"
             >
-              {personalInfo.bio}
-            </p>
-            <p className="mt-7 max-w-[650px] text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
-              {personalInfo.longBio}
-            </p>
+              {isExpanded ? 'Read less' : 'Read more'}
+              {isExpanded ? <FiArrowUp size={13} /> : <FiArrowDown size={13} />}
+            </button>
 
             <div className="mt-10">
               <a

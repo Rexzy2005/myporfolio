@@ -119,6 +119,34 @@
         color: rgba(255, 255, 255, 0.78);
       }
 
+      .contact-list a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        min-width: 0;
+      }
+
+      .contact-icon {
+        width: 3.5mm;
+        height: 3.5mm;
+        flex: 0 0 3.5mm;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.7;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .contact-icon--brand {
+        fill: currentColor;
+        stroke: none;
+      }
+
       .pill-list {
         display: flex;
         flex-wrap: wrap;
@@ -490,11 +518,12 @@
             <p class="side-title">Contact</p>
             <ul class="contact-list">
               <li>Jos, Plateau State / Remote</li>
-              <li>WhatsApp: 08133153568</li>
-              <li>timothypererat2004@gmail.com</li>
-              <li>github.com/Rexzy2005</li>
-              <li>linkedin.com/in/pererat-timothy-b33a51375</li>
-              <li>twitter.com/dev_rexzy</li>
+              <li><a class="contact-link" href="https://wa.me/2348133153568"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M8.5 7.7c.3-.5.7-.5 1-.1l1 1.6c.2.3.1.6-.1.9l-.6.7c.6 1.2 1.5 2.1 2.8 2.7l.7-.7c.2-.2.6-.3.9-.1l1.6 1c.4.2.4.7.1 1-.6.8-1.5 1.2-2.5 1-3.1-.7-5.7-3.3-6.4-6.4-.2-1 .2-1.9 1-2.6Z"/></svg><span>WhatsApp: 08133153568</span></a></li>
+              <li><a class="contact-link" href="mailto:timothypererat2004@gmail.com"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span>timothypererat2004@gmail.com</span></a></li>
+              <li><a class="contact-link" href="https://github.com/Rexzy2005"><svg class="contact-icon contact-icon--brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.68-3.76-1.32-3.76-1.32-.5-1.3-1.24-1.64-1.24-1.64-1.01-.7.08-.69.08-.69 1.12.08 1.71 1.15 1.71 1.15 1 .7 1.82.5 2.26.39.1-.72.39-1.21.7-1.49-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.15-3-.12-.29-.5-1.42.11-2.96 0 0 .94-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.54.23 2.67.11 2.96.72.78 1.15 1.78 1.15 3.01 0 4.3-2.61 5.24-5.1 5.52.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg><span>github.com/Rexzy2005</span></a></li>
+              <li><a class="contact-link" href="https://www.linkedin.com/in/pererat-timothy-b33a51375"><svg class="contact-icon contact-icon--brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.53v16.94c0 .85.69 1.53 1.55 1.53h16.9c.86 0 1.55-.68 1.55-1.53V3.53c0-.85-.69-1.53-1.55-1.53ZM8.05 18.9H5.1V9.4h2.95v9.5ZM6.57 8.1a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.33 10.8h-2.94v-4.62c0-1.1-.02-2.51-1.53-2.51-1.53 0-1.77 1.2-1.77 2.43v4.7H9.72V9.4h2.82v1.3h.04c.39-.74 1.35-1.52 2.78-1.52 2.97 0 3.54 1.95 3.54 4.49v5.23Z"/></svg><span>linkedin.com/in/pererat-timothy-b33a51375</span></a></li>
+              <li><a class="contact-link" href="https://twitter.com/dev_rexzy"><svg class="contact-icon contact-icon--brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2h3.3L15 10.3 23.5 22h-6.7l-5.25-7.13L5.4 22H2.1l7.72-8.86L1.7 2h6.87l4.75 6.48L18.9 2Zm-1.16 17.94h1.83L7.57 3.95H5.6l12.14 16Z"/></svg><span>x.com/dev_rexzy</span></a></li>
+              <li><a class="contact-link" href="https://rexzy.dev"><svg class="contact-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M2.7 12h18.6M12 2.5a15 15 0 0 1 0 19M12 2.5a15 15 0 0 0 0 19"/></svg><span>rexzy.dev</span></a></li>
             </ul>
           </div>
 
@@ -508,7 +537,6 @@
               <span class="pill">Node.js</span>
               <span class="pill">PostgreSQL</span>
               <span class="pill">MongoDB</span>
-              <span class="pill">Solidity</span>
               <span class="pill">Web3 UX</span>
               <span class="pill">Flutter</span>
               <span class="pill">Dart</span>
@@ -530,7 +558,7 @@
           <div class="side-block">
             <p class="side-title">Education</p>
             <ul class="side-list">
-              <li>Nigerian Army University, Software Engineering, final year.</li>
+              <li>Nigerian Army University, BSc Software Engineering, graduated 2026.</li>
             </ul>
           </div>
         </aside>
@@ -538,50 +566,38 @@
         <section class="content">
           <header>
             <h1>Pererat Timothy</h1>
-            <p class="role">Product-Focused Software Developer</p>
+            <p class="role">Software Engineer &amp; Product Builder</p>
             <p class="summary">
-              Product-focused software developer with 5+ years of experience building web products, mobile applications, and machine learning projects across fintech, Web3, agritech, accessibility, and design systems. Strong in React, TypeScript, Next.js, Flutter, Dart, computer vision, product architecture, and team collaboration.
+              Software Engineer and Product Builder with 5+ years of experience delivering products across fintech, SaaS, web, mobile, Web3, agritech, and machine learning. Experienced in frontend architecture, Flutter mobile development, hardware integration, cloud infrastructure, and cross-functional product delivery.
             </p>
             <div class="top-line"></div>
           </header>
 
           <section>
-            <h2>Experience</h2>
+            <h2>Professional Experience</h2>
             <div class="item">
               <div class="item-head">
-                <h3>Head of Product Engineering / Frontend Lead</h3>
-                <p class="meta">May 2026 to Present</p>
-              </div>
-              <p class="sub">ClearSig | Remote</p>
-              <ul>
-                <li>Lead product engineering for a Web3 shared wallet product for groups, families, and teams.</li>
-                <li>Handled the complete frontend implementation for the ClearSig hackathon build.</li>
-                <li>Helped the team secure 2nd place at the Ika hackathon.</li>
-              </ul>
-            </div>
-
-            <div class="item">
-              <div class="item-head">
-                <h3>Senior Frontend Developer</h3>
+                <h3>Senior Frontend Engineer</h3>
                 <p class="meta">Jan 2026 to Present</p>
               </div>
-              <p class="sub">Deta Wallet | Remote</p>
+              <p class="sub">DETALINKS TECHNOLOGY | Remote</p>
               <ul>
-                <li>Lead frontend architecture and development for a consumer wallet product.</li>
-                <li>Implement secure, responsive interfaces for financial transaction and wallet flows.</li>
-                <li>Collaborate with backend and blockchain teams to integrate wallet functionality.</li>
+                <li>Build frontend experiences for DETALINKS TECHNOLOGY products ClearSig, a shared Web3 wallet, and Deta Wallet, a consumer wallet.</li>
+                <li>Develop wallet onboarding, transaction, request, and approval flows, and integrate wallet functionality with backend and blockchain services.</li>
+                <li>Contribute to frontend architecture and responsive interface standards.</li>
               </ul>
             </div>
 
             <div class="item">
               <div class="item-head">
-                <h3>Co-founder &amp; CTO</h3>
+                <h3>Co-founder, COO &amp; CTO</h3>
                 <p class="meta">2026 to Present</p>
               </div>
-              <p class="sub">Geoponix | Remote</p>
+              <p class="sub"><a href="https://www.geoponix.co/" target="_blank" rel="noopener noreferrer">GeoPonix</a> | Remote</p>
               <ul>
-                <li>Define product and engineering direction for the core platform.</li>
-                <li>Lead technical decisions, architecture, and product execution for the company.</li>
+                <li>Co-lead company, product, and engineering direction for precision-agriculture and agro-intelligence solutions.</li>
+                <li>Serve as Hardware Engineer and Mobile Developer, building field hardware and mobile workflows for agricultural users.</li>
+                <li>Connect field data collection with practical agro-intelligence software.</li>
               </ul>
             </div>
 
@@ -599,28 +615,17 @@
           </section>
 
           <section>
-            <h2>Selected Projects</h2>
-            <div class="project-grid">
-              <div class="project">
-                <h3>ClearSig Shared Wallet</h3>
-                <p>Frontend Lead and Head of Product Engineering for shared wallet request, review, and approval flows.</p>
+            <h2>Additional Experience</h2>
+            <div class="item">
+              <div class="item-head">
+                <h3>Frontend Developer Intern</h3>
+                <p class="meta">Aug 2025 to Jan 2026</p>
               </div>
-              <div class="project">
-                <h3>FYB Studio</h3>
-                <p>Full-stack application for final-year students to personalize templates, preview designs, and export PNG assets.</p>
-              </div>
-              <div class="project">
-                <h3>WinView Microfinance Bank</h3>
-                <p>Digital-first MFB website for trust signals, account opening prompts, app prompts, and support access.</p>
-              </div>
-              <div class="project">
-                <h3>SoilSense</h3>
-                <p>Flutter agritech app using Bluetooth soil sensors and machine learning-informed recommendations for Nigerian farmers.</p>
-              </div>
-              <div class="project">
-                <h3>NSL Translator</h3>
-                <p>Flutter accessibility app combining computer vision and an on-device Nigerian Sign Language model.</p>
-              </div>
+              <p class="sub">NHUD Foundation | On-site</p>
+              <ul>
+                <li>Developed and maintained responsive interfaces for the foundation's digital projects.</li>
+                <li>Collaborated with design and backend teams to deliver features on schedule and improve accessibility.</li>
+              </ul>
             </div>
           </section>
 
@@ -629,9 +634,10 @@
             <ul>
               <li>Frontend architecture for production web apps with clear component systems.</li>
               <li>Full-stack product development with Next.js, TypeScript, and pragmatic product thinking.</li>
-              <li>Mobile app development with Flutter, Dart, and React Native.</li>
+              <li>Mobile product development with Flutter, Dart, React Native, and hardware integrations.</li>
               <li>Machine learning applications using computer vision, MediaPipe, and TensorFlow Lite.</li>
               <li>Web3 wallet interfaces, transaction approval flows, rapid prototyping, and team collaboration.</li>
+              <li>Hardware integration and mobile workflows for precision agriculture.</li>
             </ul>
           </section>
         </section>

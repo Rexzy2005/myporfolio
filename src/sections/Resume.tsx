@@ -1,21 +1,32 @@
-import { FiArrowUpRight, FiDownload } from 'react-icons/fi';
+import { FaGithub, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6';
+import { FiArrowUpRight, FiDownload, FiGlobe, FiMail } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
 import { personalInfo, socialLinks } from '@/data/constants';
 import { experiences } from '@/data/experience';
-import { hackathons } from '@/data/hackathons';
 
 const coreStrengths = [
   'Frontend architecture for production web apps',
   'Full-stack product development with Next.js and TypeScript',
   'Mobile app development with Flutter and React Native',
   'Machine learning applications with computer vision and on-device models',
+  'Hardware integration and mobile workflows for precision agriculture',
   'Product engineering, rapid prototyping, and team collaboration',
 ];
 
+const resumeContacts = [
+  { label: 'Portfolio', value: 'rexzy.dev', href: 'https://rexzy.dev', Icon: FiGlobe },
+  { label: 'Email', value: socialLinks.email, href: `mailto:${socialLinks.email}`, Icon: FiMail },
+  { label: 'WhatsApp', value: socialLinks.phone, href: socialLinks.whatsapp, Icon: FaWhatsapp },
+  { label: 'GitHub', value: 'github.com/Rexzy2005', href: socialLinks.github, Icon: FaGithub },
+  { label: 'LinkedIn', value: 'LinkedIn profile', href: socialLinks.linkedin, Icon: FaLinkedinIn },
+  { label: 'X', value: 'x.com/dev_rexzy', href: socialLinks.twitter, Icon: FaXTwitter },
+];
+
 export default function Resume() {
-  const featuredExperience = experiences.filter(({ id }) => ['clearsig', '3', '4'].includes(id));
+  const featuredExperience = experiences.filter(({ id }) => ['clearsig', '2', '3', '4'].includes(id));
+  const education = experiences.find(({ id }) => id === '5');
 
   return (
     <div className="bg-black">
@@ -47,7 +58,7 @@ export default function Resume() {
                     {personalInfo.name}
                   </h3>
                   <p className="mt-3 text-[15px] text-lead tracking-[0.16px]">
-                    {personalInfo.title} focused on web products, mobile applications, machine learning, and Web3 product interfaces.
+                    {personalInfo.title} working across fintech, SaaS, web, mobile, machine learning, blockchain, and cloud infrastructure.
                   </p>
                 </div>
               </div>
@@ -98,7 +109,7 @@ export default function Resume() {
 
               <div>
                 <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
-                  Recent roles
+                  Professional experience
                 </p>
                 <div className="border-t border-lead/20">
                   {featuredExperience.map((experience) => (
@@ -112,45 +123,51 @@ export default function Resume() {
                       <p className="mt-1 text-[13px] text-lead/70 tracking-[0.16px]">
                         {experience.company} | {experience.location}
                       </p>
+                      <p className="mt-3 max-w-[600px] text-[13px] leading-[1.7] text-lead/75 tracking-[0.12px]">
+                        {experience.description}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div>
+              {education && (
+                <div>
+                  <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
+                    Education
+                  </p>
+                  <div className="border-t border-lead/20 py-5">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                      <p className="text-[16px] text-starlight tracking-[0.16px]">{education.role}</p>
+                      <p className="text-[12px] text-lead/60 tracking-[0.2px]">
+                        {education.startDate} to {education.endDate}
+                      </p>
+                    </div>
+                    <p className="mt-1 text-[13px] text-lead/70 tracking-[0.16px]">
+                      {education.company}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="pt-6 border-t border-lead/15">
                 <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
-                  Hackathon proof
+                  Contact
                 </p>
-                <div className="flex flex-wrap gap-3">
-                  {hackathons.map((hackathon) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+                  {resumeContacts.map(({ label, value, href, Icon }) => (
                     <a
-                      key={hackathon.id}
-                      href={hackathon.eventUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-lead/20 bg-graphite/20 px-4 py-3 text-[13px] text-lead hover:text-starlight hover:border-lead/40 transition-colors"
+                      key={label}
+                      href={href}
+                      target={label === 'Email' || label === 'WhatsApp' ? undefined : '_blank'}
+                      rel={label === 'Email' || label === 'WhatsApp' ? undefined : 'noopener noreferrer'}
+                      className="inline-flex min-w-0 items-center gap-2 text-[13px] text-lead hover:text-starlight transition-colors"
                     >
-                      {hackathon.product} | {hackathon.placement}
-                      <FiArrowUpRight size={13} />
+                      <Icon size={14} className="shrink-0" aria-hidden="true" />
+                      <span className="truncate">{value}</span>
                     </a>
                   ))}
                 </div>
-              </div>
-
-              <div className="pt-6 border-t border-lead/15">
-                <a
-                  href={`mailto:${socialLinks.email}`}
-                  className="inline-flex items-center gap-2 text-[14px] text-lead hover:text-starlight transition-colors"
-                >
-                  {socialLinks.email}
-                  <FiArrowUpRight size={13} />
-                </a>
-                <a
-                  href={`tel:${socialLinks.phone}`}
-                  className="mt-3 block text-[14px] text-lead hover:text-starlight transition-colors"
-                >
-                  WhatsApp: {socialLinks.phone}
-                </a>
               </div>
             </div>
           </AnimatedWrapper>

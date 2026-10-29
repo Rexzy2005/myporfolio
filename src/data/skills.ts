@@ -118,7 +118,7 @@ export const languages: Skill[] = [
     category: 'language',
     proficiency: 'intermediate',
     years: 2,
-    description: 'Smart contracts, ERC-20/721, DeFi protocols',
+    description: 'Solidity smart contract development, ERC-20/721 standards, DeFi protocols, and Web3 integration',
     color: '#363636',
   },
   {

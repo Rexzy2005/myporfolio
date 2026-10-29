@@ -130,21 +130,12 @@ export default function Hero() {
             className="mt-5 text-[clamp(15px,2vw,19px)] text-lead font-[400]"
           >
             {personalInfo.title}
-            <span className="mx-3 text-lead/30">|</span>
-            {personalInfo.subtitle}
-          </motion.p>
-
-          <motion.p
-            {...fadeUp(0.18)}
-            className="mt-4 text-[12px] font-[400] text-lead/55 uppercase tracking-[0.22px]"
-          >
-            React | TypeScript | Next.js | Product Engineering
           </motion.p>
 
           {/* Bio */}
           <motion.p
             {...fadeUp(0.23)}
-            className="mt-7 text-[16px] font-[400] leading-[1.75] text-lead/80 max-w-[560px] tracking-[0.16px]"
+            className="mt-7 max-w-[760px] text-center text-[16px] italic font-[400] leading-[1.65] text-lead/75 tracking-[0.16px]"
           >
             {personalInfo.bio}
           </motion.p>

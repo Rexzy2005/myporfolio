@@ -15,6 +15,7 @@ const categoryLabels: Record<Project['category'], string> = {
   'machine-learning': 'Machine Learning',
 };
 const additionalCategoryLabels = {
+  hardware: 'Hardware',
   'mobile-app': 'Mobile App',
   'machine-learning': 'Machine Learning',
 } as const;

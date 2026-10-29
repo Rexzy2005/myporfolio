@@ -15,7 +15,7 @@ export interface Project {
   year?: string;
   status?: string;
   category: 'fullstack' | 'frontend' | 'web3' | 'backend' | 'machine-learning';
-  categories?: Array<'mobile-app' | 'machine-learning'>;
+  categories?: Array<'hardware' | 'mobile-app' | 'machine-learning'>;
   featured: boolean;
 }
 
@@ -27,16 +27,35 @@ export const projects: Project[] = [
     fullDescription: 'ClearSig is a shared wallet product for friends, families, and teams. It makes group money movement transparent by letting everyone see the request, approve actions, and work through a safer shared-control flow before real value moves.',
     problem: 'Shared crypto wallets are often difficult to coordinate and risky when one person controls the keys. Teams need a clearer approval experience that reduces trust assumptions and keeps wallet activity understandable.',
     approach: 'Handled the complete frontend experience for the hackathon build, translating the product flow into responsive screens, wallet states, request views, and approval interactions. Worked closely with the team on product decisions while keeping the app usable during a fast shipping cycle.',
-    outcome: 'Helped the team place 2nd at the Ika hackathon and continued into the Head of Product Engineering role for ClearSig after the build.',
+    outcome: 'Helped the team place 2nd at the Ika hackathon and continued building ClearSig as a Senior Frontend Engineer at DETALINKS TECHNOLOGY.',
     techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Web3 UX', 'Solana Devnet', 'Product Engineering'],
     features: ['Shared wallet onboarding and workspace flow', 'Transaction request and approval interface', 'Transparent activity and review states', 'Responsive frontend built for fast demos and ongoing iteration', 'Security-conscious wallet messaging and user flows'],
     image: '/projects/clearsig.xyz_.png',
     liveUrl: 'https://clearsig.xyz/',
     sourceUrl: 'https://github.com/clear-msig/clear-msig',
-    role: 'Frontend Lead and Head of Product Engineering',
+    role: 'Senior Frontend Engineer at DETALINKS TECHNOLOGY',
     year: '2026',
     status: 'Pre-alpha',
     category: 'web3',
+    featured: true,
+  },
+  {
+    id: 'geoponix',
+    title: 'GeoPonix Agro-Intelligence',
+    shortDescription: 'Precision-agriculture and agro-intelligence work combining field hardware and mobile software for more informed farming decisions.',
+    fullDescription: 'GeoPonix is building precision-agriculture and agro-intelligence solutions. As Co-founder, COO, and CTO, I also work hands-on as a Hardware Engineer and Mobile Developer, helping connect field technology with practical mobile workflows for agricultural users.',
+    problem: 'Agricultural teams need reliable field data and accessible tools to turn it into practical decisions about crops, soil, and farm operations.',
+    approach: 'Contribute across hardware engineering and Flutter mobile development, connecting field-device workflows with software designed for use in agricultural settings.',
+    outcome: 'Bring hardware and mobile product development together as part of GeoPonix\'s precision-agriculture and agro-intelligence work.',
+    techStack: ['Hardware Engineering', 'Flutter', 'Dart', 'IoT', 'Bluetooth Low Energy', 'Agro-Intelligence'],
+    features: ['Hardware engineering for field workflows', 'Mobile app development with Flutter', 'Device integration and field data collection', 'Precision-agriculture product workflows', 'Agro-intelligence software development'],
+    image: '/projects/geoponix.png',
+    liveUrl: 'https://www.geoponix.co/',
+    role: 'Co-founder, COO & CTO; Hardware Engineer & Mobile Developer',
+    year: '2026',
+    status: 'Active',
+    category: 'machine-learning',
+    categories: ['hardware', 'mobile-app', 'machine-learning'],
     featured: true,
   },
   {
