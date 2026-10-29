@@ -6,7 +6,6 @@ export const navLinks = [
   { name: 'Hackathons', href: '#hackathons' },
   { name: 'Experience', href: '#experience' },
   { name: 'Resume', href: '#resume' },
-  { name: 'Contact', href: '#contact' },
 ];
 
 export const socialLinks = {
