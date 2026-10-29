@@ -25,7 +25,6 @@ const resumeContacts = [
 ];
 
 export default function Resume() {
-  const featuredExperience = experiences.filter(({ id }) => ['clearsig', '2', '3', '4'].includes(id));
   const education = experiences.find(({ id }) => id === '5');
 
   return (
@@ -101,30 +100,6 @@ export default function Resume() {
                     <div key={strength} className="border border-lead/20 bg-graphite/25 p-4">
                       <p className="text-[13px] leading-[1.55] text-starlight tracking-[0.16px]">
                         {strength}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
-                  Professional experience
-                </p>
-                <div className="border-t border-lead/20">
-                  {featuredExperience.map((experience) => (
-                    <div key={experience.id} className="py-5 border-b border-lead/20">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                        <p className="text-[16px] text-starlight tracking-[0.16px]">{experience.role}</p>
-                        <p className="text-[12px] text-lead/60 tracking-[0.2px]">
-                          {experience.startDate} to {experience.endDate}
-                        </p>
-                      </div>
-                      <p className="mt-1 text-[13px] text-lead/70 tracking-[0.16px]">
-                        {experience.company} | {experience.location}
-                      </p>
-                      <p className="mt-3 max-w-[600px] text-[13px] leading-[1.7] text-lead/75 tracking-[0.12px]">
-                        {experience.description}
                       </p>
                     </div>
                   ))}
