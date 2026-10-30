@@ -70,7 +70,7 @@ export const projects: Project[] = [
     features: ['Template browsing for final-year designs', 'Personalized design inputs', 'Live preview workflow', 'PNG export for social and print use', 'Mobile-friendly student experience'],
     image: '/projects/fybstudio.jpg',
     liveUrl: 'https://www.fybstudio.app/',
-    role: 'Founder & Full-Stack Product Engineer',
+    role: 'Full-Stack Product Engineer',
     year: '2026',
     status: 'Live',
     category: 'fullstack',

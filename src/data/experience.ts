@@ -31,7 +31,7 @@ export const experiences: Experience[] = [
   },
   {
     id: 'fyb-studio-founder',
-    role: 'Founder & Full-Stack Product Engineer',
+    role: 'Founder',
     company: 'FYB Studio',
     location: 'Remote',
     startDate: '2026',
