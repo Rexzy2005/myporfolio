@@ -28,7 +28,7 @@ export default function About() {
           {/* Bio */}
           <AnimatedWrapper direction="left">
             <p className="max-w-[650px] text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">
-              I'm Pererat Timothy, also known as Rexzy, a Software Engineer driven by building meaningful products and engineering systems that solve real-world problems. I'm the Co-founder, COO &amp; CTO of GeoPonix, where I also work as a Hardware Engineer and Mobile Developer building precision-agriculture and agro-intelligence solutions. I'm also the CTO of Kenule Africa, where we're building technology-driven products and empowering young people with practical tech skills.
+              I'm Pererat Timothy, also known as Rexzy, a Software Engineer driven by building meaningful products and engineering systems that solve real-world problems. I'm the Founder of FYB Studio, a design platform for final-year students. I'm also the Co-founder, COO &amp; CTO of GeoPonix, where I work as a Hardware Engineer and Mobile Developer building precision-agriculture and agro-intelligence solutions, and the CTO of Kenule Africa, where we're building technology-driven products and empowering young people with practical tech skills.
             </p>
             {isExpanded && (
               <div className="mt-7 max-w-[650px] space-y-7 text-[15px] font-[400] leading-[1.85] text-lead tracking-[0.16px]">

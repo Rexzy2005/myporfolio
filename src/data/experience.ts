@@ -30,6 +30,21 @@ export const experiences: Experience[] = [
     techUsed: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Web3.js', 'REST APIs', 'Product Engineering'],
   },
   {
+    id: 'fyb-studio-founder',
+    role: 'Founder & Full-Stack Product Engineer',
+    company: 'FYB Studio',
+    location: 'Remote',
+    startDate: '2026',
+    endDate: 'Present',
+    description: 'Founded FYB Studio, a design platform helping final-year students create personalized celebration visuals through templates, live previews, and export-ready designs.',
+    achievements: [
+      'Founded and lead product development for FYB Studio',
+      'Built template discovery, personalization, and live preview workflows',
+      'Developed full-stack experiences for exporting polished PNG designs',
+    ],
+    techUsed: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Full-Stack Development', 'Product Design'],
+  },
+  {
     id: '2',
     role: 'Frontend Developer (Intern)',
     company: 'NHUD Foundation',
