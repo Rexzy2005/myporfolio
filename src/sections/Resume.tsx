@@ -1,5 +1,5 @@
-import { FaGithub, FaLinkedinIn, FaWhatsapp, FaXTwitter } from 'react-icons/fa6';
-import { FiArrowUpRight, FiDownload, FiGlobe, FiMail } from 'react-icons/fi';
+import { FaGithub } from 'react-icons/fa6';
+import { FiArrowUpRight, FiDownload } from 'react-icons/fi';
 import Container from '@/components/ui/Container';
 import SectionHeading from '@/components/ui/SectionHeading';
 import AnimatedWrapper from '@/components/ui/AnimatedWrapper';
