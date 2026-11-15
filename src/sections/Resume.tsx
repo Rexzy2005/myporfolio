@@ -19,6 +19,17 @@ const resumeContacts = [
   { label: 'GitHub', value: 'github.com/Rexzy2005', href: socialLinks.github, Icon: FaGithub }
 ];
 
+const competitions = [
+  {
+    name: 'HackJos 2026 — Agri-Finance & Inclusion',
+    detail: 'Built Jari, a poultry farm intelligence and finance platform; placed 4th.',
+  },
+  {
+    name: 'Robofest 2020 — Senior Game Team',
+    detail: 'Certificate of Achievement; Team BSS (3567-1), Boys’ Secondary School.',
+  },
+];
+
 export default function Resume() {
   const education = experiences.find(({ id }) => id === '5');
 
@@ -119,6 +130,20 @@ export default function Resume() {
                   </div>
                 </div>
               )}
+
+              <div>
+                <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
+                  Competitions &amp; recognition
+                </p>
+                <div className="space-y-4 border-t border-lead/20">
+                  {competitions.map((item) => (
+                    <div key={item.name} className="border-b border-lead/20 py-4">
+                      <p className="text-[14px] text-starlight">{item.name}</p>
+                      <p className="mt-1 text-[12px] leading-[1.6] text-lead/75">{item.detail}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
               <div className="pt-6 border-t border-lead/15">
                 <p className="text-[12px] uppercase tracking-[0.24px] text-lead/55 mb-4">
