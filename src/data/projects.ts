@@ -1,5 +1,6 @@
 export interface Project {
   id: string;
+  group: 'Blockchain' | 'Mobile App' | 'AI & Machine Learning' | 'Web';
   title: string;
   shortDescription: string;
   fullDescription: string;
@@ -11,6 +12,7 @@ export interface Project {
   image: string;
   liveUrl?: string;
   sourceUrl?: string;
+  hideSource?: boolean;
   role?: string;
   year?: string;
   status?: string;
@@ -21,7 +23,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: 'jari',
+    group: 'Web',
+    title: 'Jari',
+    shortDescription: 'A poultry farm intelligence platform that helps farmers organize operational and financial records into a clearer profile for finance and insurance opportunities.',
+    fullDescription: 'Jari is a poultry farm intelligence and finance platform designed around the needs of farmers in Jos South, Plateau State. It brings farm, flock, health, feed, production, and financial records together so farmers can better understand their operations and share a clearer picture with potential support providers.',
+    problem: 'Poultry farmers often keep operational and financial information across separate records, making it difficult to understand farm performance or present consistent information when exploring finance and insurance.',
+    approach: 'Built a full-stack platform with farmer workflows for managing farms, houses, flock batches, health records, feed, production, sales, expenses, and documents. Jari uses these records to create a farm profile and support institution-facing review workflows.',
+    outcome: 'Built and launched Jari as a working product for HackJos 2026, where the team placed 4th in the Agri-Finance & Inclusion track.',
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'Python', 'PostgreSQL', 'SQLAlchemy', 'Alembic'],
+    features: ['Farm, poultry house, and flock management', 'Feed, health, vaccination, and production records', 'Sales, expenses, inventory, and farm reporting', 'Farm profile completeness and opportunity readiness checks', 'Institution workflows for reviewing shared farm profiles'],
+    image: '/projects/jari-logo.png',
+    liveUrl: 'https://jari-jet.vercel.app/',
+    role: 'Product Engineer',
+    year: '2026',
+    status: 'Live',
+    category: 'fullstack',
+    hideSource: true,
+    featured: true,
+  },
+  {
     id: 'clearsig',
+    group: 'Blockchain',
     title: 'ClearSig Shared Wallet',
     shortDescription: 'A Web3 shared wallet where groups can create requests, review activity, and approve transactions without one person handling keys alone.',
     fullDescription: 'ClearSig is a shared wallet product for friends, families, and teams. It makes group money movement transparent by letting everyone see the request, approve actions, and work through a safer shared-control flow before real value moves.',
@@ -41,6 +64,7 @@ export const projects: Project[] = [
   },
   {
     id: 'geoponix',
+    group: 'Mobile App',
     title: 'GeoPonix Agro-Intelligence',
     shortDescription: 'Precision-agriculture and agro-intelligence work combining field hardware and mobile software for more informed farming decisions.',
     fullDescription: 'GeoPonix is building precision-agriculture and agro-intelligence solutions. As Co-founder, COO, and CTO, I also work hands-on as a Hardware Engineer and Mobile Developer, helping connect field technology with practical mobile workflows for agricultural users.',
@@ -60,6 +84,7 @@ export const projects: Project[] = [
   },
   {
     id: 'fyb-studio',
+    group: 'Web',
     title: 'FYB Studio',
     shortDescription: 'A design-led studio for final-year students to personalize templates, preview designs live, and export polished PNG assets.',
     fullDescription: 'FYB Studio is a full-stack application that helps final-year students create clean celebration visuals without waiting on a designer. The product focuses on ready-made templates, guided personalization, live preview, account flows, and fast PNG export for class campaigns and graduation moments.',
@@ -78,6 +103,7 @@ export const projects: Project[] = [
   },
   {
     id: 'winview-mfb',
+    group: 'Web',
     title: 'WinView Microfinance Bank',
     shortDescription: 'A digital-first microfinance banking website for a licensed MFB serving cooperatives, SMEs, and individuals in Nigeria.',
     fullDescription: 'WinView Microfinance Bank is a customer-facing banking platform for a microfinance bank in Abuja. The website presents account opening, cooperative banking, SME banking, loans, digital banking, support channels, and branch information in a modern, trust-focused experience.',
@@ -95,25 +121,8 @@ export const projects: Project[] = [
     featured: true,
   },
   {
-    id: 'ocassia-events',
-    title: 'Ocassia Event Marketplace',
-    shortDescription: 'A comprehensive marketplace connecting event hosts with service providers and venues, featuring secure escrow payments and ticketing.',
-    fullDescription: 'Ocassia is an all-in-one event marketplace and management platform designed to bridge the gap between event hosts, service providers, and venue owners. It provides a secure ecosystem where hosts can discover and book vendors, manage event ticketing, and handle logistics, while giving service providers and venues the tools they need to manage bookings, increase visibility, and guarantee payment security through an integrated escrow system.',
-    problem: 'Organizing an event typically involves dealing with multiple unverified vendors, insecure payment methods, and scattered communication. Event hosts struggle to find reliable service providers and venues, while vendors face issues with delayed payments, double bookings, and lack of market visibility.',
-    approach: 'Architected a multi-sided marketplace platform with distinct dashboards for hosts, service providers, and venue owners. Integrated a secure escrow payment system to build trust between parties, ensuring funds are only released when services are delivered. Built a comprehensive booking engine that handles availability, ticketing, and vendor management in one unified interface.',
-    outcome: 'Created a trust-based ecosystem that significantly reduces the friction of event planning. The platform streamlines the entire process from vendor discovery to final payment, providing peace of mind for hosts and a reliable business management tool for event professionals.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Payment Gateway (Escrow)'],
-    features: ['Multi-vendor marketplace for event services and venues', 'Secure escrow payment system for guaranteed transactions', 'Event ticketing and attendee management', 'Dedicated dashboards for hosts, vendors, and venues', 'Real-time booking and availability management', 'Vendor discovery and verified review system'],
-    image: '/projects/ocassia.png',
-    liveUrl: 'https://ocassia-six.vercel.app/',
-    role: 'Full-Stack Developer',
-    year: '2025',
-    status: 'Live',
-    category: 'fullstack',
-    featured: true,
-  },
-  {
     id: 'payflow',
+    group: 'Blockchain',
     title: 'PayFlow Web3 Payroll',
     shortDescription: 'A decentralized payroll platform for Web3 teams and DAOs. Currently in development.',
     fullDescription: 'PayFlow is a blockchain-powered payroll management platform that enables DAOs and Web3 teams to manage salary payments securely and transparently. It removes the need for intermediaries by leveraging smart contracts to hold and distribute funds, making payroll trustless, auditable, and efficient.',
@@ -132,6 +141,7 @@ export const projects: Project[] = [
   },
   {
     id: 'soilsense',
+    group: 'Mobile App',
     title: 'SoilSense',
     shortDescription: 'A local-first Flutter app that connects to Bluetooth soil sensors, measures NPK, pH, salinity, and moisture, and recommends crop-specific fertilizer plans for Nigerian farmers.',
     fullDescription: 'SoilSense is a mobile agritech product built to make soil testing easier for farmers in the field. It connects to a custom BLE soil-testing device, captures real-time soil data, and turns those readings into practical fertilizer recommendations and agronomic advice without requiring internet access or a complex onboarding flow.',
@@ -151,6 +161,7 @@ export const projects: Project[] = [
   },
   {
     id: 'nsl-translator',
+    group: 'AI & Machine Learning',
     title: 'NSL Translator',
     shortDescription: 'A Flutter mobile app that uses computer vision and an on-device sign-language model to translate Nigerian Sign Language into accessible digital communication.',
     fullDescription: 'NSL Translator is a mobile accessibility project focused on making Nigerian Sign Language easier to understand in everyday communication. The Flutter app brings together camera-based sign capture, a trained landmark-based machine-learning model, and a practical translation experience designed for fast interaction on mobile devices.',

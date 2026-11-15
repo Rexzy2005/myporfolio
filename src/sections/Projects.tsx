@@ -20,6 +20,8 @@ const additionalCategoryLabels = {
   'machine-learning': 'Machine Learning',
 } as const;
 
+const projectGroups: Project['group'][] = ['Blockchain', 'Mobile App', 'AI & Machine Learning', 'Web'];
+
 function ProjectRow({ project, index }: { project: Project; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
   const num = String(index + 1).padStart(2, '0');
@@ -119,7 +121,7 @@ function ProjectRow({ project, index }: { project: Project; index: number }) {
                         View Live <FiArrowUpRight size={13} />
                       </a>
                     )}
-                    {(project.sourceUrl || socialLinks.github) && (
+                    {!project.hideSource && (project.sourceUrl || socialLinks.github) && (
                       <a
                         href={project.sourceUrl || socialLinks.github}
                         target="_blank"
@@ -162,10 +164,27 @@ export default function Projects() {
           subtitle="Products I have built, focusing on clean code, seamless UX, and real-world impact."
         />
 
-        <div className="border-t border-lead/20">
-          {projects.map((project, i) => (
-            <ProjectRow key={project.id} project={project} index={i} />
-          ))}
+        <div className="space-y-12">
+          {projectGroups.map((group) => {
+            const groupedProjects = projects.filter((project) => project.group === group);
+            if (groupedProjects.length === 0) return null;
+
+            return (
+              <section key={group} aria-label={`${group} projects`}>
+                <div className="mb-4 flex items-center gap-4">
+                  <h3 className="shrink-0 text-[13px] font-[450] uppercase tracking-[0.16em] text-starlight">
+                    {group}
+                  </h3>
+                  <div className="h-px flex-1 bg-lead/20" />
+                </div>
+                <div className="border-t border-lead/20">
+                  {groupedProjects.map((project, index) => (
+                    <ProjectRow key={project.id} project={project} index={index} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
         </div>
       </Container>
     </div>

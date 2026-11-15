@@ -5,16 +5,37 @@ export interface Hackathon {
   date: string;
   placement: string;
   product: string;
+  track?: string;
   productUrl: string;
   eventUrl: string;
   role: string;
   summary: string;
   highlights: string[];
   image: string;
-  tags: string[];
+  imageFit?: 'cover' | 'contain';
 }
 
 export const hackathons: Hackathon[] = [
+  {
+    id: 'hackjos-2026-jari',
+    name: 'HackJos 2026',
+    organizer: 'nHub',
+    date: 'November 4 to 6, 2026',
+    placement: '4th place',
+    product: 'Jari',
+    track: 'Agri-Finance & Inclusion',
+    productUrl: 'https://jari-jet.vercel.app/',
+    eventUrl: 'https://www.hackjos.com.ng/',
+    role: 'Product Engineer',
+    summary: 'Built Jari on the Agri-Finance & Inclusion track: a poultry farm intelligence platform that brings farm operations and financial records together to help farmers present a clearer profile for finance and insurance opportunities.',
+    highlights: [
+      'Built for HackJos 2026’s Agri-Finance & Inclusion track',
+      'Connected farm, flock, health, production, and financial records in one platform',
+      'Placed 4th at the agriculture-focused hackathon',
+    ],
+    image: '/projects/hackjos2026.png',
+    imageFit: 'cover',
+  },
   {
     id: 'ika-clearsig',
     name: 'Ika Hackathon',
@@ -32,7 +53,6 @@ export const hackathons: Hackathon[] = [
       'Continued with the product as Head of Product Engineering after the hackathon',
     ],
     image: '/projects/clearsig.png',
-    tags: ['Web3', 'Shared Wallet', 'Product Engineering', 'Frontend'],
   },
   {
     id: 'hackjos-script',
@@ -51,6 +71,5 @@ export const hackathons: Hackathon[] = [
       'Helped the team finish 5th at the hackathon',
     ],
     image: '/projects/hackjosHackathon.png',
-    tags: ['SME Tools', 'Inventory', 'Sales', 'HackJos'],
   },
 ];
