@@ -285,8 +285,9 @@
         body {
           background: #ffffff;
           width: 210mm;
-          height: 297mm;
-          overflow: hidden;
+          min-height: 297mm;
+          height: auto;
+          overflow: visible;
         }
 
         .toolbar {
@@ -295,16 +296,18 @@
 
         .page {
           width: 210mm;
-          height: 297mm;
+          min-height: 297mm;
+          height: auto;
           margin: 0;
           box-shadow: none;
         }
 
         .sheet {
           width: 210mm;
-          height: 297mm;
+          height: auto;
           min-height: 297mm;
           grid-template-columns: 62mm 1fr;
+          align-items: stretch;
         }
 
         .sidebar {
@@ -368,6 +371,26 @@
 
         section {
           margin-top: 6mm;
+        }
+
+        .page-two {
+          break-before: page;
+          page-break-before: always;
+          min-height: 280mm;
+          padding-top: 9mm;
+        }
+
+        .page-two::before {
+          content: "DEVREX  /  PERERAT TIMOTHY  /  SOFTWARE ENGINEER & PRODUCT BUILDER";
+          display: block;
+          margin: 0 0 8mm;
+          padding: 4mm 5mm;
+          border-left: 2mm solid var(--accent);
+          background: var(--sidebar);
+          color: #ffffff;
+          font-size: 8pt;
+          font-weight: 750;
+          letter-spacing: 0.08em;
         }
 
         h2 {
@@ -667,7 +690,7 @@
             </div>
           </section>
 
-          <section>
+          <section class="page-two">
             <h2>Strengths</h2>
             <ul>
               <li>Frontend architecture for production web apps with clear component systems.</li>
