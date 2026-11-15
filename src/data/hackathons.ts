@@ -17,6 +17,25 @@ export interface Hackathon {
 
 export const hackathons: Hackathon[] = [
   {
+    id: 'robofest-2020',
+    name: 'Robofest 2020',
+    organizer: 'Baun STEM Robotics',
+    date: 'February 2020',
+    placement: 'Certificate of Achievement',
+    product: 'Senior Game Team — Team BSS (3567-1)',
+    productUrl: 'https://www.robofest.net/',
+    eventUrl: 'https://www.robofest.net/',
+    role: 'Participant, Boys’ Secondary School team',
+    summary: 'Participated in the Senior Game category at Robofest 2020, an international robotics competition run by Baun STEM Robotics. The team represented Boys’ Secondary School as Team BSS (3567-1) and received a Certificate of Achievement from Lawrence Technological University.',
+    highlights: [
+      'Competed in the Senior Game team category',
+      'Represented Boys’ Secondary School as Team BSS (3567-1)',
+      'Received a Certificate of Achievement dated February 6, 2020',
+    ],
+    image: '/projects/robotics.jpg',
+    imageFit: 'cover',
+  },
+  {
     id: 'hackjos-2026-jari',
     name: 'HackJos 2026',
     organizer: 'nHub',
